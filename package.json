@@ -1,0 +1,24 @@
+{
+  "name": "legoshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/svr.js",
+    "test": "http-server"
+  },
+  "author": "Usman Muhammad Kadai",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": "portsoc",
+    "root": true,
+    "env": {
+      "browser": true
+    }
+  },
+  "dependencies": {
+    "eslint-config-portsoc": "^0.8.2",
+    "express": "^4.17.2",
+    "sqlite3": "^5.0.2"
+  }
+}

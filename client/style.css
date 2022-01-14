@@ -1,0 +1,285 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap'); */
+
+/* :root {
+    --grey: rgb(134, 130, 130);
+    --green: rgb(217, 255, 0);
+} */
+
+*{
+    transition: all 0.2s linear;
+    text-transform: capitalize;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+header {
+    background: black;
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    align-items: center;
+    display: flex;
+    /* padding: 2rem 0.1rem; */
+    padding: 0.5rem;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
+    justify-content: space-between;
+    height: 8rem;
+}
+
+header .Lego{
+    color: rgb(255, 251, 0);
+    margin: 0 1rem;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+header .navBar a{
+    color: rgb(255, 251, 0); 
+    margin: 0 1rem;
+    font-size: 1.7rem;
+}
+
+header .icons a{
+    color: rgb(255, 251, 0);
+    margin: 0 1rem;
+    font-size: 1.7rem;
+}
+
+/* header .navBar a:hover{
+    color: rgb(255, 0, 0);
+}
+
+header .icons a:hover{
+    color: rgb(255, 0, 0);
+} */
+
+header a{
+    color: rgb(255, 251, 0);
+    margin: 0 1rem;
+}
+header a:hover{
+    color: rgb(255, 0, 0);
+}
+
+html{
+    overflow-x: hidden;
+    font-size: 0.625rem;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+}
+
+body{
+    margin: 0;
+    height: 100vh;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+
+}
+
+.grid{
+    display: grid;
+    grid-template-areas: 
+        'header'
+        'main'
+        'footer';
+    grid-template-rows: 5rem 1fr 5rem;
+    grid-template-columns: 1fr;
+    height: 100%;
+}
+
+footer{
+    background: black;
+    color: rgb(255, 251, 0);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.legoList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    padding: 0;
+    list-style-type: none;
+}
+
+.legoList li{
+    background: rgb(248, 248, 237);
+    flex: 0 1 30rem;
+    border: 0.2rem rgb(230, 214, 214) solid;
+    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
+    margin: 1rem;
+    /* margin-bottom: 0; */
+    height: 42rem;
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+    /* justify-content: center; */
+}
+
+.legoDiv{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.legoDiv img{
+    max-width: 22rem;
+    max-height: 22rem;
+    min-width: 22rem;
+    min-height: 22rem;
+    margin: 5rem;
+}
+
+.legoDiv:hover img{
+    filter: drop-shadow(0.2rem 0.2rem black);
+    transform: scale(1.2);
+}
+
+.legoNameLink{
+    color: black;
+}
+
+.legoNameLink:hover{
+    color: red;
+}
+
+.legoPrice{
+    font-size: 3rem;
+}
+/* #searchInput{
+    height: 5rem;
+    width: 10rem;
+    position: relative;
+    right: 1rem;
+} */
+/* #search{
+    position: relative;
+    right: 70rem;
+} */
+input{
+    width: 20rem;
+    border: 1px solid rgb(255, 251, 0);
+}
+
+#menu {
+    display: none;
+    border:  1rem, solid rgb(255, 251, 0);
+    border-radius: 3rem;
+    font-size: 2.5rem;
+    padding: 0.5rem 1.5rem;
+    color: rgb(255, 251, 0);
+    cursor: pointer;
+}
+
+/* @media(max-width:61.9375rem){
+
+    header{
+        padding: 2rem;
+    }
+    html{
+        font-size: 0.55rem;
+    }
+}
+
+@media(max-width:48rem){
+    #menu {
+        display: block;
+    }
+
+    header .navBar {
+        background: rgb(255, 251, 0);
+        position: absolute;
+        top: 100%; 
+        right: 0;
+        left: -120%;
+        width: 100%;
+        border-top: 0.1rem solid rgb(255, 251, 0);
+    }
+
+    header .navBar a{
+        text-align: center;
+        margin: 1.5rem;
+        border-radius: 0.5rem;
+        border: 0.1rem solid rgb(255, 251, 0);
+        font-size: 2rem;
+        background: rgb(255, 251, 0);
+        padding: 1.5rem;
+        display: block;
+
+    }
+} */
+/* #logo {
+    background: url(images/BrickLego.png);
+    background-size: 7rem;
+
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+#login {
+    background: url(images/login2.jpg);
+    background-size: 100vw;
+    margin: auto;
+    height: 100vh;
+    width: 100vw;
+    color: #fff;
+}
+
+#log {
+    color: black;
+    background-color: #F9E1B3;
+    height: 55vh;
+    width: 30vw;
+    margin: 12rem 0rem 0 32rem;
+    border-radius: 1rem 1rem 1rem 1rem;
+}
+
+#userName {
+    position: relative;
+    top: 7rem;
+    left: 4.2rem;
+    width: 18rem;
+    height: 2rem;
+}
+#userPassword {
+    position: relative;
+    top: 10rem;
+    left: 4.2rem;
+    width: 18rem;
+    height: 2rem;
+}
+#loginButton {
+    background-color: aqua;
+    position: relative;
+    top: 14rem;
+    right: 8rem;
+    height: 1.5rem;
+    width: 6rem;
+} */
