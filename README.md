@@ -1,3 +1,4 @@
+<!-- # LEGO SHOP -->
 <!-- npm install sqlite3
 npm i
 npm i express
@@ -8,15 +9,11 @@ npm init -->
 
 non functional requirement
 
-
 using vanilla js in frontend i.e CSS, HTML and JavaScript
 
 using node and mongoDB in backend -->
 
-
 ## Overview
-
-
 
 ### Key Features
 
@@ -30,6 +27,5 @@ using node and mongoDB in backend -->
 |  | |
 |  | |
 
-
-reasons for a specific paradigm 
+reasons for a specific paradigm
 reason for using auth0

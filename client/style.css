@@ -1,5 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap'); */
-
 /* :root {
     --grey: rgb(134, 130, 130);
     --green: rgb(217, 255, 0);
@@ -7,13 +5,13 @@
 
 *{
     transition: all 0.2s linear;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     text-decoration: none;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    border: none;
-    box-sizing: border-box;
+    /* padding: 0; */
+    /* margin: 0; */
+    /* outline: none; */
+    /* border: none; */
+    /* box-sizing: border-box; */
     font-family: sans-serif;
 }
 
@@ -25,9 +23,8 @@ header {
     left: 0;
     align-items: center;
     display: flex;
-    /* padding: 2rem 0.1rem; */
     padding: 0.5rem;
-    z-index: 1000;
+    /* z-index: 1000; */
     box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
     justify-content: space-between;
     height: 8rem;
@@ -51,14 +48,6 @@ header .icons a{
     margin: 0 1rem;
     font-size: 1.7rem;
 }
-
-/* header .navBar a:hover{
-    color: rgb(255, 0, 0);
-}
-
-header .icons a:hover{
-    color: rgb(255, 0, 0);
-} */
 
 header a{
     color: rgb(255, 251, 0);
@@ -103,7 +92,7 @@ footer{
 
 }
 
-.legoList{
+.mainLinks{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -113,18 +102,16 @@ footer{
     list-style-type: none;
 }
 
-.legoList li{
+.mainLinks li{
     background: rgb(248, 248, 237);
     flex: 0 1 30rem;
     border: 0.2rem rgb(230, 214, 214) solid;
     box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
     margin: 1rem;
-    /* margin-bottom: 0; */
     height: 42rem;
     color: black;
     text-align: center;
     font-size: 2rem;
-    /* justify-content: center; */
 }
 
 .legoDiv{
@@ -159,16 +146,16 @@ footer{
 .legoPrice{
     font-size: 3rem;
 }
-/* #searchInput{
-    height: 5rem;
-    width: 10rem;
-    position: relative;
-    right: 1rem;
-} */
-/* #search{
-    position: relative;
-    right: 70rem;
-} */
+
+.addToCart{
+    font-size: 3rem;
+    color: rgb(255, 251, 0);
+    background: black;
+}
+.addToCart:hover{
+    color: red;
+    background: white;
+}
 input{
     width: 20rem;
     border: 1px solid rgb(255, 251, 0);
@@ -183,6 +170,23 @@ input{
     color: rgb(255, 251, 0);
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* @media(max-width:61.9375rem){
 
@@ -237,49 +241,3 @@ input{
 
 
 
-
-
-
-
-
-/* 
-#login {
-    background: url(images/login2.jpg);
-    background-size: 100vw;
-    margin: auto;
-    height: 100vh;
-    width: 100vw;
-    color: #fff;
-}
-
-#log {
-    color: black;
-    background-color: #F9E1B3;
-    height: 55vh;
-    width: 30vw;
-    margin: 12rem 0rem 0 32rem;
-    border-radius: 1rem 1rem 1rem 1rem;
-}
-
-#userName {
-    position: relative;
-    top: 7rem;
-    left: 4.2rem;
-    width: 18rem;
-    height: 2rem;
-}
-#userPassword {
-    position: relative;
-    top: 10rem;
-    left: 4.2rem;
-    width: 18rem;
-    height: 2rem;
-}
-#loginButton {
-    background-color: aqua;
-    position: relative;
-    top: 14rem;
-    right: 8rem;
-    height: 1.5rem;
-    width: 6rem;
-} */

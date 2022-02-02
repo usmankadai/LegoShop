@@ -1,82 +1,17 @@
 import * as home from './home.js';
+// import * as legoPage from './legoPageOnClick.js';
+import * as inventories from './templateInventories.js';
 
-function showInventory() {
-    home.createInventory();
-    home.templateHeader();
-    home.templateFooter();
+function init() {
+//   const fetchIt = document.getElementById('tempMain');
+//   fetchIt.addEventListener('load', await inventories.createInventory());
+  inventories.createInventory();
+  //   await inventories.createInventory();
+  home.templateHeader();
+  home.templateFooter();
+//   inventories.createLe();
+//   document.querySelector('click', legoPage.legoPage());
 }
 
-
-window.addEventListener('load', showInventory);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// main.innerHTML = home.createInventory();
-// function init() {
-//     showInventory();
-//     staticHome.templateHeader();
-//     staticHome.templateFooter();
-    
-
-// //     staticHome.templateHeader();
-// //     staticHome.templateMain();
-// //     staticHome.inventories();
-// //     staticHome.templateFooter();
-// }
-
-
-// window.addEventListener('load', init);
+window.addEventListener('load', init);
+// window.addEventListener('hashchange', init);

@@ -1,7 +1,7 @@
 {
   "name": "legoshop",
   "version": "1.0.0",
-  "description": "",
+  "description": "application engineering LegoShop coursework",
   "main": "index.js",
   "scripts": {
     "start": "node server/svr.js",
@@ -17,8 +17,19 @@
     }
   },
   "dependencies": {
-    "eslint-config-portsoc": "^0.8.2",
     "express": "^4.17.2",
     "sqlite3": "^5.0.2"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-portsoc": "^0.8.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UP969376/LegoShop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/UP969376/LegoShop/issues"
+  },
+  "homepage": "https://github.com/UP969376/LegoShop#readme"
 }
