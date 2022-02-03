@@ -182,20 +182,23 @@ export async function createInventory() {
   });
 }
 
-// export function myFunction() {
-//   document.querySelector('#user').addEventListener('click', close(event));
-//   // .classList.toggle('display');
-// }
+function toggleLogin() {
+  document.querySelector('.loginDiv').classList.toggle('display');
+}
 
-// function close(event) {
-//   // if (!event.target.matches('#user')) {
-//     const dropdowns = document.querySelector('.loginDiv');
-//     let i;
-//     for (i = 0; i < dropdowns.length; i++) {
-//       const openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains('display')) {
-//         openDropdown.classList.remove('display');
-//       }
-//     }
-//   // }
-// }
+export function dropOptions() {
+  document.querySelector('#user').addEventListener('click', toggleLogin);
+}
+
+export function close(event) {
+  if (!event.target.matches('#user')) {
+    const dropdowns = document.querySelector('.loginDiv');
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('display')) {
+        openDropdown.classList.remove('display');
+      }
+    }
+  }
+}

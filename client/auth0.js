@@ -30,12 +30,12 @@ export async function updateAuthUI() {
   document.getElementById('login').disabled = isAuthenticated;
   document.getElementById('logout').disabled = !isAuthenticated;
 
-  // if (isAuthenticated) {
-  //   const user = await auth0.getUser();
-  //   console.log(user);
-  //   const el = document.getElementById('user');
-  //   el.textContent = `Hello ${user.name}`;
-  // }
+  if (isAuthenticated) {
+    const user = await auth0.getUser();
+    console.log(user);
+    const el = document.getElementById('user');
+    el.textContent = `Hello ${user.given_name}`;
+  }
 }
 
 async function login() {

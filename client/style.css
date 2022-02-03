@@ -57,7 +57,7 @@ header a:hover{
 }
 
 html{
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     font-size: 0.625rem;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
@@ -150,6 +150,10 @@ footer{
     font-size: 3rem;
     color: rgb(255, 251, 0);
     background: black;
+    border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
+    width: 22rem;
+    margin-left: 5rem;
+    /* border-radius: 0.625rem 0.625rem 0.625rem 0.625rem; */
 }
 .addToCart:hover{
     color: red;
