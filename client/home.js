@@ -86,6 +86,22 @@ export function templateHeader() {
   userIcon.id = 'user';
   userIcon.href = '#/user';
   userIcon.className = 'fas fa-user';
+
+  const loginDiv = document.createElement('div');
+  loginDiv.className = 'loginDiv';
+  selectIcon.append(loginDiv);
+  const login = document.createElement('button');
+  login.id = 'login';
+  login.className = 'credentials';
+  login.textContent = 'Login';
+  login.disabled = true;
+  loginDiv.append(login);
+  const logout = document.createElement('button');
+  logout.id = 'logout';
+  logout.className = 'credentials';
+  logout.textContent = 'Logout';
+  logout.disabled = true;
+  loginDiv.append(logout);
 }
 
 export function templateFooter() {
@@ -165,3 +181,21 @@ export async function createInventory() {
     mainLinks.append(createLi);
   });
 }
+
+// export function myFunction() {
+//   document.querySelector('#user').addEventListener('click', close(event));
+//   // .classList.toggle('display');
+// }
+
+// function close(event) {
+//   // if (!event.target.matches('#user')) {
+//     const dropdowns = document.querySelector('.loginDiv');
+//     let i;
+//     for (i = 0; i < dropdowns.length; i++) {
+//       const openDropdown = dropdowns[i];
+//       if (openDropdown.classList.contains('display')) {
+//         openDropdown.classList.remove('display');
+//       }
+//     }
+//   // }
+// }

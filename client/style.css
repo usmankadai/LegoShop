@@ -24,7 +24,6 @@ header {
     align-items: center;
     display: flex;
     padding: 0.5rem;
-    /* z-index: 1000; */
     box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
     justify-content: space-between;
     height: 8rem;
@@ -155,6 +154,39 @@ footer{
 .addToCart:hover{
     color: red;
     background: white;
+}
+/* .credentials{
+    color: red;
+    background: white;
+    box-shadow: 0 .5rem 1rem red;
+    display: block;
+    /* position: absolute; 
+} */
+
+/* .credentials:hover{
+    color: red;
+    background: rgb(255, 251, 0);
+} */
+.loginDiv {
+    display: none;
+    /* padding: 12px 16px; */
+}
+.loginDiv Button {
+    color: red;
+    background: white;
+    box-shadow: 0 .5rem 1rem red;
+    display: block;
+}
+.loginDiv Button:hover {
+    color: red;
+    background: rgb(255, 251, 0);
+}
+.loginDiv Button[disabled]{
+    background: rgb(197, 194, 194);
+    box-shadow: none;
+}
+.display {
+    display: block;
 }
 input{
     width: 20rem;

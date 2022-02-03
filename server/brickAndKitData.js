@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   legos: [
     {
       legoId: '1',
