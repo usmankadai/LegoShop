@@ -23,7 +23,6 @@ export async function initializeAuth0Client() {
 
 //
 //
-//
 // update the state of all authentication-related elements
 export async function updateAuthUI() {
   const isAuthenticated = await auth0.isAuthenticated();
