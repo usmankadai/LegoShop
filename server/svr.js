@@ -9,7 +9,7 @@ app.use(express.static('./client'));
 
 // creating a route
 
-app.get('/legos/inventories', function (req, res) {
+app.get('/inventories', function (req, res) {
   res.send(inventoriesData.legos);
 });
 

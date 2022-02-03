@@ -1,9 +1,6 @@
 // i keep junk codes here incase i need it for the future. Here are some paradigms i used before correction during drop in
 
 
-
-
-
 // export function templateMain() {
 //     const selectFooter = document.querySelector('main');
 //     const createDiv = document.createElement('div');
@@ -104,7 +101,7 @@
 //     legoPrice10.textContent = '£300';
 //     image10.src = 'images/usedInventories/aqua.png';
 //     image10.alt = 'Aqua Brick';
-    
+
 //     legoLink11.textContent = 'Red Brick';
 //     legoPrice11.textContent = '£155';
 //     image11.src = 'images/usedInventories/red.png';
@@ -158,12 +155,10 @@
 // }
 
 
-
 // if (!response || !response.ok) {
 //     const error = document.createElement('div');
 //     error.textContent = 'We have a problem creating inventory -_-';
 //   }
-
 
 
 // const path = {
@@ -173,8 +168,8 @@
 //   }
 //   function init() {
 //     const request = requestURL;
-//     const parse = (request.resource ? `/${request.resource}`: '/') + 
-//     request.id? '/:id': '' + 
+//     const parse = (request.resource ? `/${request.resource}`: '/') +
+//     request.id? '/:id': '' +
 //     (request.verb ? `/${request.verb}`: '');
-  
+
 //     const loadScreen = path[parse]? path[parse]: errorPage;
