@@ -1,7 +1,7 @@
-export function legoPage() {
-  const createDiv = document.createElement('div');
-  createDiv.textContent = 'Lego Page';
-}
+// export function legoPage() {
+//   const createDiv = document.createElement('div');
+//   createDiv.textContent = 'Lego Page';
+// }
 
 // export function legoPage() {
 //   const new = window.open('');

@@ -1,17 +1,7 @@
-/* :root {
-    --grey: rgb(134, 130, 130);
-    --green: rgb(217, 255, 0);
-} */
 
 *{
     transition: all 0.2s linear;
-    /* text-transform: capitalize; */
     text-decoration: none;
-    /* padding: 0; */
-    /* margin: 0; */
-    /* outline: none; */
-    /* border: none; */
-    /* box-sizing: border-box; */
     font-family: sans-serif;
 }
 
@@ -36,7 +26,7 @@ header .Lego{
     font-weight: bold;
 }
 
-header .navBar a{
+header .pages a{
     color: rgb(255, 251, 0); 
     margin: 0 1rem;
     font-size: 1.7rem;
@@ -52,12 +42,12 @@ header a{
     color: rgb(255, 251, 0);
     margin: 0 1rem;
 }
+
 header a:hover{
     color: rgb(255, 0, 0);
 }
 
 html{
-    /* overflow-x: hidden; */
     font-size: 0.625rem;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
@@ -68,7 +58,6 @@ body{
     height: 100vh;
     font-size: 1.5rem;
     font-family: sans-serif;
-
 }
 
 .grid{
@@ -88,6 +77,8 @@ footer{
     align-items: center;
     display: flex;
     justify-content: center;
+    /* align-items: center;
+    justify-content: space-between; */
 
 }
 
@@ -118,7 +109,6 @@ footer{
     height: 100%;
     flex-direction: column;
     justify-content: space-around;
-
 }
 
 .legoDiv img{
@@ -159,45 +149,61 @@ footer{
     color: red;
     background: white;
 }
-/* .credentials{
-    color: red;
-    background: white;
-    box-shadow: 0 .5rem 1rem red;
-    display: block;
-    /* position: absolute; 
-} */
 
-/* .credentials:hover{
-    color: red;
-    background: rgb(255, 251, 0);
-} */
 .loginDiv {
     display: none;
-    /* padding: 12px 16px; */
+    border:  1rem, solid rgb(255, 251, 0);
+    font-size: 2.5rem;
+    padding: 0.5rem 1.5rem;
+    color: rgb(255, 251, 0);
+    cursor: pointer;
+    right: -10rem;
+    height: 10rem;
+    justify-content: center;
 }
+
 .loginDiv Button {
     color: red;
     background: white;
     box-shadow: 0 .5rem 1rem red;
     display: block;
+    margin: 1.5rem 0 0 0;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    /* right: -10rem; */
 }
+
 .loginDiv Button:hover {
     color: red;
     background: rgb(255, 251, 0);
 }
+
 .loginDiv Button[disabled]{
     background: rgb(197, 194, 194);
     box-shadow: none;
 }
+header .loginDiv {
+    display: none;
+    background: black;
+    position: absolute;
+    top: 100%; 
+    width: 100%;
+    border-top: 0.1rem solid rgb(255, 251, 0);
+}
+.loginDiv.display{
+    display: block;
+    width: 20rem;
+}
 .display {
     display: block;
 }
+
 input{
     width: 20rem;
     border: 1px solid rgb(255, 251, 0);
 }
 
-#menu {
+#options {
     display: none;
     border:  1rem, solid rgb(255, 251, 0);
     border-radius: 3rem;
@@ -207,73 +213,54 @@ input{
     cursor: pointer;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* @media(max-width:61.9375rem){
-
-    header{
-        padding: 2rem;
-    }
-    html{
-        font-size: 0.55rem;
-    }
+#options:hover{
+    color: rgb(255, 0, 0);
 }
 
-@media(max-width:48rem){
-    #menu {
+@media(max-width:50rem){
+    .pages.display{
+        display: block;
+        width: 20rem;
+    }
+    #options{
         display: block;
     }
 
-    header .navBar {
-        background: rgb(255, 251, 0);
+    header .pages {
+        display: none;
+        background: black;
         position: absolute;
         top: 100%; 
-        right: 0;
-        left: -120%;
+        /* right: 0; */
+        /* left: -120%; */
         width: 100%;
         border-top: 0.1rem solid rgb(255, 251, 0);
     }
 
-    header .navBar a{
+    header .pages a{
         text-align: center;
         margin: 1.5rem;
         border-radius: 0.5rem;
         border: 0.1rem solid rgb(255, 251, 0);
         font-size: 2rem;
-        background: rgb(255, 251, 0);
+        background: black;
         padding: 1.5rem;
         display: block;
-
     }
-} */
-/* #logo {
-    background: url(images/BrickLego.png);
-    background-size: 7rem;
+    /* header .pages .active{
+        left:0;
+    } */
+} 
+@media(max-width:35rem){
+    input{
+        width: 7rem;
+        border: 1px solid rgb(255, 251, 0);
+    }
 
-} */
-
-
-
-
-
-
-
-
-
-
-
+    #logo{
+        font-size: 3rem;
+    }
+    header .icons a{
+        font-size: 1.2rem;
+    }
+}

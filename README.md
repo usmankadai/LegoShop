@@ -29,3 +29,7 @@ using node and mongoDB in backend -->
 
 reasons for a specific paradigm
 reason for using auth0
+
+
+
+<!-- standard way of swtiching pages is by making links. But it's slow especially when we have a lot of content on a page. Method used is single page application it's fast and nothing reloads. -->

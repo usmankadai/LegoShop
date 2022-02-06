@@ -1,14 +1,14 @@
 import express from 'express';
 import inventoriesData from './brickAndKitData.js';
 import authConfig from './auth-config.js';
-// import path from 'path';
-// import url from 'url';
+import path from 'path';
+import url from 'url';
 
 
 const port = 8080;
 const app = express();
-app.use(express.static('./client'));
-// app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '../client')));
+// app.use(express.static('./client'));
+app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '../client')));
 
 // creating a route
 

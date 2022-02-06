@@ -11,22 +11,23 @@ export function templateHeader() {
   log.href = '#/';
   log.textContent = 'LEGO';
 
-  // const menu = document.createElement('div');
-  // menu.id = 'menu';
-  // menu.className = 'fas fa-bars';
+  const options = document.createElement('div');
+  options.id = 'options';
+  options.className = 'fas fa-bars';
 
-  const navBar = document.createElement('nav');
-  navBar.className = 'navBar';
-  selectH1.append(log, navBar);
+  const pages = document.createElement('nav');
+  pages.className = 'pages';
+  // selectH1.append(log, pages);
 
-  // selectH1.append(menu, log, navBar);
+  selectH1.append(options, log, pages);
 
   let nav = 0;
-  const selectNav = document.querySelector('.navBar');
+  const selectNav = document.querySelector('.pages');
   for (let i = 1; i <= 4; i += 1) {
     const log = document.createElement('a');
     nav++;
     log.id = `navButton${nav}`;
+    // log.className = 'newSection';
     selectNav.append(log);
   }
 
@@ -46,9 +47,9 @@ export function templateHeader() {
   navButton3.textContent = 'Kits';
 
   const navButton4 = document.getElementById('navButton4');
-  navButton4.id = 'review';
-  navButton4.href = '#/Review';
-  navButton4.textContent = 'Review';
+  navButton4.id = 'Design';
+  navButton4.href = '#/Design';
+  navButton4.textContent = 'Design Kit';
 
   const iconsDiv = document.createElement('div');
   iconsDiv.className = 'icons';
@@ -185,20 +186,10 @@ export async function createInventory() {
 function toggleLogin() {
   document.querySelector('.loginDiv').classList.toggle('display');
 }
-
+function still() {
+  document.querySelector('.pages').classList.toggle('display');
+}
 export function dropOptions() {
   document.querySelector('#user').addEventListener('click', toggleLogin);
-}
-
-export function close(event) {
-  if (!event.target.matches('#user')) {
-    const dropdowns = document.querySelector('.loginDiv');
-    let i;
-    for (i = 0; i < dropdowns.length; i++) {
-      const openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('display')) {
-        openDropdown.classList.remove('display');
-      }
-    }
-  }
+  document.querySelector('#options').addEventListener('click', still);
 }

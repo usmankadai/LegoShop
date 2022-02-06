@@ -173,3 +173,32 @@
 //     (request.verb ? `/${request.verb}`: '');
 
 //     const loadScreen = path[parse]? path[parse]: errorPage;
+// window.addEventListener('hashchange', init);
+
+
+// export function close(event) {
+//   if (!event.target.matches('#user')) {
+//     const dropdowns = document.querySelector('.loginDiv');
+//     let i;
+//     for (i = 0; i < dropdowns.length; i++) {
+//       const openDropdown = dropdowns[i];
+//       if (openDropdown.classList.contains('display')) {
+//         openDropdown.classList.remove('display');
+//       }
+//     }
+//   }
+// }
+// window.addEventListener('click', close);
+// export function scroll() {
+//   let las = 0;
+//   const header = document.querySelector('header');
+//   window.addEventListener('scroll', function () {
+//     const top = window.pageYOffset || this.document.documentElement.scrollTop;
+//     if (top > las) {
+//       header.style.top = '-8rem';
+//     } else {
+//       header.style.top = '0rem';
+//     }
+//     las = top;
+//   });
+// }
