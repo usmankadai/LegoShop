@@ -120,7 +120,6 @@ export function templateFooter() {
 }
 
 export async function createInventory() {
-  // const { legos } = inventories;
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('http://localhost:8080/inventories', {
     headers: {
@@ -130,11 +129,8 @@ export async function createInventory() {
   if (!response || !response.ok) {
     response.sendStatus(404);
     return;
-    // const error = document.createElement('div');
-    // error.textContent = 'We have a problem creating inventory -_-';
   }
 
-  // let nav = 0;
   const legos = await response.json();
 
   const selectMain = document.getElementById('tempMain');
@@ -155,7 +151,6 @@ export async function createInventory() {
     const createA = document.createElement('a');
     createA.id = `a${lego.legoId}`;
     createA.href = `#/${lego.category}/${lego.legoId}`;
-    // createA.href = `#/${lego.category}/${lego.name}`;
 
     const legoName = document.createElement('div');
     legoName.className = 'legoName';
@@ -174,7 +169,6 @@ export async function createInventory() {
     legoNameLink.id = `legoLink${lego.legoId}`;
     legoNameLink.textContent = `${lego.name}`;
     legoNameLink.href = `#/${lego.category}/${lego.legoId}`;
-    // legoNameLink.href = `#/${lego.category}/${lego.name}`;
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.legoId}`;
@@ -213,7 +207,6 @@ export function trial() {
       changeTab.classList.add('active');
       console.log(page);
       changePage(page);
-      // changePage2(page);
     });
   }
 
@@ -223,33 +216,4 @@ export function trial() {
     const newPage = document.querySelector(`.pages .page[data-set="${page}"]`);
     newPage.classList.add('active');
   }
-  // function changePage2(page) {
-  //   const activePage = document.querySelector('li .legoDiv.active');
-  //   activePage.classList.remove('active');
-  //   const newPage = document.querySelector(`li .legoDiv.active[data-set="${page}"]`);
-  //   newPage.classList.add('active');
-  // }
 }
-
-
-// export function trial2() {
-//   const changeTabs = document.querySelectorAll('.tab');
-
-//   for (let i = 0; i < changeTabs.length; i++) {
-//     const changeTab = changeTabs[i];
-//     const page = changeTab.dataset.set;
-//     changeTab.addEventListener('click', () => {
-//       document.querySelector('.tabs .tab.active').classList.remove('active');
-//       changeTab.classList.add('active');
-//       console.log(page);
-//       changePage2(page);
-//     });
-//   }
-
-//   function changePage2(page) {
-//     const activePage = document.querySelector('.mainLinks li .legoDiv.active');
-//     activePage.classList.remove('active');
-//     const newPage = document.querySelector(`.mainLinks li .legoDiv.active[data-set="${page}"]`);
-//     newPage.classList.add('active');
-//   }
-// }
