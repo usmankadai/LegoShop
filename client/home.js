@@ -15,24 +15,26 @@ export function templateHeader() {
   options.id = 'options';
   options.className = 'fas fa-bars';
 
-  const pages = document.createElement('nav');
-  pages.className = 'pages';
-  // selectH1.append(log, pages);
+  const tabs = document.createElement('nav');
+  tabs.className = 'tabs';
+  // selectH1.append(log, tabs);
 
-  selectH1.append(options, log, pages);
+  selectH1.append(options, log, tabs);
 
   let nav = 0;
-  const selectNav = document.querySelector('.pages');
+  const selectNav = document.querySelector('.tabs');
   for (let i = 1; i <= 4; i += 1) {
     const log = document.createElement('a');
     nav++;
     log.id = `navButton${nav}`;
-    // log.className = 'newSection';
+    log.className = 'tab';
+    log.dataset.set = nav;
     selectNav.append(log);
   }
 
   const navButton1 = document.getElementById('navButton1');
   navButton1.id = 'home';
+  navButton1.className = 'tab active';
   navButton1.href = '#/home';
   navButton1.textContent = 'Home';
 
@@ -131,6 +133,8 @@ export async function createInventory() {
     // const error = document.createElement('div');
     // error.textContent = 'We have a problem creating inventory -_-';
   }
+
+  // let nav = 0;
   const legos = await response.json();
 
   const selectMain = document.getElementById('tempMain');
@@ -141,10 +145,12 @@ export async function createInventory() {
   legos.forEach(lego => {
     const mainLinks = document.querySelector('.mainLinks');
     const createLi = document.createElement('li');
+    createLi.className = 'lis';
     const createLis = document.createElement('div');
 
     createLis.className = 'legoDiv';
     createLis.id = `lego${lego.legoId}`;
+    createLis.dataset.set = `${lego.categoryId}`;
 
     const createA = document.createElement('a');
     createA.id = `a${lego.legoId}`;
@@ -181,15 +187,69 @@ export async function createInventory() {
     createLi.append(createLis);
     mainLinks.append(createLi);
   });
+  const lego13 = document.querySelector('#lego13');
+  lego13.className = 'legoDiv active';
 }
 
 function toggleLogin() {
   document.querySelector('.loginDiv').classList.toggle('display');
 }
 function still() {
-  document.querySelector('.pages').classList.toggle('display');
+  document.querySelector('.tabs').classList.toggle('display');
 }
 export function dropOptions() {
   document.querySelector('#user').addEventListener('click', toggleLogin);
   document.querySelector('#options').addEventListener('click', still);
 }
+
+export function trial() {
+  const changeTabs = document.querySelectorAll('.tab');
+
+  for (let i = 0; i < changeTabs.length; i++) {
+    const changeTab = changeTabs[i];
+    const page = changeTab.dataset.set;
+    changeTab.addEventListener('click', () => {
+      document.querySelector('.tabs .tab.active').classList.remove('active');
+      changeTab.classList.add('active');
+      console.log(page);
+      changePage(page);
+      // changePage2(page);
+    });
+  }
+
+  function changePage(page) {
+    const activePage = document.querySelector('.pages .page.active');
+    activePage.classList.remove('active');
+    const newPage = document.querySelector(`.pages .page[data-set="${page}"]`);
+    newPage.classList.add('active');
+  }
+  // function changePage2(page) {
+  //   const activePage = document.querySelector('li .legoDiv.active');
+  //   activePage.classList.remove('active');
+  //   const newPage = document.querySelector(`li .legoDiv.active[data-set="${page}"]`);
+  //   newPage.classList.add('active');
+  // }
+}
+
+
+// export function trial2() {
+//   const changeTabs = document.querySelectorAll('.tab');
+
+//   for (let i = 0; i < changeTabs.length; i++) {
+//     const changeTab = changeTabs[i];
+//     const page = changeTab.dataset.set;
+//     changeTab.addEventListener('click', () => {
+//       document.querySelector('.tabs .tab.active').classList.remove('active');
+//       changeTab.classList.add('active');
+//       console.log(page);
+//       changePage2(page);
+//     });
+//   }
+
+//   function changePage2(page) {
+//     const activePage = document.querySelector('.mainLinks li .legoDiv.active');
+//     activePage.classList.remove('active');
+//     const newPage = document.querySelector(`.mainLinks li .legoDiv.active[data-set="${page}"]`);
+//     newPage.classList.add('active');
+//   }
+// }

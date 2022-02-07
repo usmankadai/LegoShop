@@ -3,6 +3,9 @@ import * as auth0 from './auth0.js';
 
 async function init() {
   await home.createInventory();
+  // const f = document.querySelector('.mainLinks');
+  // f.domContentLoaded = sc;
+  // await sc;
   home.templateHeader();
   home.templateFooter();
   home.dropOptions();
@@ -10,6 +13,9 @@ async function init() {
   await auth0.setupListeners();
   await auth0.updateAuthUI();
   await auth0.handleAuth0Redirect();
+  home.trial();
+  // home.trial2();
 }
 
 window.addEventListener('load', init);
+window.addEventListener('hashchange', init);

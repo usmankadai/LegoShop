@@ -26,7 +26,7 @@ header .Lego{
     font-weight: bold;
 }
 
-header .pages a{
+header .tabs a{
     color: rgb(255, 251, 0); 
     margin: 0 1rem;
     font-size: 1.7rem;
@@ -46,6 +46,33 @@ header a{
 header a:hover{
     color: rgb(255, 0, 0);
 }
+
+header .tabs .tab.active{
+    background-color: rgb(139, 128, 128);
+    /* background-size: 10rem; */
+    font-size: 2.3rem;
+}
+header .tabs .tab:hover{
+    background-color: rgb(139, 128, 128);
+    /* background-size: 10rem; */
+    font-size: 2.3rem;
+}
+
+.pages .page {
+    display: none;
+}
+
+.pages .page.active {
+    display: block;
+}
+
+/* .mainLinks .lis .legoDiv {
+    display: none;
+}
+
+.mainLinks .lis .legoDiv.active {
+    display: block;
+} */
 
 html{
     font-size: 0.625rem;
@@ -218,7 +245,7 @@ input{
 }
 
 @media(max-width:50rem){
-    .pages.display{
+    .tabs.display{
         display: block;
         width: 20rem;
     }
@@ -226,7 +253,7 @@ input{
         display: block;
     }
 
-    header .pages {
+    header .tabs {
         display: none;
         background: black;
         position: absolute;
@@ -237,7 +264,7 @@ input{
         border-top: 0.1rem solid rgb(255, 251, 0);
     }
 
-    header .pages a{
+    header .tabs a{
         text-align: center;
         margin: 1.5rem;
         border-radius: 0.5rem;
@@ -247,7 +274,7 @@ input{
         padding: 1.5rem;
         display: block;
     }
-    /* header .pages .active{
+    /* header .tabs .active{
         left:0;
     } */
 } 
