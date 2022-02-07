@@ -18,4 +18,4 @@ async function init() {
 }
 
 window.addEventListener('load', init);
-window.addEventListener('hashchange', init);
+// window.addEventListener('hashchange', init);
