@@ -20,7 +20,7 @@ app.get('/auth-config', authConf);
 function inventories(req, res) {
   res.send(inventoriesData.legos);
   if (!res || !res.ok) {
-    res.sendStatus(404);
+    return res.sendStatus(404);
     // return;
   }
 }

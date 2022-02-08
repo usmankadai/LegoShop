@@ -159,6 +159,10 @@ export async function createInventory() {
     legoPrice.className = 'legoPrice';
     legoPrice.id = `legoPrice${lego.legoId}`;
     legoPrice.textContent = `£${lego.price}`;
+    if (lego.price < 1) {
+      legoPrice.textContent = `${lego.price}p`;
+    }
+    // const makeUSD = document.querySelector()
 
     const addToCart = document.createElement('button');
     addToCart.className = 'addToCart';
