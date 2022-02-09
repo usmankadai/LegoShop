@@ -162,8 +162,6 @@ export async function createInventory() {
     if (lego.price < 1) {
       legoPrice.textContent = `${lego.price}p`;
     }
-    // const makeUSD = document.querySelector()
-
     const addToCart = document.createElement('button');
     addToCart.className = 'addToCart';
     addToCart.textContent = 'Add to Cart';

@@ -6,7 +6,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/chromeGold.png',
-      price: 370,
+      price: 0.370,
       stockLevels: 25,
     },
     {
