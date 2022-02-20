@@ -13,14 +13,28 @@ app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)
 // creating a route
 
 app.get('/inventories', inventories);
+// app.get('/inventories/legoId', inventoryPage);
+// app.get('/inventories/Kits/legoId', inventoryPage);
 app.get('/auth-config', authConf);
 
+
 function inventories(req, res) {
-  res.send(inventoriesData.legos);
-  if (!res || !res.ok) {
-    return res.sendStatus(404);
+  if (res || res.ok) {
+    res.send(inventoriesData.legos);
+  } else {
+    res.sendStatus(404);
   }
 }
+
+// function inventoryPage(req, res) {
+//   // res.send(inventoriesData.legos.find((x) => x.id === req.params.lego.id));
+//   const inventory = req.query.legos.legoId;
+//   if (inventoriesData.legos[inventory]) {
+//     res.send(inventoriesData.legos[inventory]);
+//   } else {
+//     res.send('Error!!!');
+//   }
+// }
 
 function authConf(req, res) {
   res.json(authConfig);

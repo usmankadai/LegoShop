@@ -1,19 +1,31 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
+import * as cart from './cart.js';
 
+
+// const path = {
+//     '/': home.createInventory(),
+//     '/Bricks/legoId': legoPage.legoPage(),
+//     '/Kits/legoId': legoPage.legoPage(),
+//   };
+//   const request = requestURL.requestURL();
+//   const parse = (request.resource ? `/${request.resource}` : '/') +
+//   (request.id ? '/legoId' : '') +
+//   (request.verb ? `/${request.verb}` : '');
+//   const sc = path[parse] ? path[parse] : error.errorPage();
 async function init() {
-  await home.createInventory();
-  // const f = document.querySelector('.mainLinks');
-  // f.domContentLoaded = sc;
-  // await sc;
   home.templateHeader();
+  home.templateMain();
   home.templateFooter();
   home.dropOptions();
+  // home.activePage();
+  await home.createInventory();
   await auth0.initializeAuth0Client();
   await auth0.setupListeners();
   await auth0.updateAuthUI();
   await auth0.handleAuth0Redirect();
-  home.trial();
+  cart.cartTemplate();
+  // home.execute();
   // home.trial2();
 }
 

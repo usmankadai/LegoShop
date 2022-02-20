@@ -8,7 +8,7 @@ export function templateHeader() {
   const log = document.createElement('a');
   log.id = 'logo';
   log.className = 'Lego';
-  log.href = '#/';
+  log.href = '/';
   log.textContent = 'LEGO';
 
   const options = document.createElement('div');
@@ -35,22 +35,23 @@ export function templateHeader() {
   const navButton1 = document.getElementById('navButton1');
   navButton1.id = 'home';
   navButton1.className = 'tab active';
-  navButton1.href = '#/home';
+  navButton1.href = '/';
   navButton1.textContent = 'Home';
 
   const navButton2 = document.getElementById('navButton2');
   navButton2.id = 'bricks';
-  navButton2.href = '#/Bricks';
+  navButton2.href = '/#/bricks';
+  // navButton2.href = 'bricks.html';
   navButton2.textContent = 'Bricks';
 
   const navButton3 = document.getElementById('navButton3');
   navButton3.id = 'kits';
-  navButton3.href = '#/Kits';
+  // navButton3.href = '/Kits';
   navButton3.textContent = 'Kits';
 
   const navButton4 = document.getElementById('navButton4');
   navButton4.id = 'Design';
-  navButton4.href = '#/Design';
+  // navButton4.href = '/Design';
   navButton4.textContent = 'Design Kit';
 
   const iconsDiv = document.createElement('div');
@@ -71,23 +72,23 @@ export function templateHeader() {
 
   const searchIcon = document.getElementById('icon5');
   searchIcon.id = 'search';
-  searchIcon.href = '#/search';
+  // searchIcon.href = '/search';
   searchIcon.className = 'fas fa-search';
 
   const favoriteIcon = document.getElementById('icon6');
   favoriteIcon.id = 'favorite';
-  favoriteIcon.href = '#/favorite';
+  // favoriteIcon.href = '/favorite';
   favoriteIcon.className = 'fas fa-heart';
 
   const cartIcon = document.getElementById('icon7');
   cartIcon.id = 'cart';
-  cartIcon.href = '#/cart';
+  // cartIcon.href = '/cart';
   cartIcon.className = 'fas fa-shopping-cart';
   cartIcon.textContent = '(0)';
 
   const userIcon = document.getElementById('icon8');
   userIcon.id = 'user';
-  userIcon.href = '#/user';
+  // userIcon.href = '/user';
   userIcon.className = 'fas fa-user';
 
   const loginDiv = document.createElement('div');
@@ -119,6 +120,38 @@ export function templateFooter() {
   footerLinks.append(createFirstLink);
 }
 
+export function templateMain() {
+  const selectMain = document.getElementById('tempMain');
+
+  const grid = document.querySelector('.grid');
+  const createBrickTemp = document.createElement('template');
+  createBrickTemp.id = 'brickTemplate';
+
+  const createCartTemp = document.createElement('template');
+  createCartTemp.id = 'cartTemplate';
+
+  const createKitTemp = document.createElement('template');
+  createKitTemp.id = 'kitTemplate';
+
+  const createFavouriteTemp = document.createElement('template');
+  createFavouriteTemp.id = 'favouriteTemplate';
+
+  grid.append(createBrickTemp, createCartTemp, createKitTemp, createFavouriteTemp);
+
+  const brickTemplate = document.querySelector('#brickTemplate');
+  const createDiv = document.createElement('div');
+  createDiv.className = 'mainLinks';
+  brickTemplate.append(createDiv);
+
+  const mainLinks = document.querySelector('.mainLinks');
+  const brick = document.querySelector('#bricks');
+  brick.addEventListener('click', () => {
+    const cloned = mainLinks.cloneNode(true);
+    selectMain.textContent = '';
+    selectMain.appendChild(cloned);
+  });
+}
+
 export async function createInventory() {
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('http://localhost:8080/inventories', {
@@ -133,11 +166,6 @@ export async function createInventory() {
 
   const legos = await response.json();
 
-  const selectMain = document.getElementById('tempMain');
-  const createDiv = document.createElement('div');
-  createDiv.className = 'mainLinks';
-  selectMain.append(createDiv);
-
   legos.forEach(lego => {
     const mainLinks = document.querySelector('.mainLinks');
     const createLi = document.createElement('li');
@@ -150,7 +178,8 @@ export async function createInventory() {
 
     const createA = document.createElement('a');
     createA.id = `a${lego.legoId}`;
-    createA.href = `#/${lego.category}/${lego.legoId}`;
+    // createA.href = `/${lego.category}/${lego.legoId}`;
+    // createA.href = '/Bricks.html';
 
     const legoName = document.createElement('div');
     legoName.className = 'legoName';
@@ -160,7 +189,8 @@ export async function createInventory() {
     legoPrice.id = `legoPrice${lego.legoId}`;
     legoPrice.textContent = `£${lego.price}`;
     if (lego.price < 1) {
-      legoPrice.textContent = `${lego.price}p`;
+      // check if the price is less than £1, get rid of the first two characters which is 0 and point.
+      legoPrice.textContent = `${lego.price}p`.slice(2);
     }
     const addToCart = document.createElement('button');
     addToCart.className = 'addToCart';
@@ -170,7 +200,8 @@ export async function createInventory() {
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.legoId}`;
     legoNameLink.textContent = `${lego.name}`;
-    legoNameLink.href = `#/${lego.category}/${lego.legoId}`;
+    // legoNameLink.href = `/${lego.category}/${lego.legoId}`;
+    // legoNameLink.href = '/Bricks.html?id=1';
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.legoId}`;
@@ -183,8 +214,6 @@ export async function createInventory() {
     createLi.append(createLis);
     mainLinks.append(createLi);
   });
-  const lego13 = document.querySelector('#lego13');
-  lego13.className = 'legoDiv active';
 }
 
 function toggleLogin() {
@@ -198,24 +227,44 @@ export function dropOptions() {
   document.querySelector('#options').addEventListener('click', still);
 }
 
-export function trial() {
-  const changeTabs = document.querySelectorAll('.tab');
+// export function activePage() {
+//   const changeTabs = document.querySelectorAll('.tab');
 
-  for (let i = 0; i < changeTabs.length; i++) {
-    const changeTab = changeTabs[i];
-    const page = changeTab.dataset.set;
-    changeTab.addEventListener('click', () => {
-      document.querySelector('.tabs .tab.active').classList.remove('active');
-      changeTab.classList.add('active');
-      console.log(page);
-      changePage(page);
-    });
-  }
+//   for (let i = 0; i < changeTabs.length; i++) {
+//     const changeTab = changeTabs[i];
+//     const page = changeTab.dataset.set;
+//     changeTab.addEventListener('click', () => {
+//       document.querySelector('.tabs .tab.active').classList.remove('active');
+//       changeTab.classList.add('active');
+//       console.log(page);
+//       // changePage(page);
+//     });
+//   }
 
-  function changePage(page) {
-    const activePage = document.querySelector('.pages .page.active');
-    activePage.classList.remove('active');
-    const newPage = document.querySelector(`.pages .page[data-set="${page}"]`);
-    newPage.classList.add('active');
-  }
-}
+//   // function changePage(page) {
+//   //   const activePage = document.querySelector('.pages .page.active');
+//   //   activePage.classList.remove('active');
+//   //   const newPage = document.querySelector(`.pages .page[data-set="${page}"]`);
+//   //   newPage.classList.add('active');
+//   // }
+// }
+
+
+// export async function productOnClick() {
+//   const response = await fetch('http://localhost:8080/Bricks/1', {
+//     headers: {
+//       'Content-type': 'application/json',
+//     },
+//     method: 'GET',
+//   });
+//   const legos = await response.json();
+//   legos.forEach(lego => {
+//     const pro = document.createElement('h1');
+//     pro.textContent = lego.name;
+//     window.append(pro);
+//   });
+// }
+
+// export function execute() {
+//   document.querySelector('legoNameLink').addEventListener('click', productOnClick);
+// }

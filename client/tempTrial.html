@@ -1,0 +1,32 @@
+<!doctype html>
+<title>Template Example 1</title>
+<button id=b1>Use Template 1</button>
+<button id=b2>Use Template 2</button>
+
+<main></main>
+<template id=t1>
+<p>Templates are easy to use.</p>
+</template>
+<template id=t2>
+<p>The time now is <em>not specified</em></p>
+</template>
+<script>
+    const b1 = document.querySelector("#b1");
+    const b2 = document.querySelector("#b2"); 
+    const t1 = document.querySelector("#t1"); 
+    const t2 = document.querySelector("#t2");
+
+    const main = document.querySelector("main");
+    b1.addEventListener("click", (e) => {
+        const cloned = t1.content.cloneNode(true);
+        main.textContent = '';
+        main.appendChild(cloned);
+    });
+    b2.addEventListener("click", (e) => {
+        const cloned = t2.content.cloneNode(true);
+        const updateThis = cloned.querySelector("em");
+        updateThis.textContent = new Date().toLocaleTimeString();
+        main.textContent = '';
+        main.appendChild(cloned);
+    });
+</script>

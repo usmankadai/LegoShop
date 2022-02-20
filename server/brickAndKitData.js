@@ -6,7 +6,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/chromeGold.png',
-      price: 0.370,
+      price: 37,
       stockLevels: 25,
     },
     {
@@ -15,7 +15,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/pink.png',
-      price: 200,
+      price: 24,
       stockLevels: 70,
     },
     {
@@ -24,7 +24,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/green.png',
-      price: 180,
+      price: 18,
       stockLevels: 50,
     },
     {
@@ -33,7 +33,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/orange.png',
-      price: 200,
+      price: 21,
       stockLevels: 50,
     },
     {
@@ -42,7 +42,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/purple.png',
-      price: 160,
+      price: 16,
       stockLevels: 88,
     },
     {
@@ -51,7 +51,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/reddishLilac.png',
-      price: 280,
+      price: 28,
       stockLevels: 50,
     },
     {
@@ -60,7 +60,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/brown.png',
-      price: 160,
+      price: 55,
       stockLevels: 60,
     },
     {
@@ -69,7 +69,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/yellow.png',
-      price: 200,
+      price: 0.98,
       stockLevels: 135,
     },
     {
@@ -78,7 +78,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/blue.png',
-      price: 200,
+      price: 17,
       stockLevels: 88,
     },
     {
@@ -87,7 +87,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/aqua.png',
-      price: 300,
+      price: 23,
       stockLevels: 88,
     },
     {
@@ -96,7 +96,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/red.png',
-      price: 155,
+      price: 19,
       stockLevels: 88,
     },
     {
@@ -105,7 +105,7 @@ export default {
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/white.png',
-      price: 300,
+      price: 15,
       stockLevels: 88,
     },
     {
@@ -114,7 +114,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/greenkit.png',
-      price: 640,
+      price: 240,
       stockLevels: 88,
     },
     {
@@ -123,7 +123,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/greenChest.png',
-      price: 300,
+      price: 100,
       stockLevels: 88,
     },
     {
@@ -132,7 +132,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/greenLeftArm.png',
-      price: 120,
+      price: 0.99,
       stockLevels: 100,
     },
     {
@@ -141,7 +141,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/greenRightArm.png',
-      price: 120,
+      price: 0.99,
       stockLevels: 100,
     },
     {
@@ -150,7 +150,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/greenHand.png',
-      price: 100,
+      price: 10,
       stockLevels: 80,
     },
     {
@@ -159,7 +159,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/yellowBike.png',
-      price: 600,
+      price: 60,
       stockLevels: 38,
     },
     {
@@ -168,7 +168,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/bikeBrick.png',
-      price: 450,
+      price: 30,
       stockLevels: 35,
     },
     {
@@ -177,7 +177,7 @@ export default {
       category: 'Kits',
       categoryId: 3,
       image: 'images/usedInventories/tire.png',
-      price: 150,
+      price: 20,
       stockLevels: 47,
     },
   ],
