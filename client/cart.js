@@ -23,3 +23,4 @@ export function addToCart() {
     selectMain.appendChild(cloned);
   });
 }
+
