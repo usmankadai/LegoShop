@@ -25,6 +25,7 @@ async function init() {
   await auth0.updateAuthUI();
   await auth0.handleAuth0Redirect();
   cart.cartTemplate();
+  cart.cartPage();
   // home.execute();
   // home.trial2();
 }
