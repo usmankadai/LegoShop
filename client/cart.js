@@ -16,17 +16,19 @@ export function cartTemplate() {
 }
 
 export function addToCart() {
-  const selectMain = document.getElementById('tempMain');
-  const addToCart = document.querySelector('.addToCart');
-  addToCart.addEventListener('click', () => {
-    const cloned = addToCart.cloneNode(true);
-    selectMain.appendChild(cloned);
-  });
+//   const selectMain = document.getElementById('tempMain');
+//   const addToCart = document.querySelector('.addToCart');
+//   addToCart.addEventListener('click', () => {
+//     const cloned = addToCart.cloneNode(true);
+//     selectMain.appendChild(cloned);
+//   });
 }
 
 export function cartPage() {
+  const grid = document.querySelector('.grid');
   const cartPage = document.querySelector('.cartPage');
   const headerTemp = document.createElement('template');
+  headerTemp.id = 'checkout';
   const createDiv = document.createElement('div');
   createDiv.className = 'cartHeader';
   const createH1 = document.createElement('h1');
@@ -52,5 +54,17 @@ export function cartPage() {
   headerTemp.append(createDiv);
   createGuest.append(guestCheckout, checkoutWithOutAcc, continueButton);
   createSignInPage.append(createGuest);
-  cartPage.append(createSignInPage, headerTemp);
+  cartPage.append(createSignInPage);
+  grid.append(headerTemp);
+}
+
+export function showCheckoutPage() {
+  const selectMain = document.getElementById('tempMain');
+  const cartPage = document.querySelector('.cartHeader');
+  const cart = document.querySelector('.continueButton');
+  cart.addEventListener('click', () => {
+    const cloned = cartPage.cloneNode(true);
+    selectMain.textContent = '';
+    selectMain.appendChild(cloned);
+  });
 }

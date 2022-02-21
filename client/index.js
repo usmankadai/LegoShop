@@ -26,6 +26,7 @@ async function init() {
   await auth0.handleAuth0Redirect();
   cart.cartTemplate();
   cart.cartPage();
+  cart.showCheckoutPage();
   // home.execute();
   // home.trial2();
 }
