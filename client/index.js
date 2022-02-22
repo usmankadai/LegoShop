@@ -20,6 +20,7 @@ async function init() {
   home.dropOptions();
   // home.activePage();
   await home.createInventoryBricks();
+  await home.createInventoryKits();
   await auth0.initializeAuth0Client();
   await auth0.setupListeners();
   await auth0.updateAuthUI();

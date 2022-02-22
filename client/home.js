@@ -46,7 +46,7 @@ export function templateHeader() {
 
   const navButton3 = document.getElementById('navButton3');
   navButton3.id = 'kits';
-  // navButton3.href = '/Kits';
+  navButton3.href = '/#/kits';
   navButton3.textContent = 'Kits';
 
   const navButton4 = document.getElementById('navButton4');
@@ -143,18 +143,31 @@ export function templateMain() {
   createDiv.className = 'mainLinks';
   brickTemplate.append(createDiv);
 
+  const kitTemplate = document.querySelector('#kitTemplate');
+  const createKitDiv = document.createElement('div');
+  createKitDiv.className = 'kitLinks';
+  kitTemplate.append(createKitDiv);
+
   const mainLinks = document.querySelector('.mainLinks');
   const brick = document.querySelector('#bricks');
   brick.addEventListener('click', () => {
     const cloned = mainLinks.cloneNode(true);
     selectMain.textContent = '';
-    selectMain.appendChild(cloned);
+    selectMain.append(cloned);
+  });
+
+  const kitLinks = document.querySelector('.kitLinks');
+  const kit = document.querySelector('#kits');
+  kit.addEventListener('click', () => {
+    const cloned = kitLinks.cloneNode(true);
+    selectMain.textContent = '';
+    selectMain.append(cloned);
   });
 }
 
 export async function createInventoryBricks() {
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-  const response = await fetch('/inventories', {
+  const response = await fetch('/bricks', {
     headers: {
       'Content-type': 'application/json',
     },
@@ -213,6 +226,70 @@ export async function createInventoryBricks() {
     createLis.append(createA, legoName, legoPrice, addToCart);
     createLi.append(createLis);
     mainLinks.append(createLi);
+  });
+}
+
+export async function createInventoryKits() {
+  // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+  const response = await fetch('/kits', {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  if (!response || !response.ok) {
+    response.sendStatus(404);
+    return;
+  }
+
+  const legos = await response.json();
+
+  legos.forEach(lego => {
+    const kitLinks = document.querySelector('.kitLinks');
+    const createLi = document.createElement('li');
+    createLi.className = 'lis';
+    const createLis = document.createElement('div');
+
+    createLis.className = 'legoDiv';
+    createLis.id = `lego${lego.kitId}`;
+    createLis.dataset.set = `${lego.categoryId}`;
+
+    const createA = document.createElement('a');
+    createA.id = `a${lego.kitId}`;
+    // createA.href = `/${lego.category}/${lego.kitId}`;
+    // createA.href = '/Bricks.html';
+
+    const legoName = document.createElement('div');
+    legoName.className = 'legoName';
+
+    const legoPrice = document.createElement('div');
+    legoPrice.className = 'legoPrice';
+    legoPrice.id = `legoPrice${lego.kitId}`;
+    legoPrice.textContent = `£${lego.price}`;
+    if (lego.price < 1) {
+      // check if the price is less than £1, get rid of the first two characters which is 0 and point.
+      legoPrice.textContent = `${lego.price}p`.slice(2);
+    }
+    const addToCart = document.createElement('button');
+    addToCart.className = 'addToCart';
+    addToCart.textContent = 'Add to Cart';
+
+    const legoNameLink = document.createElement('a');
+    legoNameLink.className = 'legoNameLink';
+    legoNameLink.id = `legoLink${lego.kitId}`;
+    legoNameLink.textContent = `${lego.name}`;
+    // legoNameLink.href = `/${lego.category}/${lego.kitId}`;
+    // legoNameLink.href = '/Bricks.html?id=1';
+
+    const createImg = document.createElement('img');
+    createImg.id = `image${lego.kitId}`;
+    createImg.src = `${lego.image}`;
+    createImg.alt = `#${lego.name}`;
+
+    legoName.append(legoNameLink);
+    createA.append(createImg);
+    createLis.append(createA, legoName, legoPrice, addToCart);
+    createLi.append(createLis);
+    kitLinks.append(createLi);
   });
 }
 
