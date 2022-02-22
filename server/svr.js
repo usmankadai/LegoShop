@@ -25,7 +25,9 @@ function inventories(req, res) {
     res.sendStatus(404);
   }
 }
-
+function authConf(req, res) {
+  res.json(authConfig);
+}
 // function inventoryPage(req, res) {
 //   // res.send(inventoriesData.legos.find((x) => x.id === req.params.lego.id));
 //   const inventory = req.query.legos.legoId;
@@ -35,10 +37,6 @@ function inventories(req, res) {
 //     res.send('Error!!!');
 //   }
 // }
-
-function authConf(req, res) {
-  res.json(authConfig);
-}
 
 app.listen(port, function () {
   console.log('server starts on localhost:' + port);

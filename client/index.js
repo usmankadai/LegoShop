@@ -19,14 +19,15 @@ async function init() {
   home.templateFooter();
   home.dropOptions();
   // home.activePage();
-  await home.createInventory();
+  await home.createInventoryBricks();
   await auth0.initializeAuth0Client();
   await auth0.setupListeners();
   await auth0.updateAuthUI();
   await auth0.handleAuth0Redirect();
   cart.cartTemplate();
   cart.cartPage();
-  cart.showCheckoutPage();
+  // cart.showCheckoutPage();
+  // cart.hello();
   // home.execute();
   // home.trial2();
 }

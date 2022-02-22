@@ -11,7 +11,8 @@ export function cartTemplate() {
   cart.addEventListener('click', () => {
     const cloned = cartPage.cloneNode(true);
     selectMain.textContent = '';
-    selectMain.appendChild(cloned);
+    selectMain.append(cloned);
+    showCheckoutPage();
   });
 }
 
@@ -58,13 +59,20 @@ export function cartPage() {
   grid.append(headerTemp);
 }
 
-export function showCheckoutPage() {
+function showCheckoutPage() {
   const selectMain = document.getElementById('tempMain');
   const cartPage = document.querySelector('.cartHeader');
-  const cart = document.querySelector('.continueButton');
-  cart.addEventListener('click', () => {
+  const continueButton = document.querySelector('.continueButton');
+  continueButton.addEventListener('click', () => {
     const cloned = cartPage.cloneNode(true);
     selectMain.textContent = '';
-    selectMain.appendChild(cloned);
+    selectMain.append(cloned);
+    console.log(cloned);
   });
 }
+// showCheckoutPage();
+
+// export function hello() {
+//   document.querySelector('.continueButton').addEventListener('click', showCheckoutPage);
+// }
+// hello();

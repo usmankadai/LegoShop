@@ -82,7 +82,7 @@ export function templateHeader() {
 
   const cartIcon = document.getElementById('icon7');
   cartIcon.id = 'cart';
-  // cartIcon.href = '/cart';
+  cartIcon.href = '/#/cart';
   cartIcon.className = 'fas fa-shopping-cart';
   cartIcon.textContent = '(0)';
 
@@ -152,9 +152,9 @@ export function templateMain() {
   });
 }
 
-export async function createInventory() {
+export async function createInventoryBricks() {
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-  const response = await fetch('http://localhost:8080/inventories', {
+  const response = await fetch('/inventories', {
     headers: {
       'Content-type': 'application/json',
     },
