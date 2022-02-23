@@ -276,6 +276,18 @@ input{
     justify-content: space-between;
 }
 
+.address{
+    height: 40rem;
+    margin-top: 0rem;
+    margin-left: 40rem;
+    margin-right: 40rem;
+    /* text-align: center; */
+    position: relative;
+    /* display: flex; */
+    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
+    justify-content: space-between;
+}
+
 .cartSignIn{
     height: 40rem;
     margin-top: 10rem;
