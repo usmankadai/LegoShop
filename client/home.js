@@ -305,9 +305,9 @@ export function dropOptions() {
 }
 
 
-export function historyBack() {
+// export function historyBack() {
 
-}
+// }
 
 // export function activePage() {
 //   const changeTabs = document.querySelectorAll('.tab');
