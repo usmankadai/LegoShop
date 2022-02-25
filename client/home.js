@@ -191,7 +191,7 @@ export async function createInventoryBricks() {
 
     const createA = document.createElement('a');
     createA.id = `a${lego.legoId}`;
-    // createA.href = `/${lego.category}/${lego.legoId}`;
+    createA.href = `/#/${lego.category}/${lego.legoId}`;
     // createA.href = '/Bricks.html';
 
     const legoName = document.createElement('div');
@@ -213,7 +213,7 @@ export async function createInventoryBricks() {
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.legoId}`;
     legoNameLink.textContent = `${lego.name}`;
-    // legoNameLink.href = `/${lego.category}/${lego.legoId}`;
+    legoNameLink.href = `/#/${lego.category}/${lego.legoId}`;
     // legoNameLink.href = '/Bricks.html?id=1';
 
     const createImg = document.createElement('img');
@@ -255,7 +255,7 @@ export async function createInventoryKits() {
 
     const createA = document.createElement('a');
     createA.id = `a${lego.kitId}`;
-    // createA.href = `/${lego.category}/${lego.kitId}`;
+    createA.href = `/#/${lego.category}/${lego.kitId}`;
     // createA.href = '/Bricks.html';
 
     const legoName = document.createElement('div');
@@ -277,7 +277,7 @@ export async function createInventoryKits() {
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.kitId}`;
     legoNameLink.textContent = `${lego.name}`;
-    // legoNameLink.href = `/${lego.category}/${lego.kitId}`;
+    legoNameLink.href = `/#/${lego.category}/${lego.kitId}`;
     // legoNameLink.href = '/Bricks.html?id=1';
 
     const createImg = document.createElement('img');
@@ -302,6 +302,11 @@ function still() {
 export function dropOptions() {
   document.querySelector('#user').addEventListener('click', toggleLogin);
   document.querySelector('#options').addEventListener('click', still);
+}
+
+
+export function historyBack() {
+
 }
 
 // export function activePage() {

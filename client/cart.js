@@ -21,7 +21,7 @@ export function addToCart() {
 //   const addToCart = document.querySelector('.addToCart');
 //   addToCart.addEventListener('click', () => {
 //     const cloned = addToCart.cloneNode(true);
-//     selectMain.appendChild(cloned);
+//     selectMain.append(cloned);
 //   });
 }
 
@@ -47,11 +47,21 @@ export function cartPage() {
   const order = document.createElement('h1');
   order.textContent = 'Where should we send your order?';
 
+  const enterName = document.createElement('h2');
+  enterName.textContent = 'Enter your name.';
+
+  const userTitle = document.createElement('h3');
+  userTitle.textContent = 'Title';
+
+  const select = document.createElement('select');
+  // select.textContent = 'Title';
+  userTitle.append(select);
+
   const shippingAdd = document.createElement('h2');
   shippingAdd.textContent = 'Tell us your shipping address.';
 
   const userContact = document.createElement('h2');
-  userContact.textContent = 'What’s your contact information?';
+  userContact.textContent = 'What\'s your contact information?';
 
   const createGuest = document.createElement('div');
   createGuest.className = 'createGuest';
@@ -68,7 +78,7 @@ export function cartPage() {
   const orderSummary = document.createElement('h1');
   orderSummary.textContent = 'Order Summary:';
   createDiv.append(createH1, orderSummary);
-  address.append(order, shippingAdd, userContact);
+  address.append(order, enterName, userTitle, shippingAdd, userContact);
   addressInfoPage.append(createDiv, address);
   headerTemp.append(addressInfoPage);
   createGuest.append(guestCheckout, checkoutWithOutAcc, continueButton);

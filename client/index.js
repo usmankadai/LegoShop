@@ -1,13 +1,28 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
 import * as cart from './cart.js';
+// import { path } from 'express/lib/application';
+
+function url() {
+  const routes = [
+    { path: '/', view: () => console.log('Home') },
+    { path: '/#/bricks', view: () => console.log('bricks') },
+    { path: '/#/kits', view: () => console.log('kits') },
+    { path: '/#/cart', view: () => console.log('cart') },
+  ];
+
+  // check does the path match
+  const match = routes.forEach(route => {
+    return {
+      route: route,
+      isMatch: location.pathname === route.path,
+    };
+  });
+  console.log(match);
+}
+url();
 
 
-// const path = {
-//     '/': home.createInventory(),
-//     '/Bricks/legoId': legoPage.legoPage(),
-//     '/Kits/legoId': legoPage.legoPage(),
-//   };
 //   const request = requestURL.requestURL();
 //   const parse = (request.resource ? `/${request.resource}` : '/') +
 //   (request.id ? '/legoId' : '') +
@@ -34,4 +49,4 @@ async function init() {
 }
 
 window.addEventListener('load', init);
-// window.addEventListener('hashchange', init);
+// window.addEventListener('popstate', init);

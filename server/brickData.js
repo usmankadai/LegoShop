@@ -3,7 +3,7 @@ export default {
     {
       legoId: '1',
       name: 'Chrome Gold Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/chromeGold.png',
       price: 37,
@@ -12,7 +12,7 @@ export default {
     {
       legoId: '2',
       name: 'Pink Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/pink.png',
       price: 24,
@@ -21,7 +21,7 @@ export default {
     {
       legoId: '3',
       name: 'Green Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/green.png',
       price: 18,
@@ -30,7 +30,7 @@ export default {
     {
       legoId: '4',
       name: 'Orange Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/orange.png',
       price: 21,
@@ -39,7 +39,7 @@ export default {
     {
       legoId: '5',
       name: 'Purple Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/purple.png',
       price: 16,
@@ -48,7 +48,7 @@ export default {
     {
       legoId: '6',
       name: 'Reddish Lilac Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/reddishLilac.png',
       price: 28,
@@ -57,7 +57,7 @@ export default {
     {
       legoId: '7',
       name: 'Brown Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/brown.png',
       price: 55,
@@ -66,7 +66,7 @@ export default {
     {
       legoId: '8',
       name: 'Yellow Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/yellow.png',
       price: 0.98,
@@ -75,7 +75,7 @@ export default {
     {
       legoId: '9',
       name: 'Blue Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/blue.png',
       price: 17,
@@ -84,7 +84,7 @@ export default {
     {
       legoId: '10',
       name: 'Aqua Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/aqua.png',
       price: 23,
@@ -93,7 +93,7 @@ export default {
     {
       legoId: '11',
       name: 'Red Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/red.png',
       price: 19,
@@ -102,7 +102,7 @@ export default {
     {
       legoId: '12',
       name: 'White Brick',
-      category: 'Bricks',
+      category: 'bricks',
       categoryId: 2,
       image: 'images/usedInventories/white.png',
       price: 15,
@@ -111,7 +111,7 @@ export default {
     {
       legoId: '13',
       name: 'Soldier',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenkit.png',
       price: 240,
@@ -120,7 +120,7 @@ export default {
     {
       legoId: '14',
       name: 'Soldier\'s Armour',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenChest.png',
       price: 100,
@@ -129,7 +129,7 @@ export default {
     {
       legoId: '15',
       name: 'Left Arm',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenLeftArm.png',
       price: 0.99,
@@ -138,7 +138,7 @@ export default {
     {
       legoId: '16',
       name: 'Right Arm',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenRightArm.png',
       price: 0.99,
@@ -147,7 +147,7 @@ export default {
     {
       legoId: '17',
       name: 'Hand',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenHand.png',
       price: 10,
@@ -156,7 +156,7 @@ export default {
     {
       legoId: '18',
       name: 'Bike',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/yellowBike.png',
       price: 60,
@@ -165,7 +165,7 @@ export default {
     {
       legoId: '19',
       name: 'Bike\'s Body',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/bikeBrick.png',
       price: 30,
@@ -174,7 +174,7 @@ export default {
     {
       legoId: '20',
       name: 'Tire',
-      category: 'Kits',
+      category: 'bricks',
       categoryId: 3,
       image: 'images/usedInventories/tire.png',
       price: 20,
