@@ -50,6 +50,6 @@ function authConf(req, res) {
 //   }
 // }
 
-app.listen(port, function () {
-  console.log('server starts on localhost:' + port);
+app.listen(port, function (e) {
+  console.log(`server ${e ? 'fails to start' : 'starts on localhost:'}` + port);
 });
