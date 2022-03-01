@@ -1,26 +1,27 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
 import * as cart from './cart.js';
+// import * as designKit from './designKit.js';
 // import { path } from 'express/lib/application';
 
-function url() {
-  const routes = [
-    { path: '/', view: () => console.log('Home') },
-    { path: '/#/bricks', view: () => console.log('bricks') },
-    { path: '/#/kits', view: () => console.log('kits') },
-    { path: '/#/cart', view: () => console.log('cart') },
-  ];
+// function url() {
+//   const routes = [
+//     { path: '/', view: () => console.log('Home') },
+//     { path: '/#/bricks', view: () => console.log('bricks') },
+//     { path: '/#/kits', view: () => console.log('kits') },
+//     { path: '/#/cart', view: () => console.log('cart') },
+//   ];
 
-  // check does the path match
-  const match = routes.forEach(route => {
-    return {
-      route: route,
-      isMatch: location.pathname === route.path,
-    };
-  });
-  console.log(match);
-}
-url();
+//   // check does the path match
+//   const match = routes.forEach(route => {
+//     return {
+//       route: route,
+//       isMatch: location.pathname === route.path,
+//     };
+//   });
+//   console.log(match);
+// }
+// url();
 
 
 //   const request = requestURL.requestURL();
@@ -34,14 +35,15 @@ async function init() {
   home.templateFooter();
   home.dropOptions();
   // home.activePage();
-  await home.createInventoryBricks();
-  await home.createInventoryKits();
+  document.querySelector('#bricks').addEventListener('click', await home.createInventoryBricks);
+  document.querySelector('#kits').addEventListener('click', await home.createInventoryKits);
   await auth0.initializeAuth0Client();
   await auth0.setupListeners();
   await auth0.updateAuthUI();
   await auth0.handleAuth0Redirect();
   cart.cartTemplate();
   cart.cartPage();
+  // designKit.template();
   // cart.showCheckoutPage();
   // cart.hello();
   // home.execute();

@@ -38,7 +38,7 @@ export default {
     },
     {
       kitId: '5',
-      name: 'viking',
+      name: 'Viking',
       category: 'kits',
       categoryId: 2,
       image: 'images/usedInventories/kits/viking.png',

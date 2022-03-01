@@ -51,9 +51,8 @@ header a:hover{
     background-color: rgb(139, 128, 128);
     font-size: 2.3rem;
 } */
-header .tabs .tab:hover{
+.tab:hover{
     background-color: rgb(255, 255, 255);
-    font-size: 2.3rem;
 }
 
 .pages .page {

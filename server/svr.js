@@ -11,13 +11,25 @@ const app = express();
 
 app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '../client')));
 
-// creating a route
+/// ////////////////////// creating a route
+
 
 app.get('/bricks', bricks);
 app.get('/kits', kits);
 // app.get('/inventories/legoId', inventoryPage);
 // app.get('/inventories/Kits/legoId', inventoryPage);
 app.get('/auth-config', authConf);
+
+
+// 404 Error
+
+
+// app.use((req, res) => {
+//   res.redirect('/404.html');
+// });
+// app.get('/404.html', (req, res) => {
+//   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '404.html'));
+// });
 
 
 function bricks(req, res) {

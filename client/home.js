@@ -17,7 +17,6 @@ export function templateHeader() {
 
   const tabs = document.createElement('nav');
   tabs.className = 'tabs';
-  // selectH1.append(log, tabs);
 
   selectH1.append(options, log, tabs);
 
@@ -51,7 +50,7 @@ export function templateHeader() {
 
   const navButton4 = document.getElementById('navButton4');
   navButton4.id = 'Design';
-  // navButton4.href = '/Design';
+  navButton4.href = '/#/designKit';
   navButton4.textContent = 'Design Kit';
 
   const iconsDiv = document.createElement('div');
@@ -72,12 +71,10 @@ export function templateHeader() {
 
   const searchIcon = document.getElementById('icon5');
   searchIcon.id = 'search';
-  // searchIcon.href = '/search';
   searchIcon.className = 'fas fa-search';
 
   const favoriteIcon = document.getElementById('icon6');
   favoriteIcon.id = 'favorite';
-  // favoriteIcon.href = '/favorite';
   favoriteIcon.className = 'fas fa-heart';
 
   const cartIcon = document.getElementById('icon7');
@@ -88,7 +85,6 @@ export function templateHeader() {
 
   const userIcon = document.getElementById('icon8');
   userIcon.id = 'user';
-  // userIcon.href = '/user';
   userIcon.className = 'fas fa-user';
 
   const loginDiv = document.createElement('div');
@@ -116,7 +112,7 @@ export function templateFooter() {
 
   const footerLinks = document.querySelector('.footerLinks');
   const createFirstLink = document.createElement('h3');
-  createFirstLink.textContent = 'About us';
+  createFirstLink.textContent = 'UP969376';
   footerLinks.append(createFirstLink);
 }
 
@@ -166,6 +162,7 @@ export function templateMain() {
 }
 
 export async function createInventoryBricks() {
+  console.log('bricks loaded');
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('/bricks', {
     headers: {
@@ -230,6 +227,7 @@ export async function createInventoryBricks() {
 }
 
 export async function createInventoryKits() {
+  console.log('kits loaded');
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('/kits', {
     headers: {

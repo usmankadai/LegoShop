@@ -92,6 +92,7 @@ function showCheckoutPage() {
   const cartPage = document.querySelector('.addressInfoPage');
   const continueButton = document.querySelector('.continueButton');
   continueButton.addEventListener('click', () => {
+    console.log('debug');
     const cloned = cartPage.cloneNode(true);
     selectMain.textContent = '';
     selectMain.append(cloned);
