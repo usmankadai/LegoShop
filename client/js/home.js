@@ -50,7 +50,7 @@ export function templateHeader() {
 
   const navButton4 = document.getElementById('navButton4');
   navButton4.id = 'Design';
-  navButton4.href = '/#/designKit';
+  navButton4.href = '/designKit.html';
   navButton4.textContent = 'Design Kit';
 
   const iconsDiv = document.createElement('div');
@@ -73,9 +73,10 @@ export function templateHeader() {
   searchIcon.id = 'search';
   searchIcon.className = 'fas fa-search';
 
-  const favoriteIcon = document.getElementById('icon6');
-  favoriteIcon.id = 'favorite';
-  favoriteIcon.className = 'fas fa-heart';
+  const wishlistIcon = document.getElementById('icon6');
+  wishlistIcon.id = 'wishlist';
+  wishlistIcon.href = '/wishlist.html';
+  wishlistIcon.className = 'fas fa-heart';
 
   const cartIcon = document.getElementById('icon7');
   cartIcon.id = 'cart';
@@ -129,10 +130,10 @@ export function templateMain() {
   const createKitTemp = document.createElement('template');
   createKitTemp.id = 'kitTemplate';
 
-  const createFavouriteTemp = document.createElement('template');
-  createFavouriteTemp.id = 'favouriteTemplate';
+  const createWishlistTemp = document.createElement('template');
+  createWishlistTemp.id = 'wishlistTemplate';
 
-  grid.append(createBrickTemp, createCartTemp, createKitTemp, createFavouriteTemp);
+  grid.append(createBrickTemp, createCartTemp, createKitTemp, createWishlistTemp);
 
   const brickTemplate = document.querySelector('#brickTemplate');
   const createDiv = document.createElement('div');

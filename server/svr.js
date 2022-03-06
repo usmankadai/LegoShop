@@ -5,7 +5,6 @@ import authConfig from './auth-config.js';
 import path from 'path';
 import url from 'url';
 
-
 const port = 8080;
 const app = express();
 
@@ -13,24 +12,26 @@ app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)
 
 /// ////////////////////// creating a route
 
-
 app.get('/bricks', bricks);
 app.get('/kits', kits);
-// app.get('/inventories/legoId', inventoryPage);
-// app.get('/inventories/Kits/legoId', inventoryPage);
 app.get('/auth-config', authConf);
+// app.get('/404', error);
+
+// app.get('/home', (req, res) => {
+//   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), 'index.html'));
+// });
 
 
 // 404 Error
 
+app.use((req, res) => {
+  res.redirect('/404.html');
+  // res.sendStatus(404);
+});
 
-// app.use((req, res) => {
-//   res.redirect('/404.html');
-// });
-// app.get('/404.html', (req, res) => {
-//   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '404.html'));
-// });
-
+// function error(req, res) {
+//   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '404'));
+// }
 
 function bricks(req, res) {
   if (res || res.ok) {
@@ -51,16 +52,6 @@ function kits(req, res) {
 function authConf(req, res) {
   res.json(authConfig);
 }
-
-// function inventoryPage(req, res) {
-//   // res.send(inventoriesData.legos.find((x) => x.id === req.params.lego.id));
-//   const inventory = req.query.legos.legoId;
-//   if (inventoriesData.legos[inventory]) {
-//     res.send(inventoriesData.legos[inventory]);
-//   } else {
-//     res.send('Error!!!');
-//   }
-// }
 
 app.listen(port, function (e) {
   console.log(`server ${e ? 'fails to start' : 'starts on localhost:'}` + port);

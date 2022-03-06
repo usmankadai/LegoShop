@@ -1,6 +1,6 @@
 // Refrenced auth0 from auth0 lecture
 async function fetchAuthConfig() {
-  const response = await fetch('/auth-config');
+  const response = await fetch('../auth-config');
   if (response.ok) {
     return response.json();
   } else {
