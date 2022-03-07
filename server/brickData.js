@@ -182,3 +182,16 @@ export default {
     },
   ],
 };
+
+
+// export function trial() {
+//   return legos;
+// }
+
+// export function loadTrial(legoId) {
+//   for (const lego of legos) {
+//     if (legoId === lego.legoId) {
+//       return lego;
+//     }
+//   }
+// }

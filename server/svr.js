@@ -13,25 +13,40 @@ app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)
 /// ////////////////////// creating a route
 
 app.get('/bricks', bricks);
+app.get('/brick', brick);
 app.get('/kits', kits);
 app.get('/auth-config', authConf);
 // app.get('/404', error);
-
-// app.get('/home', (req, res) => {
-//   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), 'index.html'));
-// });
+// app.get('/bricks?' )
 
 
 // 404 Error
 
 app.use((req, res) => {
   res.redirect('/404.html');
-  // res.sendStatus(404);
 });
 
 // function error(req, res) {
 //   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '404'));
 // }
+
+function brick(req, res) {
+  const legoId = req.query.legoId;
+  if (!legoId) {
+    res.sendStatus(400);
+  }
+
+  console.log(legoId);
+  // let brickDetails;
+  for (const brick of brickData.legos) {
+    if (brick.legoId === legoId) {
+      // brickDetails = brick;
+      res.json(brick);
+    }
+  }
+
+  res.sendStatus(404);
+}
 
 function bricks(req, res) {
   if (res || res.ok) {

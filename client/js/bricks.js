@@ -30,7 +30,8 @@ export async function createInventoryBricks() {
 
     const createA = document.createElement('a');
     createA.id = `a${lego.legoId}`;
-    createA.href = `/#/${lego.category}/${lego.legoId}`;
+    // createA.href = '/brickInfo.html';
+    // createA.href = `/#/${lego.category}/${lego.legoId}`;
 
     const legoName = document.createElement('div');
     legoName.className = 'legoName';
@@ -51,7 +52,7 @@ export async function createInventoryBricks() {
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.legoId}`;
     legoNameLink.textContent = `${lego.name}`;
-    legoNameLink.href = `/#/${lego.category}/${lego.legoId}`;
+    // legoNameLink.href = `/#/${lego.category}/${lego.legoId}`;
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.legoId}`;

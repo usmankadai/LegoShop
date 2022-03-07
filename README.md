@@ -7,6 +7,10 @@ npm init -->
 
 <!-- functional requirement
 
+nodemon server/svr.js
+sudo npm i -g nodemon
+npm i -g nodemon
+
 non functional requirement
 
 using vanilla js in frontend i.e CSS, HTML and JavaScript

@@ -28,6 +28,6 @@ window.addEventListener('load', init);
 // }
 
 
-async function loadInventories() {
+// async function loadInventories() {
 
-}
+// }
