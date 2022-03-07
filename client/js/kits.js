@@ -1,12 +1,12 @@
-export async function createInventoryBricks() {
-  const brickTemplate = document.querySelector('.bricksPage');
+export async function createInventoryKits() {
+  const kitTemplate = document.querySelector('.kitsPage');
   const createDiv = document.createElement('div');
   createDiv.className = 'mainLinks';
-  brickTemplate.append(createDiv);
+  kitTemplate.append(createDiv);
 
-  console.log('bricks loaded');
+  console.log('kits loaded');
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-  const response = await fetch('/bricks', {
+  const response = await fetch('/kits', {
     headers: {
       'Content-type': 'application/json',
     },
@@ -25,19 +25,19 @@ export async function createInventoryBricks() {
     const createLis = document.createElement('div');
 
     createLis.className = 'legoDiv';
-    createLis.id = `lego${lego.legoId}`;
+    createLis.id = `lego${lego.kitId}`;
     createLis.dataset.set = `${lego.categoryId}`;
 
     const createA = document.createElement('a');
-    createA.id = `a${lego.legoId}`;
-    createA.href = `/#/${lego.category}/${lego.legoId}`;
+    createA.id = `a${lego.kitId}`;
+    createA.href = `/#/${lego.category}/${lego.kitId}`;
 
     const legoName = document.createElement('div');
     legoName.className = 'legoName';
 
     const legoPrice = document.createElement('div');
     legoPrice.className = 'legoPrice';
-    legoPrice.id = `legoPrice${lego.legoId}`;
+    legoPrice.id = `legoPrice${lego.kitId}`;
     legoPrice.textContent = `£${lego.price}`;
     if (lego.price < 1) {
       // check if the price is less than £1, get rid of the first two characters which is 0 and point.
@@ -49,12 +49,12 @@ export async function createInventoryBricks() {
 
     const legoNameLink = document.createElement('a');
     legoNameLink.className = 'legoNameLink';
-    legoNameLink.id = `legoLink${lego.legoId}`;
+    legoNameLink.id = `legoLink${lego.kitId}`;
     legoNameLink.textContent = `${lego.name}`;
-    legoNameLink.href = `/#/${lego.category}/${lego.legoId}`;
+    legoNameLink.href = `/#/${lego.category}/${lego.kitId}`;
 
     const createImg = document.createElement('img');
-    createImg.id = `image${lego.legoId}`;
+    createImg.id = `image${lego.kitId}`;
     createImg.src = `${lego.image}`;
     createImg.alt = `#${lego.name}`;
 

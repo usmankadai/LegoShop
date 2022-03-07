@@ -36,6 +36,7 @@ header .icons a{
     color: rgb(255, 251, 0);
     margin: 0 1rem;
     font-size: 1.7rem;
+    display: inline;
 }
 
 header a{
@@ -356,6 +357,10 @@ input{
         box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
         justify-content: space-between;
     }
+    input{
+        width: 11rem;
+        border: 1px solid rgb(255, 251, 0);
+    }
 } 
 @media(max-width:35rem){
     .cartHeader{
@@ -387,7 +392,7 @@ input{
         justify-content: space-between;
     }
     input{
-        width: 7rem;
+        width: 6.5rem;
         border: 1px solid rgb(255, 251, 0);
     }
 
@@ -435,6 +440,9 @@ input{
 
     #options{
         font-size: 2rem;
+    }
+    #sort{
+        width: 5rem;
     }
 }
 
@@ -517,6 +525,9 @@ input{
     }
     .legoPrice{
         font-size: 2rem;
+    }
+    #sort{
+        width: 2rem;
     }
 }
 

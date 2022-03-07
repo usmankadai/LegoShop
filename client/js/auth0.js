@@ -73,3 +73,10 @@ export function setupListeners() {
   document.getElementById('login').addEventListener('click', login);
   document.getElementById('logout').addEventListener('click', logout);
 }
+
+export async function executeAuth0() {
+  await initializeAuth0Client();
+  await updateAuthUI();
+  await handleAuth0Redirect();
+  setupListeners();
+}

@@ -99,9 +99,8 @@ function showCheckoutPage() {
     console.log(cloned);
   });
 }
-// showCheckoutPage();
 
-// export function hello() {
-//   document.querySelector('.continueButton').addEventListener('click', showCheckoutPage);
-// }
-// hello();
+export function executeCheckout() {
+  cartTemplate();
+  cartPage();
+}
