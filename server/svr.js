@@ -15,9 +15,9 @@ app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)
 app.get('/bricks', bricks);
 app.get('/brick', brick);
 app.get('/kits', kits);
+app.get('/kit', kit);
 app.get('/auth-config', authConf);
 // app.get('/404', error);
-// app.get('/bricks?' )
 
 
 // 404 Error
@@ -37,29 +37,40 @@ function brick(req, res) {
   }
 
   console.log(legoId);
-  // let brickDetails;
   for (const brick of brickData.legos) {
     if (brick.legoId === legoId) {
-      // brickDetails = brick;
       res.json(brick);
     }
   }
-
   res.sendStatus(404);
 }
 
 function bricks(req, res) {
   if (res || res.ok) {
     res.send(brickData.legos);
-  } else {
+  } else if (!res || !res.ok) {
     res.sendStatus(404);
   }
+}
+
+function kit(req, res) {
+  const kitId = req.query.kitId;
+  if (!kitId) {
+    res.sendStatus(400);
+  }
+  console.log(kitId);
+  for (const kit of kitData.legos) {
+    if (kit.kitId === kitId) {
+      res.json(kit);
+    }
+  }
+  res.sendStatus(404);
 }
 
 function kits(req, res) {
   if (res || res.ok) {
     res.send(kitData.legos);
-  } else {
+  } else if (!res || !res.ok) {
     res.sendStatus(404);
   }
 }
