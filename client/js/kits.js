@@ -1,4 +1,18 @@
-export async function createInventoryKits() {
+import * as home from './home.js';
+import * as auth0 from './auth0.js';
+import * as cart from './cart.js';
+
+async function init() {
+  createInventoryKits();
+  await home.execute();
+  await auth0.executeAuth0();
+  cart.executeCheckout();
+}
+
+window.addEventListener('load', init);
+
+
+async function createInventoryKits() {
   const kitTemplate = document.querySelector('.kitsPage');
   const createDiv = document.createElement('div');
   createDiv.className = 'mainLinks';
@@ -30,7 +44,7 @@ export async function createInventoryKits() {
 
     const createA = document.createElement('a');
     createA.id = `a${lego.kitId}`;
-    createA.href = `/#/${lego.category}/${lego.kitId}`;
+    createA.href = `kit.html?kitId=${lego.kitId}`;
 
     const legoName = document.createElement('div');
     legoName.className = 'legoName';
@@ -51,7 +65,7 @@ export async function createInventoryKits() {
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.kitId}`;
     legoNameLink.textContent = `${lego.name}`;
-    legoNameLink.href = `/#/${lego.category}/${lego.kitId}`;
+    legoNameLink.href = `kit.html?kitId=${lego.kitId}`;
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.kitId}`;

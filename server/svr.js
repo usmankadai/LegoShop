@@ -17,18 +17,12 @@ app.get('/brick', brick);
 app.get('/kits', kits);
 app.get('/kit', kit);
 app.get('/auth-config', authConf);
-// app.get('/404', error);
 
-
-// 404 Error
+// redirect to 404 Error page when an invalid url like is being search e.g. http://localhost:8080/kits.html/dsjsjsd.sd
 
 app.use((req, res) => {
   res.redirect('/404.html');
 });
-
-// function error(req, res) {
-//   res.sendFile(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '404'));
-// }
 
 function brick(req, res) {
   const legoId = req.query.legoId;

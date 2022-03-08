@@ -1,4 +1,33 @@
-export async function createInventoryBricks() {
+import * as home from './home.js';
+import * as auth0 from './auth0.js';
+import * as cart from './cart.js';
+// import * as bricks from './bricks.js';
+
+async function init() {
+  createInventoryBricks();
+  home.execute();
+  await auth0.executeAuth0();
+  cart.executeCheckout();
+  excuteAddToCart();
+  // se();
+  /// /////////////////////////////////////////////////////////////////////
+  // search.addEventListener('click', loadInventoriesWithSearch);
+  // searchForm.addEventListener('submit', loadInventoriesWithSearch);
+}
+window.addEventListener('load', init);
+
+
+// function loadInventoriesWithSearch(e) {
+//   e.preventDefault();
+//   loadInventories();
+// }
+
+
+// async function loadInventories() {
+
+// }
+
+async function createInventoryBricks() {
   const brickTemplate = document.querySelector('.bricksPage');
   const createDiv = document.createElement('div');
   createDiv.className = 'mainLinks';
@@ -32,6 +61,7 @@ export async function createInventoryBricks() {
     createA.id = `a${lego.legoId}`;
     // createA.href = '/brickInfo.html';
     // createA.href = `/#/${lego.category}/${lego.legoId}`;
+    createA.href = `brick.html?legoId=${lego.legoId}`;
 
     const legoName = document.createElement('div');
     legoName.className = 'legoName';
@@ -44,15 +74,19 @@ export async function createInventoryBricks() {
       // check if the price is less than £1, get rid of the first two characters which is 0 and point.
       legoPrice.textContent = `${lego.price}p`.slice(2);
     }
-    const addToCart = document.createElement('button');
+    const addToCart = document.createElement('a');
     addToCart.className = 'addToCart';
     addToCart.textContent = 'Add to Cart';
+    // addToCart.href = 'cart.html';
 
     const legoNameLink = document.createElement('a');
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.legoId}`;
     legoNameLink.textContent = `${lego.name}`;
     // legoNameLink.href = `/#/${lego.category}/${lego.legoId}`;
+    // legoNameLink.href = '/brickInfo.html';
+    legoNameLink.href = `brick.html?legoId=${lego.legoId}`;
+
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.legoId}`;
@@ -66,3 +100,28 @@ export async function createInventoryBricks() {
     mainLinks.append(createLi);
   });
 }
+
+function excuteAddToCart() {
+  document.querySelector('.addToCart').addEventListener('click', addToCart);
+}
+
+
+function addToCart(legoId) {
+//   const selectMain = document.getElementById('tempMain');
+//   const addToCart = document.querySelector('.addToCart');
+//   addToCart.addEventListener('click', () => {
+//     const cloned = addToCart.cloneNode(true);
+//     selectMain.append(cloned);
+//   });
+  console.log(legoId);
+}
+// function se() {
+//   const se = document.querySelector('.legoNameLink');
+//   se.addEventListener('click', viewBrick);
+// }
+
+// function viewBrick(event) {
+//   const legoId = event.target.parentElement.id;
+//   console.log(legoId);
+//   window.location = `brick.html?legoId=${legoId}`;
+// }

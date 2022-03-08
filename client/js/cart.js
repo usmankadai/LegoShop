@@ -16,14 +16,20 @@ export function cartTemplate() {
   });
 }
 
-export function addToCart() {
-//   const selectMain = document.getElementById('tempMain');
-//   const addToCart = document.querySelector('.addToCart');
-//   addToCart.addEventListener('click', () => {
-//     const cloned = addToCart.cloneNode(true);
-//     selectMain.append(cloned);
-//   });
-}
+// function excuteAddToCart() {
+//   document.querySelector('.addToCart').addEventListener('click', addToCart);
+// }
+
+
+// export function addToCart(legoId) {
+// //   const selectMain = document.getElementById('tempMain');
+// //   const addToCart = document.querySelector('.addToCart');
+// //   addToCart.addEventListener('click', () => {
+// //     const cloned = addToCart.cloneNode(true);
+// //     selectMain.append(cloned);
+// //   });
+//   console.log(legoId);
+// }
 
 export function cartPage() {
   const grid = document.querySelector('.grid');
@@ -103,4 +109,5 @@ function showCheckoutPage() {
 export function executeCheckout() {
   cartTemplate();
   cartPage();
+  // excuteAddToCart();
 }
