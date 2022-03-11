@@ -8,6 +8,7 @@ export default {
       image: 'images/usedInventories/kits/peakyBlinders.png',
       price: 500,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '2',
@@ -17,6 +18,7 @@ export default {
       image: 'images/usedInventories/kits/scofield.png',
       price: 399,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '3',
@@ -26,6 +28,7 @@ export default {
       image: 'images/usedInventories/kits/joker.png',
       price: 364,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '4',
@@ -35,6 +38,7 @@ export default {
       image: 'images/usedInventories/kits/TasmanianDevil.png',
       price: 260,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '5',
@@ -44,6 +48,7 @@ export default {
       image: 'images/usedInventories/kits/viking.png',
       price: 160,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '6',
@@ -53,6 +58,7 @@ export default {
       image: 'images/usedInventories/kits/lambo.png',
       price: 370,
       stockLevels: 25,
+      cart: 0,
     },
     {
       kitId: '7',
@@ -62,6 +68,7 @@ export default {
       image: 'images/usedInventories/kits/colosseum.png',
       price: 300,
       stockLevels: 70,
+      cart: 0,
     },
     {
       kitId: '8',
@@ -71,6 +78,7 @@ export default {
       image: 'images/usedInventories/kits/hogwarts.png',
       price: 320,
       stockLevels: 50,
+      cart: 0,
     },
     {
       kitId: '9',
@@ -80,6 +88,7 @@ export default {
       image: 'images/usedInventories/kits/newYork.png',
       price: 240,
       stockLevels: 50,
+      cart: 0,
     },
     {
       kitId: '10',
@@ -89,6 +98,7 @@ export default {
       image: 'images/usedInventories/kits/tajMahal.png',
       price: 392,
       stockLevels: 88,
+      cart: 0,
     },
 
     {
@@ -99,6 +109,7 @@ export default {
       image: 'images/usedInventories/kits/Skyhawk.png',
       price: 259,
       stockLevels: 88,
+      cart: 0,
     },
 
     {
@@ -109,6 +120,7 @@ export default {
       image: 'images/usedInventories/kits/F1LotusE20.png',
       price: 499,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '13',
@@ -118,6 +130,7 @@ export default {
       image: 'images/usedInventories/kits/madrid.png',
       price: 1000,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '14',
@@ -127,6 +140,7 @@ export default {
       image: 'images/usedInventories/kits/ironManHelmet.png',
       price: 200,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '15',
@@ -136,6 +150,7 @@ export default {
       image: 'images/usedInventories/kits/captainA.png',
       price: 400,
       stockLevels: 88,
+      cart: 0,
     },
     {
       kitId: '16',
@@ -145,7 +160,7 @@ export default {
       image: 'images/usedInventories/kits/ironMan.png',
       price: 374,
       stockLevels: 88,
+      cart: 0,
     },
-
   ],
 };

@@ -8,6 +8,7 @@ export default {
       image: 'images/usedInventories/chromeGold.png',
       price: 37,
       stockLevels: 25,
+      cart: 0,
     },
     {
       legoId: '2',
@@ -17,6 +18,7 @@ export default {
       image: 'images/usedInventories/pink.png',
       price: 24,
       stockLevels: 70,
+      cart: 0,
     },
     {
       legoId: '3',
@@ -26,6 +28,7 @@ export default {
       image: 'images/usedInventories/green.png',
       price: 18,
       stockLevels: 50,
+      cart: 0,
     },
     {
       legoId: '4',
@@ -35,6 +38,7 @@ export default {
       image: 'images/usedInventories/orange.png',
       price: 21,
       stockLevels: 50,
+      cart: 0,
     },
     {
       legoId: '5',
@@ -44,6 +48,7 @@ export default {
       image: 'images/usedInventories/purple.png',
       price: 16,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '6',
@@ -53,6 +58,7 @@ export default {
       image: 'images/usedInventories/reddishLilac.png',
       price: 28,
       stockLevels: 50,
+      cart: 0,
     },
     {
       legoId: '7',
@@ -62,6 +68,7 @@ export default {
       image: 'images/usedInventories/brown.png',
       price: 55,
       stockLevels: 60,
+      cart: 0,
     },
     {
       legoId: '8',
@@ -71,6 +78,7 @@ export default {
       image: 'images/usedInventories/yellow.png',
       price: 0.98,
       stockLevels: 135,
+      cart: 0,
     },
     {
       legoId: '9',
@@ -80,6 +88,7 @@ export default {
       image: 'images/usedInventories/blue.png',
       price: 17,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '10',
@@ -89,6 +98,7 @@ export default {
       image: 'images/usedInventories/aqua.png',
       price: 23,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '11',
@@ -98,6 +108,7 @@ export default {
       image: 'images/usedInventories/red.png',
       price: 19,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '12',
@@ -107,6 +118,7 @@ export default {
       image: 'images/usedInventories/white.png',
       price: 15,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '13',
@@ -116,6 +128,7 @@ export default {
       image: 'images/usedInventories/greenkit.png',
       price: 240,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '14',
@@ -125,6 +138,7 @@ export default {
       image: 'images/usedInventories/greenChest.png',
       price: 100,
       stockLevels: 88,
+      cart: 0,
     },
     {
       legoId: '15',
@@ -134,6 +148,7 @@ export default {
       image: 'images/usedInventories/greenLeftArm.png',
       price: 0.99,
       stockLevels: 100,
+      cart: 0,
     },
     {
       legoId: '16',
@@ -143,6 +158,7 @@ export default {
       image: 'images/usedInventories/greenRightArm.png',
       price: 0.99,
       stockLevels: 100,
+      cart: 0,
     },
     {
       legoId: '17',
@@ -152,6 +168,7 @@ export default {
       image: 'images/usedInventories/greenHand.png',
       price: 10,
       stockLevels: 80,
+      cart: 0,
     },
     {
       legoId: '18',
@@ -161,6 +178,7 @@ export default {
       image: 'images/usedInventories/yellowBike.png',
       price: 60,
       stockLevels: 38,
+      cart: 0,
     },
     {
       legoId: '19',
@@ -170,6 +188,7 @@ export default {
       image: 'images/usedInventories/bikeBrick.png',
       price: 30,
       stockLevels: 35,
+      cart: 0,
     },
     {
       legoId: '20',
@@ -179,6 +198,7 @@ export default {
       image: 'images/usedInventories/tire.png',
       price: 20,
       stockLevels: 47,
+      cart: 0,
     },
   ],
 };
