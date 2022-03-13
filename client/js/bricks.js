@@ -1,6 +1,7 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
 import * as cart from './cart.js';
+import * as brickStorage from './bricksLocalStorage.js';
 // import * as bricks from './bricks.js';
 
 async function init() {
@@ -8,8 +9,9 @@ async function init() {
   home.execute();
   await auth0.executeAuth0();
   cart.executeCheckout();
-  cartReloadPage();
-  await trying();
+  brickStorage.brickStorage();
+  // cartReloadPage();
+  // await fetchBricks();
   // excuteAddToCart();
   // addToCart();
   // se();
@@ -108,137 +110,4 @@ async function createInventoryBricks() {
     createLi.append(createLis);
     mainLinks.append(createLi);
   });
-
-  // function addToCarts(legoId) {
-  //   const basket = [];
-  //   const inventory = legos.find((lego) => lego.legoId === legoId);
-  //   basket.push(inventory);
-  //   console.log(basket);
-  //   // console.log('add');
-  //   // console.log(legoId);
-  // }
 }
-
-// async function excuteAddToCart() {
-//   const response = await fetch('/bricks', {
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//   });
-//   if (!response || !response.ok) {
-//     response.sendStatus(404);
-//     return;
-//   }
-
-//   const legos = await response.json();
-
-//   legos.forEach((lego) => {
-//     document.querySelector('.addToCart').addEventListener('click', () => {
-//       console.log(`${lego.legoId}`);
-//     });
-//   });
-// }
-// excuteAddToCart();
-// function addToCart(legoId) {
-//   // console.log(legoId);
-// }
-
-
-// let lego = [];
-async function trying() {
-  const response = await fetch('/bricks', {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-
-  const legos = await response.json();
-
-  const cart = document.querySelectorAll('.addToCart');
-
-  for (let i = 0; i < cart.length; i++) {
-    // console.log('running');
-    cart[i].addEventListener('click', () => {
-      // console.log('addToCart');
-      storage(legos[i]);
-    });
-  }
-}
-
-// after reloading the page the number of items in the cart should not disappear.
-// It should be the same as the items in localStorage
-
-function cartReloadPage() {
-  const cartItems = localStorage.getItem('cartnumber');
-  if (cartItems) {
-    document.querySelector('#cart').textContent = cartItems;
-  }
-}
-
-function storage(lego) {
-  // console.log('product clicked', lego);
-
-
-  let cartItems = localStorage.getItem('cartnumber');
-
-  cartItems = parseInt(cartItems);
-
-  if (cartItems) {
-    localStorage.setItem('cartnumber', cartItems + 1);
-    document.querySelector('#cart').textContent = cartItems + 1;
-  } else {
-    localStorage.setItem('cartnumber', 1);
-    document.querySelector('#cart').textContent = 1;
-  }
-
-  // saves brick being clicked to the localStorage
-  saveBrick(lego);
-}
-
-function saveBrick(lego) {
-  // console.log('inside of set item');
-  // console.log('product clicked', lego);
-
-  let basket = localStorage.getItem('lego in basket');
-  basket = JSON.parse(basket);
-
-
-  lego.cart = 1;
-  if (basket !== null) {
-    if (basket[lego.name] === undefined) {
-      basket = {
-        ...basket,
-        [lego.name]: lego,
-      };
-    }
-    basket[lego.name].cart += 1;
-  } else {
-    lego.cart = 1;
-
-    basket = {
-      [lego.name]: lego,
-    };
-  }
-  // basket = {
-  //   [lego.category]: lego,
-  // };
-  localStorage.setItem('lego inside cart', JSON.stringify(basket));
-  // console.log('cart items are', basket);
-}
-
-
-// if (basket != null) {
-//   if (basket[lego.name] === undefined) {
-//     basket = {
-//       ...basket,
-//       [lego.name]: lego,
-//     };
-//   }
-//   basket[lego.name].cart += 1;
-// } else {
-//   lego.cart = 1;
-
-//   basket = {
-//     [lego.name]: lego,
-//   };
-// }
