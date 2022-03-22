@@ -118,7 +118,7 @@ export function templateHeader() {
 
   const cartIcon = document.getElementById('icon6');
   cartIcon.id = 'cart';
-  cartIcon.href = '/#/cart';
+  cartIcon.href = '/cart.html';
   cartIcon.className = 'fas fa-shopping-cart';
   cartIcon.textContent = '(0)';
 

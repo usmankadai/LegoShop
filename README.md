@@ -37,3 +37,10 @@ reason for using auth0
 
 
 <!-- standard way of swtiching pages is by making links. But it's slow especially when we have a lot of content on a page. Method used is single page application it's fast and nothing reloads. -->
+
+
+
+<!-- RegEx for matching UK Postcodes
+https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes -->
+
+<!-- npm i pg -->

@@ -1,6 +1,6 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-import * as cart from './cart.js';
+// import * as cart from './cart.js';
 import * as brickStorage from './bricksLocalStorage.js';
 // import * as bricks from './bricks.js';
 
@@ -8,7 +8,7 @@ async function init() {
   createInventoryBricks();
   home.execute();
   await auth0.executeAuth0();
-  cart.executeCheckout();
+  // cart.executeCheckout();
   brickStorage.brickStorage();
   // cartReloadPage();
   // await fetchBricks();

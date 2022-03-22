@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href= "style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+    <script src="../js/cardValidation.js" type = "module"></script>
+    <title>checkout</title>
+</head>
+<body>
+    <div class = "grid">
+        <header></header>
+        <main>
+            <form id = "checkout">
+                <div class = "payHeader">Payment Details</div>
+                <h2>Enter your card details</h2>
+
+                <input id = "nameOnCard" placeholder = "Enter Name as it is on your card" required>
+                <label for = "nameOnCard"></label>
+
+                <input id = "cardNumber" placeholder = "Credit/Debit Card Number" required pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}">
+                <label for = "cardNumber">Format: XXXX-XXXX-XXXX-XXXX</label>
+
+                <input id = "expiry" placeholder = "Expiration MM/YY" required pattern="[0-9]{2}/[0-9]{2}">
+                <label for = "expiry"></label>
+
+                <input id = "CVV" placeholder = "CVV" required pattern="[0-9]{3}">
+                <label for = "CVV">Three digit behind your card</label>
+
+                <!-- <input id = "phoneNumber" placeholder = "Mobile Phone Number" required type="tel" name="phone"
+                pattern="[0-9]{11}"> -->
+                <span class="if-invalid">Please fill out the required information</span>
+                <input id = "successfulPayment" type="button" value="Pay">
+            </form>
+        </main>
+        <footer></footer>
+    </div>
+</body>
+</html>

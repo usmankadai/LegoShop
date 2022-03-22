@@ -20,9 +20,11 @@ app.get('/auth-config', authConf);
 
 // redirect to 404 Error page when an invalid url like is being search e.g. http://localhost:8080/kits.html/dsjsjsd.sd
 
-app.use((req, res) => {
+app.use(redirect);
+
+function redirect(req, res) {
   res.redirect('/404.html');
-});
+}
 
 function brick(req, res) {
   const legoId = req.query.legoId;
@@ -51,6 +53,7 @@ function kit(req, res) {
   const kitId = req.query.kitId;
   if (!kitId) {
     res.sendStatus(400);
+    console.log('does not exist');
   }
   console.log(kitId);
   for (const kit of kitData.legos) {

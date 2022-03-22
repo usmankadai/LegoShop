@@ -1,12 +1,14 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-import * as cart from './cart.js';
+// import * as cart from './cart.js';
+import * as kitStorage from './kitsLocalStorage.js';
 
 async function init() {
   createInventoryKits();
   await home.execute();
   await auth0.executeAuth0();
-  cart.executeCheckout();
+  // cart.executeCheckout();
+  kitStorage.kitStorage();
 }
 
 window.addEventListener('load', init);

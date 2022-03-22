@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href= "style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+    <script src="../js/checkOutValidation.js" type = "module"></script>
+    <title>checkout</title>
+</head>
+<body>
+    <div class = "grid">
+        <header></header>
+        <main>
+            <form id = "checkout">
+                <div class = "checkoutHeader">Checkout</div>
+                <h1>Where should we send your order?</h1>
+                <h2>Enter your name</h2>
+                <select>
+                    <option>Mr</option>
+                    <option>Mrs</option>
+                    <option>Miss</option>
+                    <option>Ms</option>
+                    <option>Dr</option>
+                    <option>Professor</option>
+                    <option>Not Specified</option>
+                </select>
+                <input id = "firstName" placeholder = "First Name" required>
+                <label for = "firstName"></label>
+
+                <input id = "surname" placeholder = "Surname" required>
+                <label for = "surname"></label>
+
+                <h2>Enter your shipping Address</h2>
+                <input id = "address1" placeholder = "Address Line 1" required>
+                <label for = "address1"></label>
+
+                <input id = "apartment" placeholder = "Apartment, Building Access Code">
+
+                <input id = "address2" placeholder = "Address Line 2">
+
+                <input id = "town" placeholder = "Town/City" required>
+                <label for = "town"></label>
+
+                <input id = "county" placeholder = "County" required>
+                <label for = "county"></label>
+
+                <input id = "postcode" placeholder = "Postcode" required
+                pattern="([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})">
+                <label for = "postcode">Format: XX1 1XX</label>
+
+                <input id = "Country" placeholder = "Country">
+
+                <h2>What's your contact information</h2>
+                <input id = "emailAddress" placeholder = "Email Address" type="email" required>
+                <label for = "emailAddress">Format: a@g.com</label>
+
+                <input id = "phoneNumber" placeholder = "Mobile Phone Number" required type="tel" name="phone"
+                pattern="[0-9]{11}">
+                <label for = "phoneNumber">Format: 077xxxxxxxx</label>
+
+                <span class="if-invalid">Please fill out the required information</span>
+                <input id = "pay" type="button" value="Continue To Payment">
+
+            </form>
+        </main>
+        <footer></footer>
+    </div>
+</body>
+</html>

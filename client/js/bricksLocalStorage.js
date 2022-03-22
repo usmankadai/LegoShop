@@ -13,6 +13,7 @@ async function fetchBricks() {
     // console.log('running');
     cart[i].addEventListener('click', () => {
       storage(legos[i]);
+      totalAmount(legos[i]);
     });
   }
 }
@@ -39,7 +40,6 @@ function storage(lego) {
     localStorage.setItem('cartQuantity', 1);
     document.querySelector('#cart').textContent = 1;
   }
-
   // saves brick being clicked to the localStorage
   saveBrick(lego);
 }
@@ -55,10 +55,6 @@ function saveBrick(lego) {
         [lego.name]: lego,
       };
     }
-    // lego.cart += 1;
-    // basket = {
-    //   [lego.name]: lego,
-    // };
     basket[lego.name].cart += 1;
   } else {
     lego.cart = 1;
@@ -66,8 +62,23 @@ function saveBrick(lego) {
       [lego.name]: lego,
     };
   }
-
   localStorage.setItem('lego inside cart', JSON.stringify(basket));
+}
+
+function totalAmount(lego) {
+  // this function is similar to storage function it adds the total amount to the localStorage
+  // and updates the total amount if there is another lego being added.
+
+  let totalAmount = localStorage.getItem('totalAmount');
+  console.log('The amount is', totalAmount);
+
+  // checks whatever that was in totalAmount add it to the new amount that is being clicked.
+  if (totalAmount != null) {
+    totalAmount = parseInt(totalAmount);
+    localStorage.setItem('totalAmount', totalAmount + lego.price);
+  } else {
+    localStorage.setItem('totalAmount', lego.price);
+  }
 }
 
 export async function brickStorage() {
