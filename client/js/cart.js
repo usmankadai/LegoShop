@@ -39,15 +39,22 @@ function initializeCart() {
       const subTotal = document.createElement('div');
       subTotal.textContent = `£${lego.price * lego.cart}`;
 
+      // const add = document.createElement('a');
+      // add.className = 'add';
+      // add.textContent = '+';
+
       createDiv.append(createImg, cart, legoPrice, subTotal);
       legoBasket.append(createDiv);
     });
   }
 
   const total = document.querySelector('.total');
+  // const continues = document.querySelector('.continueToCheckout');
+
   total.textContent = `Total: £${totalAmount}`;
   if (total.textContent === 'Total: £null') {
     total.className = 'emptyCart';
+    // continues.className = 'emptyCart';
     total.textContent = 'Your Cart is empty';
   }
   const empty = document.querySelector('.legoBasket');

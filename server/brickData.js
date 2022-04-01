@@ -2,7 +2,7 @@ export default {
   legos: [
     {
       legoId: '1',
-      name: 'Chrome Gold Brick',
+      Legoname: 'Chrome Gold Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/chromeGold.png',
@@ -12,7 +12,7 @@ export default {
     },
     {
       legoId: '2',
-      name: 'Pink Brick',
+      Legoname: 'Pink Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/pink.png',
@@ -22,7 +22,7 @@ export default {
     },
     {
       legoId: '3',
-      name: 'Green Brick',
+      Legoname: 'Green Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/green.png',
@@ -32,7 +32,7 @@ export default {
     },
     {
       legoId: '4',
-      name: 'Orange Brick',
+      Legoname: 'Orange Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/orange.png',
@@ -42,7 +42,7 @@ export default {
     },
     {
       legoId: '5',
-      name: 'Purple Brick',
+      Legoname: 'Purple Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/purple.png',
@@ -52,7 +52,7 @@ export default {
     },
     {
       legoId: '6',
-      name: 'Reddish Lilac Brick',
+      Legoname: 'Reddish Lilac Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/reddishLilac.png',
@@ -62,7 +62,7 @@ export default {
     },
     {
       legoId: '7',
-      name: 'Brown Brick',
+      Legoname: 'Brown Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/brown.png',
@@ -72,7 +72,7 @@ export default {
     },
     {
       legoId: '8',
-      name: 'Yellow Brick',
+      Legoname: 'Yellow Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/yellow.png',
@@ -82,7 +82,7 @@ export default {
     },
     {
       legoId: '9',
-      name: 'Blue Brick',
+      Legoname: 'Blue Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/blue.png',
@@ -92,7 +92,7 @@ export default {
     },
     {
       legoId: '10',
-      name: 'Aqua Brick',
+      Legoname: 'Aqua Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/aqua.png',
@@ -102,7 +102,7 @@ export default {
     },
     {
       legoId: '11',
-      name: 'Red Brick',
+      Legoname: 'Red Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/red.png',
@@ -112,7 +112,7 @@ export default {
     },
     {
       legoId: '12',
-      name: 'White Brick',
+      Legoname: 'White Brick',
       category: 'Bricks',
       categoryId: 2,
       image: 'images/usedInventories/white.png',
@@ -122,7 +122,7 @@ export default {
     },
     {
       legoId: '13',
-      name: 'Soldier',
+      Legoname: 'Soldier',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenkit.png',
@@ -132,7 +132,7 @@ export default {
     },
     {
       legoId: '14',
-      name: 'Soldier\'s Armour',
+      Legoname: 'Soldier\'s Armour',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenChest.png',
@@ -142,7 +142,7 @@ export default {
     },
     {
       legoId: '15',
-      name: 'Left Arm',
+      Legoname: 'Left Arm',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenLeftArm.png',
@@ -152,7 +152,7 @@ export default {
     },
     {
       legoId: '16',
-      name: 'Right Arm',
+      Legoname: 'Right Arm',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenRightArm.png',
@@ -162,7 +162,7 @@ export default {
     },
     {
       legoId: '17',
-      name: 'Hand',
+      Legoname: 'Hand',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/greenHand.png',
@@ -172,7 +172,7 @@ export default {
     },
     {
       legoId: '18',
-      name: 'Bike',
+      Legoname: 'Bike',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/yellowBike.png',
@@ -182,7 +182,7 @@ export default {
     },
     {
       legoId: '19',
-      name: 'Bike\'s Body',
+      Legoname: 'Bike\'s Body',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/bikeBrick.png',
@@ -192,7 +192,7 @@ export default {
     },
     {
       legoId: '20',
-      name: 'Tire',
+      Legoname: 'Tire',
       category: 'Bricks',
       categoryId: 3,
       image: 'images/usedInventories/tire.png',

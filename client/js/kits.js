@@ -27,10 +27,10 @@ async function createInventoryKits() {
       'Content-type': 'application/json',
     },
   });
-  if (!response || !response.ok) {
-    response.sendStatus(404);
-    return;
-  }
+  // if (!response || !response.ok) {
+  //   response.sendStatus(404);
+  //   return;
+  // }
 
   const legos = await response.json();
 

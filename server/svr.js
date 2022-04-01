@@ -4,6 +4,9 @@ import kitData from './kitData.js';
 import authConfig from './auth-config.js';
 import path from 'path';
 import url from 'url';
+// import db from './in-memory';
+// import config from './config';s
+
 
 const port = 8080;
 const app = express();
@@ -21,6 +24,14 @@ app.get('/auth-config', authConf);
 // redirect to 404 Error page when an invalid url like is being search e.g. http://localhost:8080/kits.html/dsjsjsd.sd
 
 app.use(redirect);
+
+// wrap async function for express.js error handling
+function asyncWrap(f) {
+  return (req, res, next) => {
+    Promise.resolve(f(req, res, next))
+      .catch((e) => next(e || new Error()));
+  };
+}
 
 function redirect(req, res) {
   res.redirect('/404.html');

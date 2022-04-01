@@ -66,7 +66,7 @@ export function templateHeader() {
   searchInput.type = 'search';
   searchInput.placeholder = 'Search items...';
 
-  const searchButton = document.createElement('button');
+  const searchButton = document.createElement('a');
   searchButton.id = 'search';
   searchButton.value = 'searchSite';
   searchButton.className = 'fas fa-search';

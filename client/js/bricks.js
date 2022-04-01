@@ -1,36 +1,16 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-// import * as cart from './cart.js';
 import * as brickStorage from './bricksLocalStorage.js';
-// import * as bricks from './bricks.js';
+import * as search from './search.js';
 
 async function init() {
   createInventoryBricks();
   home.execute();
   await auth0.executeAuth0();
-  // cart.executeCheckout();
   brickStorage.brickStorage();
-  // cartReloadPage();
-  // await fetchBricks();
-  // excuteAddToCart();
-  // addToCart();
-  // se();
-  /// /////////////////////////////////////////////////////////////////////
-  // search.addEventListener('click', loadInventoriesWithSearch);
-  // searchForm.addEventListener('submit', loadInventoriesWithSearch);
+  search.search();
 }
 window.addEventListener('load', init);
-
-
-// function loadInventoriesWithSearch(e) {
-//   e.preventDefault();
-//   loadInventories();
-// }
-
-
-// async function loadInventories() {
-
-// }
 
 async function createInventoryBricks() {
   const brickTemplate = document.querySelector('.bricksPage');
@@ -45,10 +25,10 @@ async function createInventoryBricks() {
       'Content-type': 'application/json',
     },
   });
-  if (!response || !response.ok) {
-    response.sendStatus(404);
-    return;
-  }
+  // if (!response || !response.ok) {
+  //   response.sendStatus(404);
+  //   return;
+  // }
 
   const legos = await response.json();
 
@@ -64,8 +44,6 @@ async function createInventoryBricks() {
 
     const createA = document.createElement('a');
     createA.id = `a${lego.legoId}`;
-    // createA.href = '/brickInfo.html';
-    // createA.href = `/#/${lego.category}/${lego.legoId}`;
     createA.href = `brick.html?legoId=${lego.legoId}`;
 
     const legoName = document.createElement('div');
@@ -82,27 +60,17 @@ async function createInventoryBricks() {
     const addToCart = document.createElement('a');
     addToCart.className = 'addToCart';
     addToCart.textContent = 'Add to Cart';
-    // addToCart.href = 'cart.html';
-    // addToCart.addEventListener('click', addToCart());
-    // const basket = [];
-
-    // addToCart.addEventListener('click', () => {
-    //   basket.push(lego);
-    //   console.log(basket);
-    // });
 
     const legoNameLink = document.createElement('a');
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.legoId}`;
-    legoNameLink.textContent = `${lego.name}`;
-    // legoNameLink.href = `/#/${lego.category}/${lego.legoId}`;
-    // legoNameLink.href = '/brickInfo.html';
+    legoNameLink.textContent = `${lego.Legoname}`;
     legoNameLink.href = `brick.html?legoId=${lego.legoId}`;
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.legoId}`;
     createImg.src = `${lego.image}`;
-    createImg.alt = `#${lego.name}`;
+    createImg.alt = `#${lego.Legoname}`;
 
     legoName.append(legoNameLink);
     createA.append(createImg);
@@ -110,4 +78,16 @@ async function createInventoryBricks() {
     createLi.append(createLis);
     mainLinks.append(createLi);
   });
+
+  // const sort = document.querySelector('#sort');
+  // sort.addEventListener('change', () => {
+  //   const s = legos.sort(function (a, b) {
+  //     if (a.name > b.name) {
+  //       return -1;
+  //     } else {
+  //       return 1;
+  //     }
+  //   });
+  //   console.log(s);
+  // });
 }
