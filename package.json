@@ -20,9 +20,8 @@
   "dependencies": {
     "express": "^4.17.3",
     "fs": "0.0.1-security",
-    "pg": "^8.7.3",
-    "postgresql": "0.0.1",
-    "sqlite3": "^5.0.2"
+    "sqlite": "^3.0.6",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "^8.7.0",

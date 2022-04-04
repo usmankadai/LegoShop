@@ -11,7 +11,7 @@ async function fetchAuthConfig() {
 // global variable entry point to the auth library
 let auth0 = null;
 
-export async function initializeAuth0Client() {
+async function initializeAuth0Client() {
   const config = await fetchAuthConfig();
   auth0 = await createAuth0Client({
     domain: config.domain,
@@ -20,13 +20,15 @@ export async function initializeAuth0Client() {
 }
 
 // update the state of all authentication-related elements
-export async function updateAuthUI() {
+async function updateAuthUI() {
   const isAuthenticated = await auth0.isAuthenticated();
 
   document.getElementById('login').disabled = isAuthenticated;
   document.getElementById('logout').disabled = !isAuthenticated;
 
   if (isAuthenticated) {
+    // const de = document.querySelector('#design');
+    // de.className = 'tab userIsAuthenticated';
     const user = await auth0.getUser();
     console.log(user);
     const el = document.getElementById('user');
@@ -47,7 +49,7 @@ function logout() {
 }
 
 // check for the code and state parameters from Auth0 login redirect
-export async function handleAuth0Redirect() {
+async function handleAuth0Redirect() {
   const isAuthenticated = await auth0.isAuthenticated();
 
   if (isAuthenticated) return;
@@ -69,7 +71,7 @@ export async function handleAuth0Redirect() {
   }
 }
 
-export function setupListeners() {
+function setupListeners() {
   document.getElementById('login').addEventListener('click', login);
   document.getElementById('logout').addEventListener('click', logout);
 }

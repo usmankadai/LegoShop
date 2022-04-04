@@ -66,13 +66,13 @@ async function createInventoryKits() {
     const legoNameLink = document.createElement('a');
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.kitId}`;
-    legoNameLink.textContent = `${lego.name}`;
+    legoNameLink.textContent = `${lego.legoName}`;
     legoNameLink.href = `kit.html?kitId=${lego.kitId}`;
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.kitId}`;
-    createImg.src = `${lego.image}`;
-    createImg.alt = `#${lego.name}`;
+    createImg.src = `${lego.legoImage}`;
+    createImg.alt = `#${lego.legoName}`;
 
     legoName.append(legoNameLink);
     createA.append(createImg);

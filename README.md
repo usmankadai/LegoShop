@@ -43,4 +43,5 @@ reason for using auth0
 <!-- RegEx for matching UK Postcodes
 https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes -->
 
-<!-- npm i pg -->
+<!-- npm i pg
+npm i sqlite -->

@@ -20,7 +20,8 @@ async function brick() {
   const details = await response.json();
 
   const image = document.querySelector('.brickIn');
-  image.src = `${details.image}`;
+  image.src = `${details.legoImage}`;
+  image.alt = `${details.legoName}`;
 
   const price = document.querySelector('.legoPrice');
   price.textContent = `£${details.price}`;
@@ -36,7 +37,7 @@ async function brick() {
   category.textContent = `Category: ${details.category}`;
 
   const description = document.querySelector('.description');
-  description.textContent = `${details.name}`;
+  description.textContent = `${details.legoName}`;
 }
 
 // similar code to bricksLocalStorage reused in this code file. But the only change
@@ -89,17 +90,17 @@ function saveBrick(lego) {
   basket = JSON.parse(basket);
 
   if (basket != null) {
-    if (basket[lego.name] === undefined) {
+    if (basket[lego.legoName] === undefined) {
       basket = {
         ...basket,
-        [lego.name]: lego,
+        [lego.legoName]: lego,
       };
     }
-    basket[lego.name].cart += 1;
+    basket[lego.legoName].cart += 1;
   } else {
     lego.cart = 1;
     basket = {
-      [lego.name]: lego,
+      [lego.legoName]: lego,
     };
   }
   localStorage.setItem('lego inside cart', JSON.stringify(basket));

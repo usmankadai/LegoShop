@@ -64,13 +64,13 @@ async function createInventoryBricks() {
     const legoNameLink = document.createElement('a');
     legoNameLink.className = 'legoNameLink';
     legoNameLink.id = `legoLink${lego.legoId}`;
-    legoNameLink.textContent = `${lego.Legoname}`;
+    legoNameLink.textContent = `${lego.legoName}`;
     legoNameLink.href = `brick.html?legoId=${lego.legoId}`;
 
     const createImg = document.createElement('img');
     createImg.id = `image${lego.legoId}`;
-    createImg.src = `${lego.image}`;
-    createImg.alt = `#${lego.Legoname}`;
+    createImg.src = `${lego.legoImage}`;
+    createImg.alt = `#${lego.legoName}`;
 
     legoName.append(legoNameLink);
     createA.append(createImg);

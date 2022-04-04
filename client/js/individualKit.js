@@ -3,16 +3,16 @@ import * as auth0 from './auth0.js';
 // import * as cart from './cart.js';
 
 async function init() {
-  await brick();
+  await kit();
   await home.execute();
   await auth0.executeAuth0();
-  await fetchBricks();
+  await fetchKits();
   cartReloadPage();
 }
 
 window.addEventListener('load', init);
 
-async function brick() {
+async function kit() {
   let kitId = window.location.search;
   kitId = kitId.slice(1);
   kitId = kitId.split('=');
@@ -21,7 +21,8 @@ async function brick() {
   const details = await response.json();
 
   const image = document.querySelector('.kitIn');
-  image.src = `${details.image}`;
+  image.src = `${details.legoImage}`;
+  image.alt = `${details.legoName}`;
 
   const price = document.querySelector('.legoPrice');
   price.textContent = `£${details.price}`;
@@ -36,12 +37,12 @@ async function brick() {
   category.textContent = `Category: ${details.category}`;
 
   const description = document.querySelector('.description');
-  description.textContent = `${details.name}`;
+  description.textContent = `${details.legoName}`;
 }
 
 // similar code to bricksLocalStorage reused in this code file. But the only change
 // here is in the fetchBrick function where /bricks was changed to /Bricks.
-async function fetchBricks() {
+async function fetchKits() {
   let kitId = window.location.search;
   kitId = kitId.slice(1);
   kitId = kitId.split('=');

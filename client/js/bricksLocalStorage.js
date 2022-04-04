@@ -16,16 +16,6 @@ async function fetchBricks() {
       totalAmount(legos[i]);
     });
   }
-
-  // const addButton = document.querySelectorAll('.add');
-
-  // for (let i = 0; i < addButton.length; i++) {
-  //   addButton[i].addEventListener('click', () => {
-  //     add(legos[i]);
-  //     storage(legos[i]);
-  //     totalAmount(legos[i]);
-  //   });
-  // }
 }
 
 // after reloading the page the number of items in the cart should not disappear.
@@ -69,17 +59,17 @@ function saveBrick(lego) {
   basket = JSON.parse(basket);
 
   if (basket != null) {
-    if (basket[lego.name] === undefined) {
+    if (basket[lego.legoName] === undefined) {
       basket = {
         ...basket,
-        [lego.name]: lego,
+        [lego.legoName]: lego,
       };
     }
-    basket[lego.name].cart += 1;
+    basket[lego.legoName].cart += 1;
   } else {
     lego.cart = 1;
     basket = {
-      [lego.name]: lego,
+      [lego.legoName]: lego,
     };
   }
   localStorage.setItem('lego inside cart', JSON.stringify(basket));

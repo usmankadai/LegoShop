@@ -413,6 +413,14 @@ header .loginDiv {
     /* width: 18rem; */
 }
 
+/* #design{
+    display: none;
+} */
+
+/* .userIsAuthenticated{
+    display: block;
+} */
+
 
 @media(max-width:50rem){
     .tabs.display{

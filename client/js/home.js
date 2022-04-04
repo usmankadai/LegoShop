@@ -46,7 +46,7 @@ export function templateHeader() {
   navButton3.textContent = 'Kits';
 
   const navButton4 = document.getElementById('navButton4');
-  navButton4.id = 'Design';
+  navButton4.id = 'design';
   navButton4.href = '/designKit.html';
   navButton4.textContent = 'Design Kit';
 

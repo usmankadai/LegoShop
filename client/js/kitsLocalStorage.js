@@ -51,17 +51,17 @@ function saveKit(lego) {
   basket = JSON.parse(basket);
 
   if (basket != null) {
-    if (basket[lego.name] === undefined) {
+    if (basket[lego.legoName] === undefined) {
       basket = {
         ...basket,
-        [lego.name]: lego,
+        [lego.legoName]: lego,
       };
     }
-    basket[lego.name].cart += 1;
+    basket[lego.legoName].cart += 1;
   } else {
     lego.cart = 1;
     basket = {
-      [lego.name]: lego,
+      [lego.legoName]: lego,
     };
   }
   localStorage.setItem('lego inside cart', JSON.stringify(basket));
