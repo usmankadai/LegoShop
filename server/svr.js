@@ -14,6 +14,7 @@ app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)
 
 /// ////////////////////// creating a route
 app.get('/bricks', asyncWrap(bricks));
+app.get('/bricks/:red', asyncWrap(redBricks));
 app.get('/brick', asyncWrap(brick));
 app.get('/kits', asyncWrap(kits));
 app.get('/kit', asyncWrap(kit));
@@ -38,19 +39,17 @@ async function bricks(req, res) {
 async function brick(req, res) {
   const legoId = await legoConfig.findBrick(req.query.legoId);
   if (!legoId) {
-    // res.sendStatus(400);
     res.status(404).send('No match for that lego.');
     return;
   }
   res.json(legoId);
-
-  // console.log(legoId);
-  // for (const brick of legoConfig.legos) {
-  //   if (brick.legoId === legoId) {
-  //     // res.json(brick);
-  //   }
-  // }
-  // res.sendStatus(404);
+}
+async function redBricks(req, res) {
+  if (res || res.ok) {
+    res.json(await legoConfig.redBricks());
+  } else if (!res || !res.ok) {
+    res.sendStatus(404);
+  }
 }
 
 async function kits(req, res) {
