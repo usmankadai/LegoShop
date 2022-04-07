@@ -16,12 +16,16 @@ export async function listBricks() {
   // return db.all('SELECT * FROM legos ORDER BY legoId ASC');
 }
 
-export async function redBricks() {
+export async function sort(sort) {
   const db = await dbConn;
-  return db.all('SELECT * FROM legos WHERE color = Red');
-  // select legos.color from legos where color = 'Red';
-  // return db.all('SELECT * FROM legos ORDER BY legoId ASC');
+  console.log('config', sort);
+  return db.all('SELECT * FROM legos WHERE sort LIKE ?', `%${sort}%`);
 }
+
+// export async function bricksType(type) {
+//   const db = await dbConn;
+//   return db.all('SELECT * FROM legos WHERE brickType = ?', type);
+// }
 
 export async function findBrick(legoId) {
   const db = await dbConn;
