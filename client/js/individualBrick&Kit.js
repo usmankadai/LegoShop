@@ -3,8 +3,7 @@
 // any file that is needed
 
 
-export function detail(details) {
-  const image = document.querySelector('.kitIn');
+export function detail(details, image) {
   image.src = `${details.legoImage}`;
   image.alt = `${details.legoName}`;
 
@@ -22,14 +21,4 @@ export function detail(details) {
 
   const description = document.querySelector('.description');
   description.textContent = `${details.legoName}`;
-}
-
-
-// after reloading the page the number of items in the cart should not disappear.
-// It should be the same as the items in localStorage
-export function cartReloadPage() {
-  const cartItems = localStorage.getItem('cartQuantity');
-  if (cartItems) {
-    document.querySelector('#cart').textContent = cartItems;
-  }
 }

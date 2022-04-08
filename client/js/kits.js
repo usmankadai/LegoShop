@@ -1,12 +1,14 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-import * as kitStorage from './kitsLocalStorage.js';
+import * as localstorage from './storage.js';
+
 
 async function init() {
   createInventoryKits();
   await home.execute();
   await auth0.executeAuth0();
-  kitStorage.kitStorage();
+  await kitslocalStorage();
+  localstorage.cartReloadPage();
 }
 
 window.addEventListener('load', init);
@@ -20,7 +22,6 @@ async function createInventoryKits() {
       'Content-type': 'application/json',
     },
   });
-
   const legos = await response.json();
 
   legos.forEach(lego => {
@@ -79,4 +80,19 @@ function htmlGridLayout(lego) {
   createLis.append(createA, legoName, legoPrice, addToCart);
   createLi.append(createLis);
   mainLinks.append(createLi);
+}
+
+async function fetchKits() {
+  const response = await fetch('/kits', {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
+  return await response.json();
+}
+
+export async function kitslocalStorage() {
+  const legos = await fetchKits();
+  localstorage.listeners(legos);
 }

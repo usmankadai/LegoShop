@@ -1,6 +1,6 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-import * as brickStorage from './bricksLocalStorage.js';
+import * as localstorage from './storage.js';
 
 function checkValidity(e) {
   e.target.classList.toggle('invalid',
@@ -13,7 +13,7 @@ async function init() {
   });
   home.execute();
   await auth0.executeAuth0();
-  brickStorage.brickStorage();
+  localstorage.cartReloadPage();
   for (const input of document.querySelectorAll('input')) {
     input.addEventListener('blur', checkValidity);
   }

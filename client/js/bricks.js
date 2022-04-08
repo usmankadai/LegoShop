@@ -1,15 +1,18 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-import * as brickStorage from './bricksLocalStorage.js';
-// import * as search from './search.js';
+import * as localstorage from './storage.js';
+
 
 async function init() {
   createInventoryBricks();
   home.execute();
   await auth0.executeAuth0();
-  brickStorage.brickStorage();
+  await brickslocalStorage();
+  localstorage.cartReloadPage();
 }
+
 window.addEventListener('load', init);
+
 
 async function createInventoryBricks() {
   console.log('bricks loaded');
@@ -26,7 +29,7 @@ async function createInventoryBricks() {
   });
 }
 
-export function htmlGridLayout(lego) {
+function htmlGridLayout(lego) {
   const brickTemplate = document.querySelector('.bricksPage');
   const createDiv = document.createElement('div');
   createDiv.className = 'mainLinks';
@@ -77,4 +80,19 @@ export function htmlGridLayout(lego) {
   createLis.append(createA, legoName, legoPrice, addToCart);
   createLi.append(createLis);
   mainLinks.append(createLi);
+}
+
+async function fetchBricks() {
+  const response = await fetch('/bricks', {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
+  return await response.json();
+}
+
+async function brickslocalStorage() {
+  const legos = await fetchBricks();
+  localstorage.listeners(legos);
 }

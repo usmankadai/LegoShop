@@ -1,14 +1,13 @@
-// similar code to bricksLocalStorage reused in this code file. But the only change
-// here is in the fetchKit function where /bricks was changed to /kits.
-async function fetchKits() {
-  const response = await fetch('/kits', {
-    headers: {
-      'Content-type': 'application/json',
-    },
+export function setupListeners(legos) {
+  const cart = document.querySelector('.addToCart');
+
+  cart.addEventListener('click', () => {
+    storage(legos);
+    totalAmount(legos);
   });
+}
 
-  const legos = await response.json();
-
+export function listeners(legos) {
   const cart = document.querySelectorAll('.addToCart');
 
   for (let i = 0; i < cart.length; i++) {
@@ -20,15 +19,16 @@ async function fetchKits() {
   }
 }
 
+
 // after reloading the page the number of items in the cart should not disappear.
 // It should be the same as the items in localStorage
-
-function cartReloadPage() {
+export function cartReloadPage() {
   const cartItems = localStorage.getItem('cartQuantity');
   if (cartItems) {
     document.querySelector('#cart').textContent = cartItems;
   }
 }
+
 
 function storage(lego) {
   let cartItems = localStorage.getItem('cartQuantity');
@@ -42,11 +42,11 @@ function storage(lego) {
     localStorage.setItem('cartQuantity', 1);
     document.querySelector('#cart').textContent = 1;
   }
-  // saves kit being clicked to the localStorage
-  saveKit(lego);
+  // saves lego being clicked to the localStorage
+  saveBrick(lego);
 }
 
-function saveKit(lego) {
+function saveBrick(lego) {
   let basket = localStorage.getItem('lego inside cart');
   basket = JSON.parse(basket);
 
@@ -81,9 +81,4 @@ function totalAmount(lego) {
   } else {
     localStorage.setItem('totalAmount', lego.price);
   }
-}
-
-export async function kitStorage() {
-  await fetchKits();
-  cartReloadPage();
 }

@@ -1,27 +1,25 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
-import * as brickStorage from './bricksLocalStorage.js';
-// import * as kitStorage from './kitsLocalStorage.js';
+import * as localstorage from './storage.js';
 
 
 async function init() {
   home.execute();
   await auth0.executeAuth0();
-  brickStorage.brickStorage();
-  // kitStorage.kitStorage();
   initializeCart();
+  localstorage.cartReloadPage();
+  emptyCart();
 }
 
 window.addEventListener('load', init);
 
 function initializeCart() {
   let cart = localStorage.getItem('lego inside cart');
-  const totalAmount = localStorage.getItem('totalAmount');
   cart = JSON.parse(cart);
   if (cart) {
     const legoBasket = document.querySelector('.legoBasket');
     legoBasket.textContent = '';
-    // check the value of the lego inside cart i.e the one we got in line 16 and loop through
+    // check the value of the lego inside cart i.e the one we got in line 14 and loop through
     // each lego similar to how it is in bricks.js and kits.js
     const value = Object.values(cart);
     value.forEach(lego => {
@@ -41,22 +39,20 @@ function initializeCart() {
       const subTotal = document.createElement('div');
       subTotal.textContent = `£${lego.price * lego.cart}`;
 
-      // const add = document.createElement('a');
-      // add.className = 'add';
-      // add.textContent = '+';
-
       createDiv.append(createImg, cart, legoPrice, subTotal);
       legoBasket.append(createDiv);
     });
   }
+}
+
+function emptyCart() {
+  const totalAmount = localStorage.getItem('totalAmount');
 
   const total = document.querySelector('.total');
-  // const continues = document.querySelector('.continueToCheckout');
 
   total.textContent = `Total: £${totalAmount}`;
   if (total.textContent === 'Total: £null') {
     total.className = 'emptyCart';
-    // continues.className = 'emptyCart';
     total.textContent = 'Your Cart is empty';
   }
   const empty = document.querySelector('.legoBasket');
