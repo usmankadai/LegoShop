@@ -1,56 +1,38 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
 // import * as cart from './cart.js';
+import * as similarity from './jj.js';
 
 async function init() {
   await kit();
   await home.execute();
   await auth0.executeAuth0();
   await fetchKits();
-  cartReloadPage();
+  similarity.cartReloadPage();
 }
 
 window.addEventListener('load', init);
 
-async function kit() {
+
+async function fetchKit() {
   let kitId = window.location.search;
   kitId = kitId.slice(1);
   kitId = kitId.split('=');
   kitId = kitId[1];
   const response = await fetch(`/kit?kitId=${kitId}`);
-  const details = await response.json();
+  return response.json();
+}
 
-  const image = document.querySelector('.kitIn');
-  image.src = `${details.legoImage}`;
-  image.alt = `${details.legoName}`;
 
-  const price = document.querySelector('.legoPrice');
-  price.textContent = `£${details.price}`;
-  if (details.price < 1) {
-    // check if the price is less than £1, get rid of the first two characters which is 0 and point.
-    price.textContent = `${price.price}`.slice(2) + 'p';
-  }
-  const stock = document.querySelector('.stock');
-  stock.textContent = `Stock: ${details.stock}`;
-
-  const category = document.querySelector('.category');
-  category.textContent = `Category: ${details.category}`;
-
-  const description = document.querySelector('.description');
-  description.textContent = `${details.legoName}`;
+async function kit() {
+  const details = await fetchKit();
+  similarity.detail(details);
 }
 
 // similar code to bricksLocalStorage reused in this code file. But the only change
 // here is in the fetchBrick function where /bricks was changed to /Bricks.
 async function fetchKits() {
-  let kitId = window.location.search;
-  kitId = kitId.slice(1);
-  kitId = kitId.split('=');
-  kitId = kitId[1];
-  const response = await fetch(`/kit?kitId=${kitId}`);
-
-  const legos = await response.json();
-
+  const legos = await fetchKit();
   const cart = document.querySelector('.addToCart');
 
   cart.addEventListener('click', () => {
@@ -59,15 +41,6 @@ async function fetchKits() {
   });
 }
 
-// after reloading the page the number of items in the cart should not disappear.
-// It should be the same as the items in localStorage
-
-function cartReloadPage() {
-  const cartItems = localStorage.getItem('cartQuantity');
-  if (cartItems) {
-    document.querySelector('#cart').textContent = cartItems;
-  }
-}
 
 function storage(lego) {
   let cartItems = localStorage.getItem('cartQuantity');
@@ -90,17 +63,17 @@ function saveBrick(lego) {
   basket = JSON.parse(basket);
 
   if (basket != null) {
-    if (basket[lego.name] === undefined) {
+    if (basket[lego.legoName] === undefined) {
       basket = {
         ...basket,
-        [lego.name]: lego,
+        [lego.legoName]: lego,
       };
     }
-    basket[lego.name].cart += 1;
+    basket[lego.legoName].cart += 1;
   } else {
     lego.cart = 1;
     basket = {
-      [lego.name]: lego,
+      [lego.legoName]: lego,
     };
   }
   localStorage.setItem('lego inside cart', JSON.stringify(basket));

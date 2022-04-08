@@ -52,15 +52,6 @@ async function sort(req, res) {
   res.json(brickColor);
 }
 
-// async function bricksType(req, res) {
-//   const brickType = await legoConfig.bricksType(req.query.brickType);
-//   if (!brickType) {
-//     res.status(404).send('No match for that type.');
-//     return;
-//   }
-//   res.json(brickType);
-// }
-
 async function kits(req, res) {
   const kits = await legoConfig.listKits();
   if (!kits) {
@@ -80,7 +71,7 @@ async function kit(req, res) {
 
 // redirect to 404 Error page when an invalid url like is being search e.g. http://localhost:8080/kits.html/dsjsjsd.sd
 function redirect(req, res) {
-  res.redirect('/404.html');
+  res.redirect('/404Error.html');
 }
 
 function authConf(req, res) {

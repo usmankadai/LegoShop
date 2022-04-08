@@ -1,4 +1,3 @@
-// import uuid from 'uuid-random';
 import sqlite from 'sqlite';
 
 async function init() {
@@ -13,7 +12,6 @@ const dbConn = init();
 export async function listBricks() {
   const db = await dbConn;
   return db.all('SELECT * FROM legos');
-  // return db.all('SELECT * FROM legos ORDER BY legoId ASC');
 }
 
 export async function sort(sort) {
@@ -22,10 +20,6 @@ export async function sort(sort) {
   return db.all('SELECT * FROM legos WHERE sort LIKE ?', `%${sort}%`);
 }
 
-// export async function bricksType(type) {
-//   const db = await dbConn;
-//   return db.all('SELECT * FROM legos WHERE brickType = ?', type);
-// }
 
 export async function findBrick(legoId) {
   const db = await dbConn;
@@ -36,7 +30,6 @@ export async function findBrick(legoId) {
 export async function listKits() {
   const db = await dbConn;
   return db.all('SELECT * FROM kits');
-  // return db.all('SELECT * FROM legos ORDER BY legoId ASC');
 }
 
 export async function findKit(kitId) {

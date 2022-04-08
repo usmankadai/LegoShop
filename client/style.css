@@ -413,6 +413,16 @@ header .loginDiv {
     /* width: 18rem; */
 }
 
+#error{
+    background: black;
+    color: rgb(255, 251, 0);
+    text-align: center;
+}
+
+#errorLink{
+    color: white;
+}
+
 /* #design{
     display: none;
 } */

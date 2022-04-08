@@ -11,14 +11,21 @@ async function init() {
 
 window.addEventListener('load', init);
 
-async function brick() {
+async function fetchBrick() {
   let legoId = window.location.search;
   legoId = legoId.slice(1);
   legoId = legoId.split('=');
   legoId = legoId[1];
   const response = await fetch(`/brick?legoId=${legoId}`);
-  const details = await response.json();
+  return await response.json();
+}
 
+async function brick() {
+  const details = await fetchBrick();
+  detail(details);
+}
+
+export function detail(details) {
   const image = document.querySelector('.brickIn');
   image.src = `${details.legoImage}`;
   image.alt = `${details.legoName}`;
@@ -43,13 +50,7 @@ async function brick() {
 // similar code to bricksLocalStorage reused in this code file. But the only change
 // here is in the fetchBrick function where /bricks was changed to /Bricks.
 async function fetchBricks() {
-  let legoId = window.location.search;
-  legoId = legoId.slice(1);
-  legoId = legoId.split('=');
-  legoId = legoId[1];
-  const response = await fetch(`/brick?legoId=${legoId}`);
-
-  const legos = await response.json();
+  const legos = await fetchBrick();
 
   const cart = document.querySelector('.addToCart');
 
@@ -62,7 +63,7 @@ async function fetchBricks() {
 // after reloading the page the number of items in the cart should not disappear.
 // It should be the same as the items in localStorage
 
-function cartReloadPage() {
+export function cartReloadPage() {
   const cartItems = localStorage.getItem('cartQuantity');
   if (cartItems) {
     document.querySelector('#cart').textContent = cartItems;
@@ -106,7 +107,7 @@ function saveBrick(lego) {
   localStorage.setItem('lego inside cart', JSON.stringify(basket));
 }
 
-function totalAmount(lego) {
+export function totalAmount(lego) {
   // this function is similar to storage function it adds the total amount to the localStorage
   // and updates the total amount if there is another lego being added.
 

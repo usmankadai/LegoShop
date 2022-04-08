@@ -1,23 +1,17 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
 import * as brickStorage from './bricksLocalStorage.js';
-import * as search from './search.js';
+// import * as search from './search.js';
 
 async function init() {
   createInventoryBricks();
   home.execute();
   await auth0.executeAuth0();
   brickStorage.brickStorage();
-  search.search();
 }
 window.addEventListener('load', init);
 
 async function createInventoryBricks() {
-  const brickTemplate = document.querySelector('.bricksPage');
-  const createDiv = document.createElement('div');
-  createDiv.className = 'mainLinks';
-  brickTemplate.append(createDiv);
-
   console.log('bricks loaded');
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('/bricks', {
@@ -33,6 +27,12 @@ async function createInventoryBricks() {
 }
 
 export function htmlGridLayout(lego) {
+  const brickTemplate = document.querySelector('.bricksPage');
+  const createDiv = document.createElement('div');
+  createDiv.className = 'mainLinks';
+  brickTemplate.append(createDiv);
+
+
   const mainLinks = document.querySelector('.mainLinks');
   const createLi = document.createElement('li');
   createLi.className = 'lis';

@@ -282,13 +282,6 @@ async function fetchSortedItems(color) {
   return response.json();
 }
 
-// function filter() {
-//   const legos = document.querySelectorAll('.mainLinks');
-//   legos.forEach(lego => {
-//     lego.remove();
-//   });
-// }
-
 export function execute() {
   templateHeader();
   templateMain();
