@@ -4,15 +4,24 @@ import * as localstorage from './storage.js';
 
 
 async function init() {
+  kitsContainer();
   createInventoryKits();
   await home.execute();
   await auth0.executeAuth0();
   await kitslocalStorage();
   localstorage.cartReloadPage();
+  // fjjf
 }
 
 window.addEventListener('load', init);
 
+
+function kitsContainer() {
+  const kitTemplate = document.querySelector('.kitsPage');
+  const createDiv = document.createElement('div');
+  createDiv.className = 'mainLinks';
+  kitTemplate.append(createDiv);
+}
 
 async function createInventoryKits() {
   console.log('kits loaded');
@@ -30,12 +39,6 @@ async function createInventoryKits() {
 }
 
 function htmlGridLayout(lego) {
-  const kitTemplate = document.querySelector('.kitsPage');
-  const createDiv = document.createElement('div');
-  createDiv.className = 'mainLinks';
-  kitTemplate.append(createDiv);
-
-
   const mainLinks = document.querySelector('.mainLinks');
   const createLi = document.createElement('li');
   createLi.className = 'lis';

@@ -4,8 +4,9 @@ import * as localstorage from './storage.js';
 
 
 async function init() {
+  bricksContainer();
   createInventoryBricks();
-  home.execute();
+  await home.execute();
   await auth0.executeAuth0();
   await brickslocalStorage();
   localstorage.cartReloadPage();
@@ -14,6 +15,13 @@ async function init() {
 
 window.addEventListener('load', init);
 
+
+function bricksContainer() {
+  const brickTemplate = document.querySelector('.bricksPage');
+  const createDiv = document.createElement('div');
+  createDiv.className = 'mainLinks';
+  brickTemplate.append(createDiv);
+}
 
 async function createInventoryBricks() {
   console.log('bricks loaded');
@@ -31,12 +39,6 @@ async function createInventoryBricks() {
 }
 
 function htmlGridLayout(lego) {
-  const brickTemplate = document.querySelector('.bricksPage');
-  const createDiv = document.createElement('div');
-  createDiv.className = 'mainLinks';
-  brickTemplate.append(createDiv);
-
-
   const mainLinks = document.querySelector('.mainLinks');
   const createLi = document.createElement('li');
   createLi.className = 'lis';
@@ -97,7 +99,6 @@ async function brickslocalStorage() {
   const legos = await fetchBricks();
   localstorage.listeners(legos);
 }
-
 
 async function sorting(e) {
   const color = e.target.options[e.target.selectedIndex].text;
