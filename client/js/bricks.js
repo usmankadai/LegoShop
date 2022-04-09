@@ -9,6 +9,7 @@ async function init() {
   await auth0.executeAuth0();
   await brickslocalStorage();
   localstorage.cartReloadPage();
+  document.querySelector('#sort').addEventListener('change', sorting);
 }
 
 window.addEventListener('load', init);
@@ -95,4 +96,30 @@ async function fetchBricks() {
 async function brickslocalStorage() {
   const legos = await fetchBricks();
   localstorage.listeners(legos);
+}
+
+
+async function sorting(e) {
+  const color = e.target.options[e.target.selectedIndex].text;
+  const legos = await fetchSortedItems(color);
+  console.log(legos);
+  const legosDOM = document.querySelectorAll('.lis');
+  legosDOM.forEach(lego => {
+    lego.remove();
+  });
+
+  const mainLinks = document.querySelector('.mainLinks');
+  const div = document.createElement('div');
+  div.className = `filtered ${color}`;
+  mainLinks.append(div);
+
+  console.log('sorting', color);
+  legos.forEach(lego => {
+    htmlGridLayout(lego);
+  });
+}
+
+async function fetchSortedItems(color) {
+  const response = await fetch(`/bricks/${color}`);
+  return response.json();
 }
