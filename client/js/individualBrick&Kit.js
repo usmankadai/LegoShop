@@ -11,7 +11,7 @@ export function detail(details, image) {
   price.textContent = `£${details.price}`;
   if (details.price < 1) {
     // check if the price is less than £1, get rid of the first two characters which is 0 and point.
-    price.textContent = `${price.price}`.slice(2) + 'p';
+    price.textContent = `${details.price}p`.slice(2);
   }
   const stock = document.querySelector('.stock');
   stock.textContent = `Stock: ${details.stock}`;

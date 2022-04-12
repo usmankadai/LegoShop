@@ -1,8 +1,7 @@
 // static home page
 
-export function templateHeader() {
+function templateHeader() {
   const selectH1 = document.querySelector('header');
-
   const log = document.createElement('a');
   log.id = 'logo';
   log.className = 'Lego';
@@ -76,71 +75,13 @@ export function templateHeader() {
   sort.append(select);
   selectH1.append(searchDiv, sort);
 
-  let sorting = 0;
-  const selectSort = document.querySelector('#sort');
-  for (let i = 1; i <= 17; i += 1) {
-    const log = document.createElement('option');
-    sorting++;
-    log.id = `sort${sorting}`;
-    selectSort.append(log);
-  }
-
-  const sort1 = document.getElementById('sort1');
-  sort1.textContent = 'All';
-
-  const sort2 = document.getElementById('sort2');
-  sort2.textContent = '1x1';
-
-  const sort3 = document.getElementById('sort3');
-  sort3.textContent = '1x2';
-
-  const sort4 = document.getElementById('sort4');
-  sort4.textContent = '2x2';
-
-  const sort5 = document.getElementById('sort5');
-  sort5.textContent = '2x3';
-
-  const sort6 = document.getElementById('sort6');
-  sort6.textContent = 'Gold';
-
-  const sort7 = document.getElementById('sort7');
-  sort7.textContent = 'Red';
-
-  const sort8 = document.getElementById('sort8');
-  sort8.textContent = 'Aqua';
-
-  const sort9 = document.getElementById('sort9');
-  sort9.textContent = 'Pink';
-
-  const sort10 = document.getElementById('sort10');
-  sort10.textContent = 'Green';
-
-  const sort11 = document.getElementById('sort11');
-  sort11.textContent = 'Orange';
-
-  const sort12 = document.getElementById('sort12');
-  sort12.textContent = 'Lilac';
-
-  const sort13 = document.getElementById('sort13');
-  sort13.textContent = 'Brown';
-
-  const sort14 = document.getElementById('sort14');
-  sort14.textContent = 'Yellow';
-
-  const sort15 = document.getElementById('sort15');
-  sort15.textContent = 'Blue';
-
-  const sort16 = document.getElementById('sort16');
-  sort16.textContent = 'White';
-
-  const sort17 = document.getElementById('sort17');
-  sort17.textContent = 'Purple';
-
-
   const iconsDiv = document.createElement('div');
   iconsDiv.className = 'icons';
   selectH1.append(iconsDiv);
+}
 
+function icons() {
+  let nav = 0;
   const selectIcon = document.querySelector('.icons');
 
   for (let i = 1; i <= 3; i += 1) {
@@ -150,18 +91,18 @@ export function templateHeader() {
     selectIcon.append(log);
   }
 
-  const wishlistIcon = document.getElementById('icon5');
+  const wishlistIcon = document.getElementById('icon1');
   wishlistIcon.id = 'wishlist';
   wishlistIcon.href = '/wishlist.html';
   wishlistIcon.className = 'fas fa-heart';
 
-  const cartIcon = document.getElementById('icon6');
+  const cartIcon = document.getElementById('icon2');
   cartIcon.id = 'cart';
   cartIcon.href = '/cart.html';
   cartIcon.className = 'fas fa-shopping-cart';
   cartIcon.textContent = '(0)';
 
-  const userIcon = document.getElementById('icon7');
+  const userIcon = document.getElementById('icon3');
   userIcon.id = 'user';
   userIcon.className = 'fas fa-user';
 
@@ -182,7 +123,8 @@ export function templateHeader() {
   loginDiv.append(logout);
 }
 
-export function templateFooter() {
+
+function templateFooter() {
   const selectFooter = document.querySelector('footer');
   const createDiv = document.createElement('div');
   createDiv.className = 'footerLinks';
@@ -194,7 +136,7 @@ export function templateFooter() {
   footerLinks.append(createFirstLink);
 }
 
-export function templateMain() {
+function templateMain() {
   const grid = document.querySelector('.grid');
 
   const createCartTemp = document.createElement('template');
@@ -206,10 +148,12 @@ export function templateMain() {
 function toggleLogin() {
   document.querySelector('.loginDiv').classList.toggle('display');
 }
+
 function still() {
   document.querySelector('.tabs').classList.toggle('display');
 }
-export function dropOptions() {
+
+function dropOptions() {
   document.querySelector('#user').addEventListener('click', toggleLogin);
   document.querySelector('#options').addEventListener('click', still);
 }
@@ -218,5 +162,6 @@ export function execute() {
   templateHeader();
   templateMain();
   templateFooter();
+  icons();
   dropOptions();
 }

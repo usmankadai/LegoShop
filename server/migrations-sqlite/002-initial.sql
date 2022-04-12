@@ -10,7 +10,7 @@ CREATE TABLE kits (
     cart int NOT NULL
 );
 
-insert into kits values
+INSERT INTO kits VALUES
   ('zsuareua', 'Peaky Blinders', 'Kits', 'images/kits/peakyBlinders.png', 'anime', 'Black', 500, 88, 0),
   ('risfnwor', 'Micheal Scofield', 'Kits', 'images/kits/scofield.png', 'anime', 'Blue', 399, 50, 0),
   ('teiskwrf', 'Joker', 'Kits', 'images/kits/joker.png', 'anime', 'Black', 364, 33, 0),

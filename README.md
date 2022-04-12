@@ -18,6 +18,10 @@ using node and SQLite in the server -->
 * npm i express
 * npm i -g nodemon
 * npm i sqlite@3.0.6
+* npm i fs
+* npm i path
+* npm i uuid
+* npm install --save multer
 
 After installing all the dependencies to start the server, it can be done by running:
 
@@ -44,6 +48,9 @@ After installing all the dependencies to start the server, it can be done by run
 
 ### Reference List
 
+* LEGO Database Download https://rebrickable.com/downloads/
+* RegEx for matching UK Postcodes
+https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes
 * 
 * 
 * 
@@ -51,11 +58,6 @@ After installing all the dependencies to start the server, it can be done by run
 * 
 * 
 * 
-* 
-* 
-
-<!-- RegEx for matching UK Postcodes
-https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes -->
 
 <!--
  -->

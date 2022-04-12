@@ -3,10 +3,20 @@ import authConfig from './auth-config.js';
 import path from 'path';
 import url from 'url';
 import * as legoConfig from './legoConfig.js';
+import multer from 'multer';
 
 
 const port = 8080;
 const app = express();
+
+const uploader = multer({
+  dest: 'upload',
+  limits: { // for security
+    fields: 10,
+    fileSize: 1024 * 1024 * 20, // 20MB
+    files: 1,
+  },
+});
 
 app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '../client')));
 
@@ -17,6 +27,8 @@ app.get('/brick', asyncWrap(brick));
 app.get('/kits', asyncWrap(kits));
 app.get('/kit', asyncWrap(kit));
 app.get('/auth-config', authConf);
+app.get('/uploads', design);
+app.put('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
 // wrap async function for express.js error handling
@@ -67,6 +79,20 @@ async function kit(req, res) {
     return;
   }
   res.json(kitId);
+}
+
+async function design(req, res) {
+  const upload = await legoConfig.design();
+  if (!upload) {
+    res.status(404).send('No match for that link.');
+    return;
+  }
+  res.json(upload);
+}
+
+async function upload(req, res) {
+  const newLego = await legoConfig.uploadLego(req.body.instructions, req.file);
+  res.json(newLego);
 }
 
 // redirect to 404 Error page when an invalid url like is being search e.g. http://localhost:8080/kits.html/dsjsjsd.sd

@@ -1,6 +1,7 @@
 import * as home from './home.js';
 import * as auth0 from './auth0.js';
 import * as localstorage from './storage.js';
+import * as sort from './sort.js';
 
 
 async function init() {
@@ -10,6 +11,7 @@ async function init() {
   await auth0.executeAuth0();
   await brickslocalStorage();
   localstorage.cartReloadPage();
+  sort.sort();
   document.querySelector('#sort').addEventListener('change', sorting);
 }
 
