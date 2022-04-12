@@ -111,10 +111,10 @@ async function sorting(e) {
     lego.remove();
   });
 
-  const mainLinks = document.querySelector('.mainLinks');
-  const div = document.createElement('div');
-  div.className = `filtered ${color}`;
-  mainLinks.append(div);
+  // const mainLinks = document.querySelector('.mainLinks');
+  // const div = document.createElement('div');
+  // div.className = `filtered ${color}`;
+  // mainLinks.append(div);
 
   console.log('sorting', color);
   legos.forEach(lego => {
