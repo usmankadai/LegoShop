@@ -63,7 +63,7 @@ export function sort() {
   sort18.textContent = '<£1';
 
   const sort19 = document.getElementById('sort19');
-  sort19.textContent = '£2-£10';
+  sort19.textContent = '£1-£10';
 
   const sort20 = document.getElementById('sort20');
   sort20.textContent = '£11-£20';
