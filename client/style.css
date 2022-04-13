@@ -401,7 +401,7 @@ header .loginDiv {
 .emptyCart{
     display: none;
 }
-/* .continueToCheckout{
+.continueToCheckout{
     text-align: center;
     display: flex;
     justify-content: end;
@@ -410,7 +410,7 @@ header .loginDiv {
     color: rgb(255, 251, 0);
     background: black;
     border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-} */
+}
 
 #error{
     background: black;
@@ -420,6 +420,12 @@ header .loginDiv {
 
 #errorLink{
     color: white;
+}
+
+.remove {
+    color: red;
+    margin: 5rem 0 0 0;
+    text-decoration: underline;
 }
 
 /* #design{

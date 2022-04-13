@@ -23,21 +23,21 @@ export function listeners(legos) {
 // after reloading the page the number of items in the cart should not disappear.
 // It should be the same as the items in localStorage
 export function cartReloadPage() {
-  const cartItems = localStorage.getItem('cartQuantity');
-  if (cartItems) {
-    document.querySelector('#cart').textContent = cartItems;
+  const cartQuantity = localStorage.getItem('cartQuantity');
+  if (cartQuantity) {
+    document.querySelector('#cart').textContent = cartQuantity;
   }
 }
 
 
 function storage(lego) {
-  let cartItems = localStorage.getItem('cartQuantity');
+  let cartQuantity = localStorage.getItem('cartQuantity');
 
-  cartItems = parseInt(cartItems);
+  cartQuantity = parseInt(cartQuantity);
 
-  if (cartItems) {
-    localStorage.setItem('cartQuantity', cartItems + 1);
-    document.querySelector('#cart').textContent = cartItems + 1;
+  if (cartQuantity) {
+    localStorage.setItem('cartQuantity', cartQuantity + 1);
+    document.querySelector('#cart').textContent = cartQuantity + 1;
   } else {
     localStorage.setItem('cartQuantity', 1);
     document.querySelector('#cart').textContent = 1;

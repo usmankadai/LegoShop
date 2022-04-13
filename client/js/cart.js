@@ -6,8 +6,9 @@ import * as localstorage from './storage.js';
 async function init() {
   home.execute();
   await auth0.executeAuth0();
-  initializeCart();
+  await initializeCart();
   localstorage.cartReloadPage();
+  checkout();
   emptyCart();
 }
 
@@ -28,10 +29,25 @@ function initializeCart() {
 
       const createImg = document.createElement('img');
       createImg.src = `${lego.legoImage}`;
-      createImg.alt = `#${lego.legoName}`;
+      createImg.alt = `${lego.legoName}`;
+
+      // const span = document.createElement('span');
+      // span.textContent = `${lego.legoName}`;
+
+      const remove = document.createElement('div');
+      remove.textContent = 'Delete';
+      remove.className = 'remove';
+
+      const decrease = document.createElement('button');
+      decrease.textContent = '<';
 
       const cart = document.createElement('div');
-      cart.textContent = `${lego.cart}`;
+
+      const quantity = document.createElement('span');
+      quantity.textContent = `${lego.cart}`;
+
+      const increase = document.createElement('button');
+      increase.textContent = '>';
 
       const legoPrice = document.createElement('div');
       legoPrice.textContent = `£${lego.price}`;
@@ -39,11 +55,14 @@ function initializeCart() {
       const subTotal = document.createElement('div');
       subTotal.textContent = `£${lego.price * lego.cart}`;
 
+      cart.append(decrease, quantity, increase, remove);
       createDiv.append(createImg, cart, legoPrice, subTotal);
       legoBasket.append(createDiv);
     });
   }
+  removefromCart();
 }
+
 
 function emptyCart() {
   const totalAmount = localStorage.getItem('totalAmount');
@@ -51,9 +70,12 @@ function emptyCart() {
   const total = document.querySelector('.total');
 
   total.textContent = `Total: £${totalAmount}`;
-  if (total.textContent === 'Total: £null') {
+
+  const nullPrice = total.textContent === 'Total: £null';
+  const zeroPounds = total.textContent === 'Total: £0';
+
+  if (nullPrice || zeroPounds) {
     total.className = 'emptyCart';
-    total.textContent = 'Your Cart is empty';
   }
   const empty = document.querySelector('.legoBasket');
   if (empty.textContent === '') {
@@ -79,9 +101,49 @@ function emptyCart() {
     usefulLinks.append(homeLink, brickLink, kitLink);
     cartStyle.append(usefulLinks);
   }
+}
+
+function checkout() {
+  const totalAmount = localStorage.getItem('totalAmount');
 
   const checkout = document.querySelector('.continueToCheckout');
+
+  checkout.textContent = `Total: £${totalAmount}`;
+
+  const emptyBasket = checkout.textContent === 'Total: £null';
+  const zeroPounds = checkout.textContent === 'Total: £0';
+  if (emptyBasket || zeroPounds) {
+    checkout.className = 'emptyCart';
+  }
   checkout.addEventListener('click', () => {
     window.location = '/checkout.html';
   });
+}
+
+function removefromCart() {
+  const remove = document.querySelectorAll('.remove');
+  const cartDiv = document.querySelectorAll('.cartDiv');
+
+  const cartQuantity = localStorage.getItem('cartQuantity');
+  let name;
+  let basket = localStorage.getItem('lego inside cart');
+  basket = JSON.parse(basket);
+  const totalAmount = localStorage.getItem('totalAmount');
+
+  for (let i = 0; i < remove.length; i++) {
+    remove[i].addEventListener('click', () => {
+      console.log(cartQuantity);
+      name = cartDiv[i].firstChild.alt;
+      localStorage.setItem('cartQuantity', cartQuantity - basket[name].cart);
+
+      localStorage.setItem('totalAmount', totalAmount - (basket[name].price * basket[name].cart));
+
+      delete basket[name];
+      localStorage.setItem('lego inside cart', JSON.stringify(basket));
+      initializeCart();
+      localstorage.cartReloadPage();
+      emptyCart();
+      checkout();
+    });
+  }
 }
