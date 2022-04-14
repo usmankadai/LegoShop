@@ -1,7 +1,7 @@
 export function sort() {
   let sorting = 0;
   const selectSort = document.querySelector('#sort');
-  for (let i = 1; i <= 21; i += 1) {
+  for (let i = 1; i <= 20; i += 1) {
     const log = document.createElement('option');
     sorting++;
     log.id = `sort${sorting}`;
@@ -60,20 +60,11 @@ export function sort() {
   sort17.textContent = 'Purple';
 
   const sort18 = document.getElementById('sort18');
-  sort18.textContent = '<£1';
+  sort18.textContent = '£1-£10';
 
   const sort19 = document.getElementById('sort19');
-  sort19.textContent = '£1-£10';
+  sort19.textContent = '£11-£20';
 
   const sort20 = document.getElementById('sort20');
-  sort20.textContent = '£11-£20';
-
-  const sort21 = document.getElementById('sort21');
-  sort21.textContent = '>£20';
+  sort20.textContent = '>£20';
 }
-
-
-// all 1x1 will be below one pound done
-// all 1x2 will be btw 2-10
-// all 2x2 will be btw 11-20
-// all 2x3 will be above 20 done

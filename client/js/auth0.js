@@ -1,4 +1,4 @@
-// Refrenced auth0 from auth0 lecture
+// Refrenced auth0 from auth0 lecture with a few additions in updateAuthUI()
 async function fetchAuthConfig() {
   const response = await fetch('../auth-config');
   if (response.ok) {
@@ -27,12 +27,34 @@ async function updateAuthUI() {
   document.getElementById('logout').disabled = !isAuthenticated;
 
   if (isAuthenticated) {
-    // const de = document.querySelector('#design');
-    // de.className = 'tab userIsAuthenticated';
+    // //////////////
+
+    // Area where a few changes were made in auth0
+
+    const design = document.querySelector('#design');
+    design.className = 'userIsAuthenticated';
+
+    const wishlist = document.querySelector('#wishlist');
+    wishlist.className = 'fas fa-heart userIsAuthenticated';
+
+    // check if a user is authenticated then he/she can checkout
+    if (window.location.href === 'http://localhost:8080/cart.html') {
+      const check = document.querySelector('.continueToCheckout');
+      check.className = 'authenticCheckout';
+    }
+
     const user = await auth0.getUser();
     console.log(user);
+
+    // //////////////
+
     const el = document.getElementById('user');
-    el.textContent = `Hello ${user.given_name}`;
+    el.textContent = ` ${user.email.slice(0, 1).toUpperCase()}`;
+  } else {
+    if (window.location.href === 'http://localhost:8080/cart.html') {
+      const message = document.querySelector('.message');
+      message.className = 'notAuthenticated';
+    }
   }
 }
 

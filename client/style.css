@@ -47,7 +47,7 @@ header a{
 header a:hover{
     color: rgb(255, 0, 0);
 }
-.tab:hover{
+.tab:hover, .userIsAuthenticated:hover{
     background-color: rgb(255, 255, 255);
 }
 
@@ -401,11 +401,11 @@ header .loginDiv {
 .emptyCart{
     display: none;
 }
-.continueToCheckout{
+.authenticCheckout{
     text-align: center;
     display: flex;
     justify-content: end;
-    margin: 5rem 1rem 5rem 80rem;
+    margin: 5rem;
     font-size: 2rem;
     color: rgb(255, 251, 0);
     background: black;
@@ -428,12 +428,21 @@ header .loginDiv {
     text-decoration: underline;
 }
 
-/* #design{
+.tab#design, .tab#wishlist, .continueToCheckout, .message{
     display: none;
-} */
+}
 
-/* .userIsAuthenticated{
-    display: block;
+.userIsAuthenticated{
+    display: relative;
+}
+
+.notAuthenticated{
+    color: red;
+    margin: 5rem;
+}
+
+/* #user {
+    background: white;
 } */
 
 

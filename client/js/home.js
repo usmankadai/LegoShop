@@ -19,7 +19,7 @@ function templateHeader() {
 
   let nav = 0;
   const selectNav = document.querySelector('.tabs');
-  for (let i = 1; i <= 4; i += 1) {
+  for (let i = 1; i <= 5; i += 1) {
     const log = document.createElement('a');
     nav++;
     log.id = `navButton${nav}`;
@@ -48,6 +48,12 @@ function templateHeader() {
   navButton4.id = 'design';
   navButton4.href = '/designKit.html';
   navButton4.textContent = 'Design Kit';
+
+  const navButton5 = document.getElementById('navButton5');
+  navButton5.id = 'wishlist';
+  navButton5.href = '/wishlist.html';
+  navButton5.textContent = 'Wishlist';
+  navButton5.className += ' fas fa-heart';
 
   const searchDiv = document.createElement('div');
   searchDiv.className = 'search';
@@ -84,25 +90,20 @@ function icons() {
   let nav = 0;
   const selectIcon = document.querySelector('.icons');
 
-  for (let i = 1; i <= 3; i += 1) {
+  for (let i = 1; i <= 2; i += 1) {
     const log = document.createElement('a');
     nav++;
     log.id = `icon${nav}`;
     selectIcon.append(log);
   }
 
-  const wishlistIcon = document.getElementById('icon1');
-  wishlistIcon.id = 'wishlist';
-  wishlistIcon.href = '/wishlist.html';
-  wishlistIcon.className = 'fas fa-heart';
-
-  const cartIcon = document.getElementById('icon2');
+  const cartIcon = document.getElementById('icon1');
   cartIcon.id = 'cart';
   cartIcon.href = '/cart.html';
   cartIcon.className = 'fas fa-shopping-cart';
   cartIcon.textContent = '(0)';
 
-  const userIcon = document.getElementById('icon3');
+  const userIcon = document.getElementById('icon2');
   userIcon.id = 'user';
   userIcon.className = 'fas fa-user';
 

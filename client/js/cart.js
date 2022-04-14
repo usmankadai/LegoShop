@@ -106,7 +106,8 @@ function emptyCart() {
 function checkout() {
   const totalAmount = localStorage.getItem('totalAmount');
 
-  const checkout = document.querySelector('.continueToCheckout');
+  const checkout = document.querySelector('.continueToCheckout, .authenticCheckout');
+  const notAuthenticated = document.querySelector('.notAuthenticated');
 
   checkout.textContent = `Total: £${totalAmount}`;
 
@@ -114,6 +115,7 @@ function checkout() {
   const zeroPounds = checkout.textContent === 'Total: £0';
   if (emptyBasket || zeroPounds) {
     checkout.className = 'emptyCart';
+    notAuthenticated.className = 'emptyCart';
   }
   checkout.addEventListener('click', () => {
     window.location = '/checkout.html';
