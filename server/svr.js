@@ -26,6 +26,9 @@ app.get('/bricks/:sort', asyncWrap(sort));
 app.get('/brick', asyncWrap(brick));
 app.get('/kits', asyncWrap(kits));
 app.get('/kit', asyncWrap(kit));
+app.get('/brickss/brickImage', asyncWrap(brickImage));
+app.get('/videos', asyncWrap(video));
+app.get('/kitss/kitImage', asyncWrap(kitImage));
 app.get('/auth-config', authConf);
 app.get('/uploads', design);
 app.put('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
@@ -79,6 +82,33 @@ async function kit(req, res) {
     return;
   }
   res.json(kitId);
+}
+
+async function brickImage(req, res) {
+  const brickImage = await legoConfig.brickImage();
+  if (!brickImage) {
+    res.status(404).send('No match for that link.');
+    return;
+  }
+  res.json(brickImage);
+}
+
+async function kitImage(req, res) {
+  const brickImage = await legoConfig.kitImage();
+  if (!brickImage) {
+    res.status(404).send('No match for that link.');
+    return;
+  }
+  res.json(brickImage);
+}
+
+async function video(req, res) {
+  const video = await legoConfig.video();
+  if (!video) {
+    res.status(404).send('No video found.');
+    return;
+  }
+  res.json(video);
 }
 
 async function design(req, res) {

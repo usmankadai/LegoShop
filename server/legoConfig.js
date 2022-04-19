@@ -45,10 +45,24 @@ export async function findKit(kitId) {
   return db.get('SELECT * FROM kits WHERE kitId = ?', kitId);
 }
 
+export async function brickImage() {
+  const db = await dbConn;
+  return db.all('SELECT legoId, legoImage FROM legos');
+}
+
+export async function kitImage() {
+  const db = await dbConn;
+  return db.all('SELECT kitId, legoImage FROM kits');
+}
 
 export async function design() {
   const db = await dbConn;
   return db.all('SELECT * FROM upload');
+}
+
+export async function video() {
+  const db = await dbConn;
+  return db.all('SELECT * FROM videos');
 }
 
 export async function uploadLego(legoId, legoName, instructions, file) {

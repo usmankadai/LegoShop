@@ -41,12 +41,16 @@ async function updateAuthUI() {
     if (window.location.href === 'http://localhost:8080/cart.html') {
       const check = document.querySelector('.continueToCheckout');
       check.className = 'authenticCheckout';
+
+      const checkout = document.querySelector('.authenticCheckout');
+      checkout.addEventListener('click', () => {
+        window.location = '/checkout.html';
+      });
     }
 
     const user = await auth0.getUser();
     console.log(user);
 
-    // //////////////
 
     const el = document.getElementById('user');
     el.textContent = ` ${user.email.slice(0, 1).toUpperCase()}`;
@@ -54,7 +58,20 @@ async function updateAuthUI() {
     if (window.location.href === 'http://localhost:8080/cart.html') {
       const message = document.querySelector('.message');
       message.className = 'notAuthenticated';
+
+
+      const totalAmount = localStorage.getItem('totalAmount');
+
+      const total = document.querySelector('.total');
+      total.textContent = `Total: £${totalAmount}`;
+
+      const emptyBasket = total.textContent === 'Total: £null';
+      const zeroPounds = total.textContent === 'Total: £0';
+      if (emptyBasket || zeroPounds) {
+        message.className = 'emptyCart';
+      }
     }
+    // //////////////////////////////////////////////////////////////////////////
   }
 }
 
