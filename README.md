@@ -34,7 +34,6 @@ After installing all the dependencies to start the server, it can be done by run
 
 need to explain how a user can't see wishlist, design and checkout button
 
-
 ### Reasons for a specific paradigm
 
 | Paradigm used | Reasons for a specific paradigm |

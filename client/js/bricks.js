@@ -6,7 +6,7 @@ import * as sort from './sort.js';
 
 async function init() {
   bricksContainer();
-  createInventoryBricks();
+  await createInventoryBricks();
   await home.execute();
   await auth0.executeAuth0();
   await brickslocalStorage();

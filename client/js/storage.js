@@ -11,11 +11,9 @@ export function listeners(legos) {
   const cart = document.querySelectorAll('.addToCart');
 
   for (let i = 0; i < cart.length; i++) {
-    // console.log('running');
     cart[i].addEventListener('click', () => {
       storage(legos[i]);
       totalAmount(legos[i]);
-      // totalTextContent();
     });
   }
 }
@@ -34,11 +32,6 @@ export function cartReloadPage() {
 export function storage(lego, quantity) {
   let cartQuantity = localStorage.getItem('cartQuantity');
   cartQuantity = parseInt(cartQuantity);
-
-  // let basket = localStorage.getItem('lego inside cart');
-  // basket = JSON.parse(basket);
-
-
   if (quantity === 'decrease') {
     localStorage.setItem('cartQuantity', cartQuantity - 1);
     document.querySelector('#cart').textContent = cartQuantity - 1;
@@ -49,14 +42,6 @@ export function storage(lego, quantity) {
     localStorage.setItem('cartQuantity', 1);
     document.querySelector('#cart').textContent = 1;
   }
-
-  // if (cartQuantity) {
-  //   localStorage.setItem('cartQuantity', cartQuantity + 1);
-  //   document.querySelector('#cart').textContent = cartQuantity + 1;
-  // } else {
-  //   localStorage.setItem('cartQuantity', 1);
-  //   document.querySelector('#cart').textContent = 1;
-  // }
   // saves lego being clicked to the localStorage
   saveBrick(lego);
 }

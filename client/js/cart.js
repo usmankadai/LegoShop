@@ -9,6 +9,7 @@ async function init() {
   await initializeCart();
   storage.cartReloadPage();
   emptyCart();
+  bricks();
 }
 
 window.addEventListener('load', init);
@@ -164,7 +165,6 @@ function quantity() {
       lego = cartDiv[i].firstChild.alt;
       console.log(lego);
 
-
       if (basket[lego].cart > 1) {
         basket[lego].cart = basket[lego].cart - 1;
         storage.storage(basket[lego], 'decrease');
@@ -174,4 +174,12 @@ function quantity() {
       }
     });
   }
+}
+
+async function bricks() {
+  const response = await fetch('/bricks');
+
+  const legos = await response.json();
+
+  console.log(legos);
 }
