@@ -31,6 +31,7 @@ app.get('/videos', asyncWrap(video));
 app.get('/kitss/kitImage', asyncWrap(kitImage));
 app.get('/auth-config', authConf);
 app.get('/uploads', design);
+// app.post('/bricks', asyncWrap(stock));
 app.put('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
@@ -41,6 +42,15 @@ function asyncWrap(f) {
       .catch((e) => next(e || new Error()));
   };
 }
+
+// async function stock(req, res) {
+//   const stock = await legoConfig.stock();
+//   if (!stock) {
+//     res.status(404).send('No match');
+//     return;
+//   }
+//   res.json(stock);
+// }
 
 async function bricks(req, res) {
   const bricks = await legoConfig.listBricks();

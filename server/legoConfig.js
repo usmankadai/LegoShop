@@ -28,6 +28,10 @@ export async function sort(sort) {
   return db.all('SELECT * FROM legos WHERE sort LIKE ?', `%${sort}%`);
 }
 
+// export async function stock() {
+//   const db = await dbConn;
+//   return db.all('SELECT legoId, stock FROM legos');
+// }
 
 export async function findBrick(legoId) {
   const db = await dbConn;
