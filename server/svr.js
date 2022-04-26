@@ -30,7 +30,7 @@ app.get('/videos', asyncWrap(video));
 app.get('/auth-config', authConf);
 app.get('/uploads', design);
 app.put('/brick', asyncWrap(stock));
-app.put('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
+app.post('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
 // wrap async function for express.js error handling
@@ -107,7 +107,7 @@ async function design(req, res) {
 }
 
 async function upload(req, res) {
-  const newLego = await legoConfig.uploadLego(req.body.instructions, req.file);
+  const newLego = await legoConfig.uploadLego(req.body, req.file);
   res.json(newLego);
 }
 

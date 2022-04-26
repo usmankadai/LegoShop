@@ -10,35 +10,38 @@ async function init() {
   storage.cartReloadPage();
   emptyCart();
   // stock();
-  // check();
+  check();
 }
 
 window.addEventListener('load', init);
 
-// async function update() {
-//   const baskets = JSON.parse(localStorage.getItem('legoInsideCart'));
+async function update() {
+  const baskets = JSON.parse(localStorage.getItem('legoInsideCart'));
+  console.log(baskets);
 
-//   for (const basket of baskets) {
-//     const legoId = basket.legoId;
-//     const payload = { legoId, legoName: basket.legoName, category: basket.category, legoImage: basket.legoImage, brickType: basket.brickType, sort: basket.sort, price: basket.price, stock: basket.stock, cart: basket.cart };
-//     console.log('Payload', payload);
+  for (const basket of baskets) {
+    console.log(basket);
+    console.log(basket.legoId);
+    const legoId = basket.legoId;
+    const payload = { legoId, legoName: basket.legoName, category: basket.category, legoImage: basket.legoImage, brickType: basket.brickType, sort: basket.sort, price: basket.price, stock: basket.stock, cart: basket.cart };
+    console.log('Payload', payload);
 
-//     const response = await fetch('/brick', {
-//       method: 'PUT',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify(payload),
-//     });
+    const response = await fetch(`/brick?legoId=${legoId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
 
-//     if (!response) {
-//       console.log('OH!!!');
-//     }
-//   }
-//   window.localStorage.clear();
-// }
+    if (!response) {
+      console.log('OH!!!');
+    }
+  }
+  window.localStorage.clear();
+}
 
-// function check() {
-//   document.querySelector('.authenticCheckout').addEventListener('click', update);
-// }
+function check() {
+  document.querySelector('.authenticCheckout').addEventListener('click', update);
+}
 
 function initializeCart() {
   let cart = localStorage.getItem('legoInsideCart');

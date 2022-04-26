@@ -500,6 +500,14 @@ video {
     margin-right: 1rem;
 }
 
+.uploadBrick{
+    margin-top: 10rem;
+}
+
+#tempMain .userIsAuthenticated{
+    margin-top: 10rem;
+}
+
 @media(max-width:75rem){
     .cartHeader{
         margin-left: 2rem;

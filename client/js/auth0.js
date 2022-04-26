@@ -30,6 +30,11 @@ async function updateAuthUI() {
     // //////////////
 
     // Area where a few changes were made in auth0
+    if (window.location.href === 'http://localhost:8080/bricks.html') {
+      const uploadBrick = document.querySelector('.uploadBrick');
+      uploadBrick.className = 'userIsAuthenticated';
+    }
+
 
     const design = document.querySelector('#design');
     design.className = 'userIsAuthenticated';

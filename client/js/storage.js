@@ -13,6 +13,7 @@ export function listeners(legos) {
     cart[i].addEventListener('click', () => {
       storage(legos[i]);
       totalAmount(legos[i]);
+      // saveBrick(legos[i]);
     });
   }
 }
@@ -25,6 +26,24 @@ export function cartReloadPage() {
   if (cartQuantity) {
     document.querySelector('#cart').textContent = cartQuantity;
   }
+}
+
+function saveBrick(lego) {
+  // let basket = localStorage.getItem('legoInsideCart');
+  // basket = JSON.parse(basket);
+
+  
+  // let newBasket = [];
+
+  // if (basket != null) {
+  //   newBasket = basket;
+  //   // lego.cart = +1;
+  //   newBasket.push(lego);
+  // } else {
+  //   lego.cart = 1;
+  //   newBasket.push(lego);
+  // }
+  // localStorage.setItem('legoInsideCart', JSON.stringify(newBasket));
 }
 
 
@@ -45,26 +64,26 @@ export function storage(lego, quantity) {
   saveBrick(lego);
 }
 
-function saveBrick(lego) {
-  let basket = localStorage.getItem('legoInsideCart');
-  basket = JSON.parse(basket);
+// function saveBrick(lego) {
+//   let basket = localStorage.getItem('legoInsideCart');
+//   basket = JSON.parse(basket);
 
-  if (basket != null) {
-    if (basket[lego.legoName] === undefined) {
-      basket = {
-        ...basket,
-        [lego.legoName]: lego,
-      };
-    }
-    basket[lego.legoName].cart += 1;
-  } else {
-    lego.cart = 1;
-    basket = {
-      [lego.legoName]: lego,
-    };
-  }
-  localStorage.setItem('legoInsideCart', JSON.stringify(basket));
-}
+//   if (basket != null) {
+//     if (basket[lego.legoName] === undefined) {
+//       basket = {
+//         ...basket,
+//         [lego.legoName]: lego,
+//       };
+//     }
+//     basket[lego.legoName].cart += 1;
+//   } else {
+//     lego.cart = 1;
+//     basket = {
+//       [lego.legoName]: lego,
+//     };
+//   }
+//   localStorage.setItem('legoInsideCart', JSON.stringify(basket));
+// }
 
 export function totalAmount(lego, total) {
   // this function is similar to storage function it adds the total amount to the localStorage
@@ -85,3 +104,19 @@ export function totalAmount(lego, total) {
     // amount.textContent = `Total: £${lego.price}`;
   }
 }
+
+
+// let basket = localStorage.getItem('legoInsideCart');
+// basket = JSON.parse(basket);
+
+// let newBasket = [];
+
+// if (basket != null) {
+//   newBasket = basket;
+//   // lego.cart = +1;
+//   newBasket.push(lego);
+// } else {
+//   lego.cart = 1;
+//   newBasket.push(lego);
+// }
+// localStorage.setItem('legoInsideCart', JSON.stringify(newBasket));

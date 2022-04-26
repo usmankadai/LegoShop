@@ -22,6 +22,7 @@ using node and SQLite in the server -->
   * ```npm i path```
   * ```npm i uuid```
   * ```npm install --save multer```
+  * ```npm i uuid-random```
 
 After installing all the dependencies to start the server, it can be done by running:
 
@@ -84,6 +85,11 @@ why i chose videos the way i did that's math.random
 * Design Kit:
 
 * Continue as guest:
+
+### Assumptions
+
+i am assuming that the person who logs in is an administrator. So they get the luxury to upload a new brick.
+also, for the customer i assume they should have all the features required to checkout and buy a product without being forced to login.
 
 ### Known Issues
 

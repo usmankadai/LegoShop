@@ -13,7 +13,14 @@
 <body>
     <div class = "grid">
         <header></header>
-        <main id = "tempMain" class="bricksPage"></main>
+        <main id = "tempMain" class="bricksPage">
+            <div class = "uploadBrick emptyCart">
+                <input id=uploadName type=text autofocus autocomplete=off placeholder='Add LegoName…'>
+                <input id=uploadPrice type=text autofocus autocomplete=off placeholder='Add LegoPrice…'>
+                <label id=avatar>Bricks: <input id=avatarfile type=file accept="image/png, image/jpeg"></label>
+                <input id=send type=submit value=Send>
+            </div>
+        </main>
         <footer></footer>
     </div>
 </body>
