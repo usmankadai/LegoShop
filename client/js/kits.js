@@ -10,7 +10,6 @@ async function init() {
   await auth0.executeAuth0();
   await kitslocalStorage();
   localstorage.cartReloadPage();
-  // fjjf
 }
 
 window.addEventListener('load', init);

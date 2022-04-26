@@ -115,6 +115,15 @@ async function sorting(e) {
   legos.forEach(lego => {
     htmlGridLayout(lego);
   });
+
+
+  const cart = document.querySelectorAll('.addToCart');
+  for (let i = 0; i < cart.length; i++) {
+    cart[i].addEventListener('click', () => {
+      localstorage.storage(legos[i]);
+      localstorage.totalAmount(legos[i]);
+    });
+  }
 }
 
 async function fetchSortedItems(color) {

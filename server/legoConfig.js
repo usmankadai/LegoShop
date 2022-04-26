@@ -28,10 +28,25 @@ export async function sort(sort) {
   return db.all('SELECT * FROM legos WHERE sort LIKE ?', `%${sort}%`);
 }
 
-// export async function stock() {
-//   const db = await dbConn;
-//   return db.all('SELECT legoId, stock FROM legos');
-// }
+export async function stock(currentStock) {
+  const db = await dbConn;
+  console.log(currentStock);
+
+  const legoId = currentStock.legoId;
+  const legoName = currentStock.legoName;
+  const category = currentStock.legoImage;
+  const legoImage = currentStock.legoImage;
+  const brickType = currentStock.brickType;
+  const sort = currentStock.sort;
+  const price = currentStock.price;
+  const stock = currentStock.stock;
+  const cart = 0;
+
+  const update = await db.run('UPDATE legos SET legoName = ? , category = ? , legoImage = ? , brickType = ? , sort = ? , price = ? , stock = ? , cart = ? WHERE legoId = ? , FROM legos', [legoId, legoName, category, legoImage, brickType, sort, price, stock, cart]);
+  // if nothing was updated, the ID doesn't exist
+  if (update.changes === 0) throw new Error('message not found');
+  return findBrick(legoId);
+}
 
 export async function findBrick(legoId) {
   const db = await dbConn;
@@ -49,15 +64,15 @@ export async function findKit(kitId) {
   return db.get('SELECT * FROM kits WHERE kitId = ?', kitId);
 }
 
-export async function brickImage() {
-  const db = await dbConn;
-  return db.all('SELECT legoId, legoImage FROM legos');
-}
+// export async function brickImage() {
+//   const db = await dbConn;
+//   return db.all('SELECT legoId, legoImage FROM legos');
+// }
 
-export async function kitImage() {
-  const db = await dbConn;
-  return db.all('SELECT kitId, legoImage FROM kits');
-}
+// export async function kitImage() {
+//   const db = await dbConn;
+//   return db.all('SELECT kitId, legoImage FROM kits');
+// }
 
 export async function design() {
   const db = await dbConn;

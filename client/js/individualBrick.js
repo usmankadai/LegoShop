@@ -33,3 +33,9 @@ async function bricklocalStorage() {
   const legos = await fetchBrick();
   localstorage.setupListeners(legos);
 }
+
+/// /////// update quantity
+
+// function brickId() {
+//   return window.location.hash.substring(1);
+// }

@@ -44,7 +44,7 @@ async function updateAuthUI() {
 
       const checkout = document.querySelector('.authenticCheckout');
       checkout.addEventListener('click', () => {
-        window.location = '/checkout.html';
+        // window.location = '/checkout.html';
       });
     }
 

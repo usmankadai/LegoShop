@@ -9,18 +9,44 @@ async function init() {
   await initializeCart();
   storage.cartReloadPage();
   emptyCart();
-  bricks();
+  // stock();
+  // check();
 }
 
 window.addEventListener('load', init);
 
+// async function update() {
+//   const baskets = JSON.parse(localStorage.getItem('legoInsideCart'));
+
+//   for (const basket of baskets) {
+//     const legoId = basket.legoId;
+//     const payload = { legoId, legoName: basket.legoName, category: basket.category, legoImage: basket.legoImage, brickType: basket.brickType, sort: basket.sort, price: basket.price, stock: basket.stock, cart: basket.cart };
+//     console.log('Payload', payload);
+
+//     const response = await fetch('/brick', {
+//       method: 'PUT',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(payload),
+//     });
+
+//     if (!response) {
+//       console.log('OH!!!');
+//     }
+//   }
+//   window.localStorage.clear();
+// }
+
+// function check() {
+//   document.querySelector('.authenticCheckout').addEventListener('click', update);
+// }
+
 function initializeCart() {
-  let cart = localStorage.getItem('lego inside cart');
+  let cart = localStorage.getItem('legoInsideCart');
   cart = JSON.parse(cart);
   if (cart) {
     const legoBasket = document.querySelector('.legoBasket');
     legoBasket.textContent = '';
-    // check the value of the lego inside cart i.e the one we got in line 14 and loop through
+    // check the value of the legoInsideCart i.e the one we got in line 14 and loop through
     // each lego similar to how it is in bricks.js and kits.js
     const value = Object.values(cart);
     value.forEach(lego => {
@@ -111,7 +137,7 @@ function removefromCart() {
 
   const cartQuantity = localStorage.getItem('cartQuantity');
   let name;
-  let basket = localStorage.getItem('lego inside cart');
+  let basket = localStorage.getItem('legoInsideCart');
   basket = JSON.parse(basket);
   const totalAmount = localStorage.getItem('totalAmount');
 
@@ -124,7 +150,7 @@ function removefromCart() {
       localStorage.setItem('totalAmount', totalAmount - (basket[name].price * basket[name].cart));
 
       delete basket[name];
-      localStorage.setItem('lego inside cart', JSON.stringify(basket));
+      localStorage.setItem('legoInsideCart', JSON.stringify(basket));
       initializeCart();
       storage.cartReloadPage();
       emptyCart();
@@ -135,7 +161,7 @@ function removefromCart() {
 function quantity() {
   const increase = document.querySelectorAll('.increase');
   const decrease = document.querySelectorAll('.decrease');
-  let basket = localStorage.getItem('lego inside cart');
+  let basket = localStorage.getItem('legoInsideCart');
   basket = JSON.parse(basket);
 
   const cartDiv = document.querySelectorAll('.cartDiv');
@@ -153,7 +179,7 @@ function quantity() {
       basket[lego].cart = basket[lego].cart + 1;
       storage.storage(basket[lego]);
       storage.totalAmount(basket[lego]);
-      localStorage.setItem('lego inside cart', JSON.stringify(basket));
+      localStorage.setItem('legoInsideCart', JSON.stringify(basket));
       initializeCart();
     });
   }
@@ -169,17 +195,50 @@ function quantity() {
         basket[lego].cart = basket[lego].cart - 1;
         storage.storage(basket[lego], 'decrease');
         storage.totalAmount(basket[lego], 'decrease');
-        localStorage.setItem('lego inside cart', JSON.stringify(basket));
+        localStorage.setItem('legoInsideCart', JSON.stringify(basket));
         initializeCart();
       }
     });
   }
 }
 
-async function bricks() {
-  const response = await fetch('/bricks');
+// async function bricks() {
+//   const response = await fetch('/bricks');
 
-  const legos = await response.json();
+//   const legos = await response.json();
 
-  console.log(legos);
-}
+//   console.log(legos);
+// }
+
+
+// function local() {
+//   // let basket = localStorage.getItem('legoInsideCart');
+//   // basket = JSON.parse(basket);
+
+//   // const value = Object.values(basket);
+//   // value.forEach(lego => {
+//   //   console.log(lego.stock - lego.cart);
+//   //   // console.log(lego.stock);
+//   // });
+// }
+
+// async function fetchBricks() {
+//   const response = await fetch('/bricks', {
+//     headers: {
+//       'Content-type': 'application/json',
+//     },
+//   });
+
+//   return await response.json();
+// }
+
+// async function brickslocalStorage() {
+//   const legos = await fetchBricks();
+//   console.log(legos);
+
+//   legos.forEach(lego => {
+//     console.log(lego.stock - le);
+//   });
+// }
+
+// brickslocalStorage();

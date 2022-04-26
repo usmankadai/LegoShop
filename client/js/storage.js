@@ -9,7 +9,6 @@ export function setupListeners(legos) {
 
 export function listeners(legos) {
   const cart = document.querySelectorAll('.addToCart');
-
   for (let i = 0; i < cart.length; i++) {
     cart[i].addEventListener('click', () => {
       storage(legos[i]);
@@ -47,7 +46,7 @@ export function storage(lego, quantity) {
 }
 
 function saveBrick(lego) {
-  let basket = localStorage.getItem('lego inside cart');
+  let basket = localStorage.getItem('legoInsideCart');
   basket = JSON.parse(basket);
 
   if (basket != null) {
@@ -64,7 +63,7 @@ function saveBrick(lego) {
       [lego.legoName]: lego,
     };
   }
-  localStorage.setItem('lego inside cart', JSON.stringify(basket));
+  localStorage.setItem('legoInsideCart', JSON.stringify(basket));
 }
 
 export function totalAmount(lego, total) {
@@ -80,9 +79,9 @@ export function totalAmount(lego, total) {
     // checks whatever that was in totalAmount add it to the new amount that is being clicked.
     totalAmount = parseInt(totalAmount);
     localStorage.setItem('totalAmount', totalAmount + lego.price);
-    amount.textContent = `Total: £${totalAmount + lego.price}`;
+    // amount.textContent = `Total: £${totalAmount + lego.price}`;
   } else {
     localStorage.setItem('totalAmount', lego.price);
-    amount.textContent = `Total: £${lego.price}`;
+    // amount.textContent = `Total: £${lego.price}`;
   }
 }

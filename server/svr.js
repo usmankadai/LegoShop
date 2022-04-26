@@ -26,12 +26,10 @@ app.get('/bricks/:sort', asyncWrap(sort));
 app.get('/brick', asyncWrap(brick));
 app.get('/kits', asyncWrap(kits));
 app.get('/kit', asyncWrap(kit));
-app.get('/brickss/brickImage', asyncWrap(brickImage));
 app.get('/videos', asyncWrap(video));
-app.get('/kitss/kitImage', asyncWrap(kitImage));
 app.get('/auth-config', authConf);
 app.get('/uploads', design);
-// app.post('/bricks', asyncWrap(stock));
+app.put('/brick', asyncWrap(stock));
 app.put('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
@@ -43,14 +41,10 @@ function asyncWrap(f) {
   };
 }
 
-// async function stock(req, res) {
-//   const stock = await legoConfig.stock();
-//   if (!stock) {
-//     res.status(404).send('No match');
-//     return;
-//   }
-//   res.json(stock);
-// }
+async function stock(req, res) {
+  const stock = await legoConfig.stock(req.body);
+  res.json(stock);
+}
 
 async function bricks(req, res) {
   const bricks = await legoConfig.listBricks();
@@ -92,24 +86,6 @@ async function kit(req, res) {
     return;
   }
   res.json(kitId);
-}
-
-async function brickImage(req, res) {
-  const brickImage = await legoConfig.brickImage();
-  if (!brickImage) {
-    res.status(404).send('No match for that link.');
-    return;
-  }
-  res.json(brickImage);
-}
-
-async function kitImage(req, res) {
-  const brickImage = await legoConfig.kitImage();
-  if (!brickImage) {
-    res.status(404).send('No match for that link.');
-    return;
-  }
-  res.json(brickImage);
 }
 
 async function video(req, res) {

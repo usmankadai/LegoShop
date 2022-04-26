@@ -15,7 +15,7 @@ async function init() {
 window.addEventListener('load', init);
 
 async function fetchBrick() {
-  const response = await fetch('/brickss/brickImage');
+  const response = await fetch('/bricks');
   return response.json();
 }
 
@@ -25,7 +25,7 @@ async function fetchVideo() {
 }
 
 async function fetchKit() {
-  const response = await fetch('/kitss/kitImage');
+  const response = await fetch('/kits');
   return response.json();
 }
 
@@ -36,7 +36,6 @@ async function takeRandomVideo() {
 
   rand.forEach(video => {
     document.querySelector('video').src = video.videoSrc;
-    console.log(video.videoSrc);
   });
 }
 
@@ -68,13 +67,11 @@ async function takeRandomBrick() {
 
 
   rands.forEach(rand => {
-    console.log(rand.legoImage);
     createBrickElement(rand);
   });
 
 
   second.forEach(rand => {
-    console.log(rand.legoImage);
     createBrickElement(rand);
   });
 }
@@ -88,13 +85,11 @@ async function takeRandomKit() {
 
 
   rands.forEach(rand => {
-    console.log(rand.legoImage);
     createKitElement(rand);
   });
 
 
   second.forEach(rand => {
-    console.log(rand.legoImage);
     createKitElement(rand);
   });
 }
