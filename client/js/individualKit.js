@@ -1,7 +1,7 @@
-import * as home from './home.js';
+import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
 import * as similarity from './individualBrick&Kit.js';
-import * as createBasket from './createBasket.js';
+import * as createBasket from './createBasket.mjs';
 
 
 async function init() {

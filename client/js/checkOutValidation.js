@@ -1,6 +1,7 @@
-import * as home from './home.js';
+import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
-// import * as localstorage from './storage.js';
+import * as createBasket from './createBasket.mjs';
+
 
 function checkValidity(e) {
   e.target.classList.toggle('invalid',
@@ -13,7 +14,7 @@ async function init() {
   });
   home.execute();
   await auth0.executeAuth0();
-  // localstorage.cartReloadPage();
+  createBasket.initializeBasket();
   for (const input of document.querySelectorAll('input')) {
     input.addEventListener('blur', checkValidity);
   }

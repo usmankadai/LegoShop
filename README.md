@@ -1,13 +1,5 @@
 # LEGO SHOP
 
-<!-- functional requirement
-
-non functional requirement
-
-using vanilla js in frontend i.e CSS, HTML and JavaScript
-
-using node and SQLite in the server -->
-
 ## Overview
 
 ## DevDependencies and installations
@@ -72,9 +64,9 @@ need to explain how a user can't see wishlist, design and checkout button
 |Sorting by price, type, and color| There are two ways i approached sorting. First is by selecting two different columns and use "LIKE" and "OR" to check if the option clicked on the website is the same as the text in the database as shown in the image below.![sort alternative considered](./client/images/sort.png) It worked when i tried it on the Uni VM but i couldn't get it to work on the website. ![sort alternative considered](./client/images/sort2.png) The other option i considered was to make another column which contains all the sorting options in the website and use "LIKE" to check if the option clicked matches any of the value within that database column. ![sort alternative considered](./client/images/sort4.png) ![sort alternative considered](./client/images/sort3.png) This is an insufficient way in my opinion it would be better if i can select from two different column this is one of the things i need to improve in the future.|
 |Top picks and coming soon| Suggesting to a user some items is a good feature in a shopping website. I fetched from the server kits, bricks and two videos and set the src to random. Suggestion for a website like this should not be guessable hence, why i set the src to be random.|
 |Reason for using multiple database||
-sorting??
-why use redirect?
-why i chose videos the way i did that's math.random
+|Reason for including only the first letter of the name as profile| I realised when using auth0 when i login with google i can retrieve the username as we were taught in the authentication lecture. But whenever i login using email as password i.e. as a registered auth0 user it returns undefined hence, i decided to just get the first letter of just the email address and capitalize it.|
+|why use 404.html for redirecting URL| If for example a user enters a wrong URL it should display a well designed error message. This can help users identify if a link is valid or not.|
+|Reason for using SQLite||
 
 ## Future Development
 
@@ -93,6 +85,8 @@ also, for the customer i assume they should have all the features required to ch
 
 ### Known Issues
 
+* The sorting of the bricks works properly but can be improved. It has been explained above in reasons for specific paradigm's section.
+
 ### Reference List
 
 * LEGO Database Download <https://rebrickable.com/downloads/>
@@ -106,6 +100,3 @@ also, for the customer i assume they should have all the features required to ch
 *
 *
 *
-
-<!-- explain why i used sqlite
- -->

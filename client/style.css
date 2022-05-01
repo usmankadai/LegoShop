@@ -401,7 +401,7 @@ header .loginDiv {
 .emptyCart, .deleteBrick{
     display: none;
 }
-.authenticCheckout{
+.continueToCheckout{
     text-align: center;
     display: flex;
     justify-content: end;
@@ -428,7 +428,7 @@ header .loginDiv {
     text-decoration: underline;
 }
 
-.tab#design, .tab#wishlist, .continueToCheckout, .message{
+.tab#design, .tab#wishlist{
     display: none;
 }
 
@@ -441,26 +441,13 @@ header .loginDiv {
     margin: 5rem;
 }
 
-/* #user {
-    background: white;
-} */
-
 .featured{
     margin-top: 5rem;
 }
 
-/* .slide-image {
-    max-width: 22rem;
-    max-height: 22rem;
-    min-width: 22rem;
-    min-height: 22rem;
-} */
-
 .slides{
-    /* align-items: center; */
     width: 25rem;
     box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    /* margin: 0 0 0 5rem; */
     height: 25rem;
     display: flex;
     flex-direction: column;
@@ -508,6 +495,22 @@ video {
     margin-top: 10rem;
 }
 
+#successPage{
+    background: black;
+    color: rgb(255, 251, 0);;
+}
+#tick{
+    color: #8bEA6C;
+}
+
+#successful{
+    text-align: center;
+}
+
+#successPage a{
+    color: white;
+}
+
 @media(max-width:75rem){
     .cartHeader{
         margin-left: 2rem;
@@ -531,20 +534,6 @@ video {
         height: 75rem;
         width: 75rem;
     }
-
-    /* .container{
-        display: grid;
-        grid-template-rows: 5rem 1fr 5rem;
-        grid-template-columns: 1fr;
-
-    } */
-    /* .container div{
-        flex: 0 1 30rem;
-    }
-    .container{
-        display: flex;
-        flex-wrap: wrap;
-    } */
 }
 
 @media(max-width:55rem){

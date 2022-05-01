@@ -119,7 +119,6 @@ function cartHtmlElement(bricks, kits) {
     cart.append(decrease, quantityDOM, increase, remove);
     createDiv.append(createImg, cart, legoPrice, subTotal);
     legoBasket.append(createDiv);
-    // debugger
     cartQuantity += parseInt(quantity);
   }
   const cartQuantityDOM = document.querySelector('#cart');

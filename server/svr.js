@@ -1,8 +1,8 @@
 import express from 'express';
-import authConfig from './auth-config.js';
+import authConfig from './auth-config.mjs';
 import path from 'path';
 import url from 'url';
-import * as legoConfig from './legoConfig.js';
+import * as legoConfig from './legoConfig.mjs';
 import multer from 'multer';
 
 
@@ -30,7 +30,7 @@ app.get('/videos', asyncWrap(video));
 app.get('/auth-config', authConf);
 app.get('/uploads', design);
 app.put('/brick', asyncWrap(stock));
-app.post('/bricks', uploader.single('src'), express.json(), asyncWrap(upload));
+app.post('/bricks', uploader.single('legoImage'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
 // wrap async function for express.js error handling

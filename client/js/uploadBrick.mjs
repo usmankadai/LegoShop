@@ -12,7 +12,7 @@ export async function sendBrick() {
   const payload = new FormData();
   payload.append('legoName', uploadName.value);
   payload.append('price', uploadPrice.value);
-  payload.append('src', avatar.files[0]);
+  payload.append('legoImage', avatar.files[0]);
 
   console.log(payload);
 

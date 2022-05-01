@@ -1,8 +1,8 @@
-import * as home from './home.js';
+import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
-import * as sort from './sort.js';
-import * as upload from './uploadBrick.js';
-import * as createBasket from './createBasket.js';
+import * as sort from './sort.mjs';
+import * as upload from './uploadBrick.mjs';
+import * as createBasket from './createBasket.mjs';
 
 
 async function init() {
