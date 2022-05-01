@@ -5,6 +5,7 @@ export function setupListeners(legos) {
 
   cart.addEventListener('click', () => {
     saveBrick(legos);
+    totalAmount(legos);
   });
 }
 
@@ -14,6 +15,7 @@ export function listeners(legos) {
   for (let i = 0; i < cart.length; i++) {
     cart[i].addEventListener('click', () => {
       saveBrick(legos[i]);
+      totalAmount(legos[i]);
     });
   }
 }
@@ -132,6 +134,19 @@ function addButton() {
     increase[i].addEventListener('click', () => {
       console.log('clicked');
     });
+  }
+}
+
+function totalAmount(lego) {
+  let totalAmount = localStorage.getItem('totalAmount');
+  console.log('The amount is', totalAmount);
+
+  // checks whatever that was in totalAmount add it to the new amount that is being clicked.
+  if (totalAmount != null) {
+    totalAmount = parseInt(totalAmount);
+    localStorage.setItem('totalAmount', totalAmount + lego.price);
+  } else {
+    localStorage.setItem('totalAmount', lego.price);
   }
 }
 
