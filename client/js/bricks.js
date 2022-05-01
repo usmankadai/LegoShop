@@ -1,7 +1,8 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
-import * as localstorage from './storage.js';
+import * as auth0 from './auth0.mjs';
 import * as sort from './sort.js';
+import * as upload from './uploadBrick.js';
+import * as createBasket from './createBasket.js';
 
 
 async function init() {
@@ -10,9 +11,10 @@ async function init() {
   await home.execute();
   await auth0.executeAuth0();
   await brickslocalStorage();
-  localstorage.cartReloadPage();
   sort.sort();
   document.querySelector('#sort').addEventListener('change', sorting);
+  upload.addEventListeners();
+  createBasket.initializeBasket();
 }
 
 window.addEventListener('load', init);
@@ -40,7 +42,7 @@ async function createInventoryBricks() {
   });
 }
 
-function htmlGridLayout(lego) {
+export function htmlGridLayout(lego) {
   const mainLinks = document.querySelector('.mainLinks');
   const createLi = document.createElement('li');
   createLi.className = 'lis';
@@ -69,6 +71,10 @@ function htmlGridLayout(lego) {
   addToCart.className = 'addToCart';
   addToCart.textContent = 'Add to Cart';
 
+  const removeBrick = document.createElement('div');
+  removeBrick.textContent = 'Delete';
+  removeBrick.className = 'deleteBrick';
+
   const legoNameLink = document.createElement('a');
   legoNameLink.className = 'legoNameLink';
   legoNameLink.id = `legoLink${lego.legoId}`;
@@ -82,24 +88,14 @@ function htmlGridLayout(lego) {
 
   legoName.append(legoNameLink);
   createA.append(createImg);
-  createLis.append(createA, legoName, legoPrice, addToCart);
+  createLis.append(createA, legoName, legoPrice, addToCart, removeBrick);
   createLi.append(createLis);
   mainLinks.append(createLi);
 }
 
-async function fetchBricks() {
-  const response = await fetch('/bricks', {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-
-  return await response.json();
-}
-
 async function brickslocalStorage() {
-  const legos = await fetchBricks();
-  localstorage.listeners(legos);
+  const legos = await createBasket.fetchBricks();
+  createBasket.listeners(legos);
 }
 
 async function sorting(e) {
@@ -120,8 +116,7 @@ async function sorting(e) {
   const cart = document.querySelectorAll('.addToCart');
   for (let i = 0; i < cart.length; i++) {
     cart[i].addEventListener('click', () => {
-      localstorage.storage(legos[i]);
-      localstorage.totalAmount(legos[i]);
+      createBasket.listeners(legos);
     });
   }
 }

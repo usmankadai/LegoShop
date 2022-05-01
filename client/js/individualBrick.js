@@ -1,7 +1,7 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
+import * as auth0 from './auth0.mjs';
 import * as similarity from './individualBrick&Kit.js';
-import * as localstorage from './storage.js';
+import * as createBasket from './createBasket.js';
 
 
 async function init() {
@@ -9,7 +9,7 @@ async function init() {
   await home.execute();
   await auth0.executeAuth0();
   await bricklocalStorage();
-  localstorage.cartReloadPage();
+  createBasket.initializeBasket();
 }
 
 window.addEventListener('load', init);
@@ -31,11 +31,5 @@ async function brick() {
 
 async function bricklocalStorage() {
   const legos = await fetchBrick();
-  localstorage.setupListeners(legos);
+  createBasket.setupListeners(legos);
 }
-
-/// /////// update quantity
-
-// function brickId() {
-//   return window.location.hash.substring(1);
-// }

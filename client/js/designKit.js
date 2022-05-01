@@ -1,5 +1,5 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
+import * as auth0 from './auth0.mjs';
 import * as localstorage from './storage.js';
 
 

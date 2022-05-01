@@ -1,6 +1,6 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
-import * as localstorage from './storage.js';
+import * as auth0 from './auth0.mjs';
+import * as createBasket from './createBasket.js';
 
 
 async function init() {
@@ -9,7 +9,8 @@ async function init() {
   await home.execute();
   await auth0.executeAuth0();
   await kitslocalStorage();
-  localstorage.cartReloadPage();
+  createBasket.initializeBasket();
+  // localstorage.cartReloadPage();
 }
 
 window.addEventListener('load', init);
@@ -44,19 +45,19 @@ function htmlGridLayout(lego) {
   const createLis = document.createElement('div');
 
   createLis.className = 'legoDiv';
-  createLis.id = `lego${lego.kitId}`;
+  createLis.id = `lego${lego.legoId}`;
   createLis.dataset.set = `${lego.categoryId}`;
 
   const createA = document.createElement('a');
-  createA.id = `a${lego.kitId}`;
-  createA.href = `kit.html?kitId=${lego.kitId}`;
+  createA.id = `a${lego.legoId}`;
+  createA.href = `kit.html?legoId=${lego.legoId}`;
 
   const legoName = document.createElement('div');
   legoName.className = 'legoName';
 
   const legoPrice = document.createElement('div');
   legoPrice.className = 'legoPrice';
-  legoPrice.id = `legoPrice${lego.kitId}`;
+  legoPrice.id = `legoPrice${lego.legoId}`;
   legoPrice.textContent = `£${lego.price}`;
   if (lego.price < 1) {
     // check if the price is less than £1, get rid of the first two characters which is 0 and point.
@@ -68,12 +69,12 @@ function htmlGridLayout(lego) {
 
   const legoNameLink = document.createElement('a');
   legoNameLink.className = 'legoNameLink';
-  legoNameLink.id = `legoLink${lego.kitId}`;
+  legoNameLink.id = `legoLink${lego.legoId}`;
   legoNameLink.textContent = `${lego.legoName}`;
-  legoNameLink.href = `kit.html?kitId=${lego.kitId}`;
+  legoNameLink.href = `kit.html?legoId=${lego.legoId}`;
 
   const createImg = document.createElement('img');
-  createImg.id = `image${lego.kitId}`;
+  createImg.id = `image${lego.legoId}`;
   createImg.src = `${lego.legoImage}`;
   createImg.alt = `#${lego.legoName}`;
 
@@ -96,5 +97,5 @@ async function fetchKits() {
 
 export async function kitslocalStorage() {
   const legos = await fetchKits();
-  localstorage.listeners(legos);
+  createBasket.listeners(legos);
 }

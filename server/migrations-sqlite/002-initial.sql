@@ -1,9 +1,9 @@
 CREATE TABLE kits (
-    kitId varchar(20) PRIMARY KEY,
+    legoId varchar(20) PRIMARY KEY,
     legoName text NOT NULL,
     category varchar(20) NOT NULL,
     legoImage text NOT NULL,
-    kitType varchar(20) NOT NULL,
+    legoType varchar(20) NOT NULL,
     color varchar(20) NOT NULL,
     price int NOT NULL,
     stock int NOT NULL,

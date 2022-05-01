@@ -30,7 +30,7 @@ app.get('/videos', asyncWrap(video));
 app.get('/auth-config', authConf);
 app.get('/uploads', design);
 app.put('/brick', asyncWrap(stock));
-app.post('/uploads', uploader.single('avatar'), express.json(), asyncWrap(upload));
+app.post('/bricks', uploader.single('src'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
 // wrap async function for express.js error handling
@@ -80,12 +80,12 @@ async function kits(req, res) {
 }
 
 async function kit(req, res) {
-  const kitId = await legoConfig.findKit(req.query.kitId);
-  if (!kitId) {
+  const legoId = await legoConfig.findKit(req.query.legoId);
+  if (!legoId) {
     res.status(404).send('No match for that brick.');
     return;
   }
-  res.json(kitId);
+  res.json(legoId);
 }
 
 async function video(req, res) {
@@ -107,7 +107,7 @@ async function design(req, res) {
 }
 
 async function upload(req, res) {
-  const newLego = await legoConfig.uploadLego(req.body, req.file);
+  const newLego = await legoConfig.addBrick(req.body, req.file);
   res.json(newLego);
 }
 

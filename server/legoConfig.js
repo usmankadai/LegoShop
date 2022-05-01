@@ -24,7 +24,7 @@ export async function listBricks() {
 
 export async function sort(sort) {
   const db = await dbConn;
-  console.log('config', sort);
+  console.log('sorting', sort);
   return db.all('SELECT * FROM legos WHERE sort LIKE ?', `%${sort}%`);
 }
 
@@ -39,7 +39,7 @@ export async function stock(currentStock) {
 
   const legoId = currentStock.legoId;
   const legoName = currentStock.legoName;
-  const category = currentStock.legoImage;
+  const category = currentStock.category;
   const legoImage = currentStock.legoImage;
   const brickType = currentStock.brickType;
   const sort = currentStock.sort;
@@ -58,47 +58,14 @@ export async function listKits() {
   return db.all('SELECT * FROM kits');
 }
 
-export async function findKit(kitId) {
+export async function findKit(legoId) {
   const db = await dbConn;
-  return db.get('SELECT * FROM kits WHERE kitId = ?', kitId);
-}
-
-// export async function brickImage() {
-//   const db = await dbConn;
-//   return db.all('SELECT legoId, legoImage FROM legos');
-// }
-
-// export async function kitImage() {
-//   const db = await dbConn;
-//   return db.all('SELECT kitId, legoImage FROM kits');
-// }
-
-export async function design() {
-  const db = await dbConn;
-  return db.all('SELECT * FROM upload');
+  return db.get('SELECT * FROM kits WHERE legoId = ?', legoId);
 }
 
 export async function video() {
   const db = await dbConn;
   return db.all('SELECT * FROM videos');
-}
-
-export async function uploadLego(legoId, legoName, instructions, file) {
-  let newFilename;
-  if (file) {
-    // we should first check that the file is actually an image
-    // move the file where we want it
-    const fileExt = file.mimetype.split('/')[1] || 'png';
-    newFilename = file.filename + '.' + fileExt;
-    await fs.renameAsync(file.path, path.join('client', 'images', newFilename));
-  }
-
-  const db = await dbConn;
-
-  // const legoId = uuid();
-  await db.run('INSERT INTO upload VALUES (?, ?, ?, ?)', [legoId, legoName, instructions, newFilename]);
-
-  return design();
 }
 
 export async function addBrick(brick, file) {
@@ -108,14 +75,15 @@ export async function addBrick(brick, file) {
     // move the file where we want it
     const fileExt = file.mimetype.split('/')[1] || 'png';
     newFilename = file.filename + '.' + fileExt;
-    await fs.renameAsync(file.path, path.join('client', 'images', newFilename));
+    await fs.renameAsync(file.path, path.join('client', 'images/bricks', newFilename));
   }
 
   const db = await dbConn;
   const legoId = uuid();
   const legoName = brick.legoName;
-  const category = brick.legoImage;
-  const legoImage = brick.legoImage;
+  const category = brick.category;
+  const legoImage = newFilename;
+  // const legoImage = brick.legoImage;
   const brickType = brick.brickType;
   const sort = brick.sort;
   const price = brick.price;
@@ -123,7 +91,7 @@ export async function addBrick(brick, file) {
   const cart = 0;
 
 
-  await db.run('INSERT INTO legos VALUES (?, ?, ?, ?)', [legoId, legoName, category, legoImage, brickType, sort, price, stock, cart]);
+  await db.run('INSERT INTO legos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [legoId, legoName, category, legoImage, brickType, sort, price, stock, cart]);
 
   return listBricks();
 }

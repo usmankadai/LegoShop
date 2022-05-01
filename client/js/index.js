@@ -1,15 +1,15 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
-import * as localstorage from './storage.js';
+import * as auth0 from './auth0.mjs';
+import * as createBasket from './createBasket.js';
 
 async function init() {
   home.execute();
   await auth0.executeAuth0();
-  localstorage.cartReloadPage();
   container();
   takeRandomBrick();
   takeRandomKit();
   takeRandomVideo();
+  createBasket.initializeBasket();
 }
 
 window.addEventListener('load', init);
@@ -123,7 +123,7 @@ function createKitElement(rand) {
   slideNumber.className = 'slide-number';
 
   const a = document.createElement('a');
-  a.href = `kit.html?kitId=${rand.kitId}`;
+  a.href = `kit.html?legoId=${rand.legoId}`;
 
   const img = document.createElement('img');
   img.className = 'slide-image';

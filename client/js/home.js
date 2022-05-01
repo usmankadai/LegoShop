@@ -101,7 +101,7 @@ function icons() {
   cartIcon.id = 'cart';
   cartIcon.href = '/cart.html';
   cartIcon.className = 'fas fa-shopping-cart';
-  cartIcon.textContent = '(0)';
+  cartIcon.textContent = '0';
 
   const userIcon = document.getElementById('icon2');
   userIcon.id = 'user';

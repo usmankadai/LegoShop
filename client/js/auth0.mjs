@@ -35,6 +35,8 @@ async function updateAuthUI() {
       uploadBrick.className = 'userIsAuthenticated';
     }
 
+    const deleteBrick = document.querySelectorAll('.deleteBrick');
+    deleteBrick.className = 'userIsAuthenticated';
 
     const design = document.querySelector('#design');
     design.className = 'userIsAuthenticated';

@@ -1,7 +1,7 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
+import * as auth0 from './auth0.mjs';
 import * as similarity from './individualBrick&Kit.js';
-import * as localstorage from './storage.js';
+import * as createBasket from './createBasket.js';
 
 
 async function init() {
@@ -9,17 +9,17 @@ async function init() {
   await home.execute();
   await auth0.executeAuth0();
   await fetchKits();
-  localstorage.cartReloadPage();
+  createBasket.initializeBasket();
 }
 
 window.addEventListener('load', init);
 
 async function fetchKit() {
-  let kitId = window.location.search;
-  kitId = kitId.slice(1);
-  kitId = kitId.split('=');
-  kitId = kitId[1];
-  const response = await fetch(`/kit?kitId=${kitId}`);
+  let legoId = window.location.search;
+  legoId = legoId.slice(1);
+  legoId = legoId.split('=');
+  legoId = legoId[1];
+  const response = await fetch(`/kit?legoId=${legoId}`);
   return response.json();
 }
 
@@ -31,5 +31,5 @@ async function kit() {
 
 async function fetchKits() {
   const legos = await fetchKit();
-  localstorage.setupListeners(legos);
+  createBasket.setupListeners(legos);
 }

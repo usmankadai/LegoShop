@@ -1,6 +1,5 @@
 import * as home from './home.js';
-import * as auth0 from './auth0.js';
-import * as localstorage from './storage.js';
+import * as auth0 from './auth0.mjs';
 
 function checkValidity(e) {
   e.target.classList.toggle('invalid',
@@ -18,7 +17,7 @@ async function init() {
   document.querySelector('#successfulPayment').addEventListener('click', clearStorage);
   home.execute();
   await auth0.executeAuth0();
-  localstorage.cartReloadPage();
+  // localstorage.cartReloadPage();
   for (const input of document.querySelectorAll('input')) {
     input.addEventListener('blur', checkValidity);
   }

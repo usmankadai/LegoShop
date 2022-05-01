@@ -1,13 +1,13 @@
 CREATE TABLE legos (
     legoId varchar(20) PRIMARY KEY,
     legoName text NOT NULL,
-    category varchar(20) NOT NULL,
-    legoImage text NOT NULL,
-    brickType varchar(20) NOT NULL,
-    sort varchar(20) NOT NULL,
+    category varchar(20),
+    legoImage text,
+    brickType varchar(20),
+    sort varchar(20),
     price int NOT NULL,
-    stock int NOT NULL,
-    cart int NOT NULL
+    stock int,
+    cart int
 );
 
 INSERT INTO legos VALUES
