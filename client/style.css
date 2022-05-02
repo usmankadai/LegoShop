@@ -398,10 +398,10 @@ header .loginDiv {
     margin: 5rem 1rem 5rem 0;
     font-weight: bold;
 }
-.emptyCart, .deleteBrick{
+.emptyCart{
     display: none;
 }
-.continueToCheckout{
+.continueToCheckout, .clearBasket{
     text-align: center;
     display: flex;
     justify-content: end;
@@ -428,11 +428,16 @@ header .loginDiv {
     text-decoration: underline;
 }
 
+.deleteBrick {
+    color: red;
+    text-decoration: underline;
+}
+
 .tab#design, .tab#wishlist{
     display: none;
 }
 
-.userIsAuthenticated{
+.userIsAuthenticated, .deleteBrick{
     display: relative;
 }
 

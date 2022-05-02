@@ -8,18 +8,25 @@ async function init() {
   emptyCart();
   await createBasket.initializeCart();
   checkOut();
+  removefromCart();
 }
 
 window.addEventListener('load', init);
 
 
 function emptyCart() {
-  const basket = localStorage.getItem('basket');
+  const totalAmount = localStorage.getItem('totalAmount');
 
   const total = document.querySelector('.total');
-  total.textContent = 'Total: £0';
+
+  total.textContent = `Total: £${totalAmount}`;
+
+  const basket = localStorage.getItem('basket');
+
   if (basket === null) {
     const continueToCheckout = document.querySelector('.continueToCheckout');
+    const clearBasket = document.querySelector('.clearBasket');
+    clearBasket.className = 'emptyCart';
     continueToCheckout.className = 'emptyCart';
     total.className = 'emptyCart';
 
@@ -44,6 +51,22 @@ function emptyCart() {
 
     usefulLinks.append(homeLink, brickLink, kitLink);
     cartStyle.append(usefulLinks);
+  }
+}
+
+function removefromCart() {
+  const remove = document.querySelectorAll('.remove');
+  const cartDiv = document.querySelectorAll('.cartDiv');
+
+  const cartQuantity = localStorage.getItem('cartQuantity');
+  let basket = localStorage.getItem('basket');
+  // basket = JSON.parse(basket);
+  const totalAmount = localStorage.getItem('totalAmount');
+
+  for (let i = 0; i < remove.length; i++) {
+    remove[i].addEventListener('click', () => {
+      console.log('working');
+    });
   }
 }
 

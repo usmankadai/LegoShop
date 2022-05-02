@@ -1,3 +1,5 @@
+// this file creates basket and localStorage
+
 export let basket;
 
 export function setupListeners(legos) {

@@ -33,10 +33,10 @@ async function updateAuthUI() {
     if (window.location.href === 'http://localhost:8080/bricks.html') {
       const uploadBrick = document.querySelector('.uploadBrick');
       uploadBrick.className = 'userIsAuthenticated';
+      const deleteBrick = document.querySelectorAll('.deleteBrick');
+      deleteBrick.className = 'deleteBrick';
     }
 
-    const deleteBrick = document.querySelectorAll('.deleteBrick');
-    deleteBrick.className = 'userIsAuthenticated';
 
     const design = document.querySelector('#design');
     design.className = 'userIsAuthenticated';

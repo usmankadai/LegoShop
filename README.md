@@ -39,7 +39,7 @@ need to explain how a user can't see wishlist, design and checkout button
 
 * /bricks
   * GET: retrieve all the bricks from the database.
-  * PUT:
+  * POST: upload a brick
 * /bricks/:sort
   * GET: retrieves list of sorted bricks
 * /brick
@@ -67,6 +67,7 @@ need to explain how a user can't see wishlist, design and checkout button
 |Reason for including only the first letter of the name as profile| I realised when using auth0 when i login with google i can retrieve the username as we were taught in the authentication lecture. But whenever i login using email as password i.e. as a registered auth0 user it returns undefined hence, i decided to just get the first letter of just the email address and capitalize it.|
 |why use 404.html for redirecting URL| If for example a user enters a wrong URL it should display a well designed error message. This can help users identify if a link is valid or not.|
 |Reason for using SQLite||
+|LocalStorage| There were two different approach i did for storing the bricks in the localstorage. The first approach was to store the whole brick object in the localstorage and create a column in the database and set it to zero then use that to count number of the brick on each addToCart. ![localstorage alternative considered](./client/images/localstorage1.png) But, it looks inefficient as there is no need of storing everything about a brick to the localstorage. The second approach was to store the id of the brick and it's quantity to the localstorage. This is efficient because we can access all the information about a brick from storing the id only. ![localstorage alternative considered](./client/images/localstorage2.png)|
 
 ## Future Development
 
@@ -89,13 +90,16 @@ also, for the customer i assume they should have all the features required to ch
 
 ### Reference List
 
-* LEGO Database Download <https://rebrickable.com/downloads/>
-* RegEx for matching UK Postcodes
-<https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes>
+* *LEGO CatalogDatabase Download* (n.d.). Rebrickable. <https://rebrickable.com/downloads/>
 
-*
-*
-*
+Copyright information:
+![rebrickable](./client/images/rebrickable.png)
+
+* *RegEx for matching UK Postcodes*. (2013, June 25). Stackoverflow. <https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes>
+
+* <https://github.com/portsoc/ws_api>
+* <https://github.com/portsoc/staged-simple-message-board>
+* 
 *
 *
 *

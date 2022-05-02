@@ -73,7 +73,7 @@ export function htmlGridLayout(lego) {
 
   const removeBrick = document.createElement('div');
   removeBrick.textContent = 'Delete';
-  removeBrick.className = 'deleteBrick';
+  removeBrick.className = 'deleteBrick emptyCart';
 
   const legoNameLink = document.createElement('a');
   legoNameLink.className = 'legoNameLink';

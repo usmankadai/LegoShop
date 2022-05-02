@@ -33,25 +33,25 @@ export async function findBrick(legoId) {
   return db.get('SELECT * FROM legos WHERE legoId = ?', legoId);
 }
 
-export async function stock(currentStock) {
-  const db = await dbConn;
-  console.log(currentStock);
+// export async function stock(currentStock) {
+//   const db = await dbConn;
+//   console.log(currentStock);
 
-  const legoId = currentStock.legoId;
-  const legoName = currentStock.legoName;
-  const category = currentStock.category;
-  const legoImage = currentStock.legoImage;
-  const brickType = currentStock.brickType;
-  const sort = currentStock.sort;
-  const price = currentStock.price;
-  const stock = currentStock.stock;
-  const cart = 0;
+//   const legoId = currentStock.legoId;
+//   const legoName = currentStock.legoName;
+//   const category = currentStock.category;
+//   const legoImage = currentStock.legoImage;
+//   const brickType = currentStock.brickType;
+//   const sort = currentStock.sort;
+//   const price = currentStock.price;
+//   const stock = currentStock.stock;
+//   const cart = 0;
 
-  const update = await db.run('UPDATE legos SET legoName = ? , category = ? , legoImage = ? , brickType = ? , sort = ? , price = ? , stock = ? , cart = ? WHERE legoId = ? , FROM legos', [legoName, category, legoImage, brickType, sort, price, stock, cart, legoId]);
-  // if nothing was updated, the ID doesn't exist
-  if (update.changes === 0) throw new Error('message not found');
-  return findBrick(legoId);
-}
+//   const update = await db.run('UPDATE legos SET legoName = ? , category = ? , legoImage = ? , brickType = ? , sort = ? , price = ? , stock = ? , cart = ? WHERE legoId = ? , FROM legos', [legoName, category, legoImage, brickType, sort, price, stock, cart, legoId]);
+//   // if nothing was updated, the ID doesn't exist
+//   if (update.changes === 0) throw new Error('message not found');
+//   return findBrick(legoId);
+// }
 
 export async function listKits() {
   const db = await dbConn;
@@ -82,8 +82,7 @@ export async function addBrick(brick, file) {
   const legoId = uuid();
   const legoName = brick.legoName;
   const category = brick.category;
-  const legoImage = newFilename;
-  // const legoImage = brick.legoImage;
+  const legoImage = `images/bricks/${newFilename}`;
   const brickType = brick.brickType;
   const sort = brick.sort;
   const price = brick.price;
