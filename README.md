@@ -69,7 +69,16 @@ need to explain how a user can't see wishlist, design and checkout button
 |Reason for using SQLite||
 |LocalStorage| There were two different approach i did for storing the bricks in the localstorage. The first approach was to store the whole brick object in the localstorage and create a column in the database and set it to zero then use that to count number of the brick on each addToCart. ![localstorage alternative considered](./client/images/localstorage1.png) But, it looks inefficient as there is no need of storing everything about a brick to the localstorage. The second approach was to store the id of the brick and it's quantity to the localstorage. This is efficient because we can access all the information about a brick from storing the id only. ![localstorage alternative considered](./client/images/localstorage2.png)|
 
-## Future Development
+### Assumptions
+
+i am assuming that the person who logs in is an administrator. So they get the luxury to upload a new brick.
+also, for the customer i assume they should have all the features required to checkout and buy a product without being forced to login.
+
+## Known Issues and Future improvements
+
+* The sorting of the bricks works properly but can be improved. It has been explained above in reasons for specific paradigm's section.
+
+* Auth0 redirecting back to homepage. This is bad for usability, if there is time in the future i will check the auth0 library properly so that if a user logs in, it should redirect to the page they were in.
 
 * Due to the lack of time, some features i desired to achieve were not implemented. If there was time i would have implemented search for inventories using array.filter to create a new array of inventories that matches the input.value of being entered.
 
@@ -79,27 +88,19 @@ need to explain how a user can't see wishlist, design and checkout button
 
 * Continue as guest:
 
-### Assumptions
-
-i am assuming that the person who logs in is an administrator. So they get the luxury to upload a new brick.
-also, for the customer i assume they should have all the features required to checkout and buy a product without being forced to login.
-
-### Known Issues
-
-* The sorting of the bricks works properly but can be improved. It has been explained above in reasons for specific paradigm's section.
-
 ### Reference List
 
-* *LEGO CatalogDatabase Download* (n.d.). Rebrickable. <https://rebrickable.com/downloads/>
+* *LEGO CatalogDatabase Download*. (n.d.). Rebrickable. <https://rebrickable.com/downloads/>
 
 Copyright information:
 ![rebrickable](./client/images/rebrickable.png)
 
 * *RegEx for matching UK Postcodes*. (2013, June 25). Stackoverflow. <https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes>
 
-* <https://github.com/portsoc/ws_api>
+* *ws_api*. (2019, November 26). Github. <https://github.com/portsoc/ws_api>
 * <https://github.com/portsoc/staged-simple-message-board>
-* 
+* *simple-staged-message-board*. (2022, January 17). Github. <https://github.com/portsoc/staged-simple-message-board>
+
 *
 *
 *

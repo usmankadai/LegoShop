@@ -75,7 +75,12 @@ export async function addBrick(brick, file) {
     // move the file where we want it
     const fileExt = file.mimetype.split('/')[1] || 'png';
     newFilename = file.filename + '.' + fileExt;
-    await fs.renameAsync(file.path, path.join('client', 'images/bricks', newFilename));
+
+    try {
+      await fs.renameAsync(file.path, path.join('client', 'images/bricks', newFilename));
+    } catch (e) {
+      console.error('failed to move incoming file', e);
+    }
   }
 
   const db = await dbConn;
