@@ -19,7 +19,7 @@ function templateHeader() {
 
   let nav = 0;
   const selectNav = document.querySelector('.tabs');
-  for (let i = 1; i <= 5; i += 1) {
+  for (let i = 1; i <= 4; i += 1) {
     const log = document.createElement('a');
     nav++;
     log.id = `navButton${nav}`;
@@ -44,12 +44,7 @@ function templateHeader() {
   navButton3.href = '/kits.html';
   navButton3.textContent = 'Kits';
 
-  const navButton4 = document.getElementById('navButton4');
-  navButton4.id = 'design';
-  navButton4.href = '/designKit.html';
-  navButton4.textContent = 'Design Kit';
-
-  const navButton5 = document.getElementById('navButton5');
+  const navButton5 = document.getElementById('navButton4');
   navButton5.id = 'wishlist';
   navButton5.href = '/wishlist.html';
   navButton5.textContent = 'Wishlist';

@@ -15,13 +15,15 @@
   * ```npm i uuid```
   * ```npm install --save multer```
   * ```npm i uuid-random```
+  * ```npm i --save-dev jest```
+  * ```npm i node-fetch```
 
 After installing all the dependencies to start the server, it can be done by running:
 
 * ```npm start``` or
 * ```nodemon server/svr.js```
 
-## Key Features and Functionalilty (need to discuss all app.put)
+## Key Features and Functionalilty
 
 need to explain how a user can't see wishlist, design and checkout button
 
@@ -29,6 +31,7 @@ need to explain how a user can't see wishlist, design and checkout button
 
 * list all bricks, sorted bricks, kits and videos from the database.
 * specify a brick or kit from the database.
+* Updates stocklevels
 * see below
 
 ### Management
@@ -44,6 +47,8 @@ need to explain how a user can't see wishlist, design and checkout button
   * GET: retrieves list of sorted bricks
 * /brick
   * GET: retrieve a brick from the database.
+* /brick/:basket
+  * PUT: updates the stocklevels in the database after a customer has made a purchase.
 * /kits
   * GET: retrieve all the kits from the database.
 * /kit
@@ -54,6 +59,9 @@ need to explain how a user can't see wishlist, design and checkout button
     Serves auth0 configuration file
 * redirect
     Handles any URL error. It redirects to 404error page.
+  
+## Testing
+
 
 ## Reasons for a specific paradigm
 
@@ -68,6 +76,7 @@ need to explain how a user can't see wishlist, design and checkout button
 |why use 404.html for redirecting URL| If for example a user enters a wrong URL it should display a well designed error message. This can help users identify if a link is valid or not.|
 |Reason for using SQLite||
 |LocalStorage| There were two different approach i did for storing the bricks in the localstorage. The first approach was to store the whole brick object in the localstorage and create a column in the database and set it to zero then use that to count number of the brick on each addToCart. ![localstorage alternative considered](./client/images/localstorage1.png) But, it looks inefficient as there is no need of storing everything about a brick to the localstorage. The second approach was to store the id of the brick and it's quantity to the localstorage. This is efficient because we can access all the information about a brick from storing the id only. ![localstorage alternative considered](./client/images/localstorage2.png)|
+|Jest||
 
 ### Assumptions
 
@@ -82,11 +91,13 @@ also, for the customer i assume they should have all the features required to ch
 
 * Due to the lack of time, some features i desired to achieve were not implemented. If there was time i would have implemented search for inventories using array.filter to create a new array of inventories that matches the input.value of being entered.
 
-* Wishlist: A new database file using HTTP request of POST. I already implemented that only if a user is logged in they can see the wish list tab. If i had created a database file for wish list, it will get a handler on the wish list button then, forEach lego being added to wish list it POST to the database. And also will display the OBJECT.value of that database file.
+* couldn't figure out how to implement administrator authentication. At the moment any person who could login has administrator rights.
 
-* Design Kit:
+* If there was time similar to how i updload brick i would have allow the admin to delete bricks. Refrence to how it was done in wp_api.
 
-* Continue as guest:
+* Wishlist: A new database file using HTTP request of POST. If i had created a database file for wish list, it will get a handler on the wish list button then, forEach lego being added to wish list it POST to the database. And also will display the OBJECT.value of that database file.
+
+* Orders:
 
 ### Reference List
 
@@ -100,8 +111,3 @@ Copyright information:
 * *ws_api*. (2019, November 26). Github. <https://github.com/portsoc/ws_api>
 * <https://github.com/portsoc/staged-simple-message-board>
 * *simple-staged-message-board*. (2022, January 17). Github. <https://github.com/portsoc/staged-simple-message-board>
-
-*
-*
-*
-*

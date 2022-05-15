@@ -7,7 +7,7 @@ import multer from 'multer';
 
 
 const port = 8080;
-const app = express();
+export const app = express();
 
 const uploader = multer({
   dest: 'upload',
@@ -29,7 +29,7 @@ app.get('/kit', asyncWrap(kit));
 app.get('/videos', asyncWrap(video));
 app.get('/auth-config', authConf);
 // app.get('/uploads', design);
-// app.put('/brick', asyncWrap(stock));
+app.put('/brick/:basket', asyncWrap(stock));
 app.post('/bricks', uploader.single('legoImage'), express.json(), asyncWrap(upload));
 app.use(redirect);
 
@@ -41,10 +41,14 @@ function asyncWrap(f) {
   };
 }
 
-// async function stock(req, res) {
-//   const stock = await legoConfig.stock(req.body);
-//   res.json(stock);
-// }
+async function stock(req, res) {
+  try {
+    const stock = await legoConfig.stock(req);
+    res.json(stock);
+  } catch (e) {
+    error(res, e);
+  }
+}
 
 async function bricks(req, res) {
   try {
@@ -98,14 +102,6 @@ async function video(req, res) {
   res.json(video);
 }
 
-// async function design(req, res) {
-//   const upload = await legoConfig.design();
-//   if (!upload) {
-//     res.status(404).send('No match for that link.');
-//     return;
-//   }
-//   res.json(upload);
-// }
 
 async function upload(req, res) {
   try {

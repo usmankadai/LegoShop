@@ -8,16 +8,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
     <script src="../js/wishList.js" type = "module"></script>
-    <title>Kit Design</title>
+    <title>Wishlist</title>
 </head>
 <body>
     <div class = "grid">
         <header></header>
         <main id = "designPage">
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
-            <h1>Wishlist</h1>
+            <h1 class = "wishlistHeader">Wishlist</h1>
+            <form class = 'form'>
+                <div class = "cartStyle">
+                    <div class = "legoInCart">Lego</div>
+                    <div>Qty</div>
+                    <div>Price</div>
+                    <div>Subtotal</div>
+                </div>
+                <div class = "legoBasket"></div>
+                <div class = "emptyMessage"></div>
+                <div class = "total"></div>
+                <input class = "clearBasket" type=button value='clear wishList'>
+            </form>
         </main>
         <footer></footer>
     </div>

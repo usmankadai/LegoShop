@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server/svr.js",
-    "test": "http-server"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "author": "Usman Muhammad Kadai",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "express": "^4.17.3",
     "fs": "0.0.1-security",
     "multer": "^1.4.4",
+    "node-fetch": "^3.2.4",
     "path": "^0.12.7",
     "sqlite": "^3.0.6",
     "util": "^0.12.4",
@@ -29,7 +31,8 @@
   },
   "devDependencies": {
     "eslint": "^8.7.0",
-    "eslint-config-portsoc": "^0.8.2"
+    "eslint-config-portsoc": "^0.8.2",
+    "jest": "^28.1.0"
   },
   "repository": {
     "type": "git",

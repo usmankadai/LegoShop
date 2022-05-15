@@ -398,7 +398,7 @@ header .loginDiv {
     margin: 5rem 1rem 5rem 0;
     font-weight: bold;
 }
-.emptyCart{
+.emptyCart, .empty{
     display: none;
 }
 .continueToCheckout, .clearBasket{
@@ -433,9 +433,13 @@ header .loginDiv {
     text-decoration: underline;
 }
 
-.tab#design, .tab#wishlist{
+/* .tab#design, .tab#wishlist{
     display: none;
-}
+} */
+
+/* .emptyMessage{
+    display: none;
+} */
 
 .userIsAuthenticated, .deleteBrick{
     display: relative;
@@ -446,7 +450,7 @@ header .loginDiv {
     margin: 5rem;
 }
 
-.featured{
+.featured, .wishlistHeader{
     margin-top: 5rem;
 }
 

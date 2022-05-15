@@ -33,25 +33,25 @@ export async function findBrick(legoId) {
   return db.get('SELECT * FROM legos WHERE legoId = ?', legoId);
 }
 
-// export async function stock(currentStock) {
-//   const db = await dbConn;
-//   console.log(currentStock);
-
-//   const legoId = currentStock.legoId;
-//   const legoName = currentStock.legoName;
-//   const category = currentStock.category;
-//   const legoImage = currentStock.legoImage;
-//   const brickType = currentStock.brickType;
-//   const sort = currentStock.sort;
-//   const price = currentStock.price;
-//   const stock = currentStock.stock;
-//   const cart = 0;
-
-//   const update = await db.run('UPDATE legos SET legoName = ? , category = ? , legoImage = ? , brickType = ? , sort = ? , price = ? , stock = ? , cart = ? WHERE legoId = ? , FROM legos', [legoName, category, legoImage, brickType, sort, price, stock, cart, legoId]);
-//   // if nothing was updated, the ID doesn't exist
-//   if (update.changes === 0) throw new Error('message not found');
-//   return findBrick(legoId);
-// }
+export async function stock(req) {
+  const db = await dbConn;
+  const basket = new Map(JSON.parse(req.params.basket));
+  for (const item of basket) {
+    const legoId = item[0];
+    const quantity = item[1];
+    const lego = await findBrick(legoId);
+    const currentStock = lego.stock;
+    const updatedStock = currentStock - quantity;
+    if (updatedStock < 0) {
+      continue;
+    }
+    const update = await db.run('UPDATE legos SET stock = ? WHERE legoId = ?', [updatedStock, legoId]);
+    if (update.changes === 0) throw new Error('message not found');
+    console.log(`Old: ${currentStock}, new: ${updatedStock}`);
+  }
+  // if nothing was updated, the ID doesn't exist
+  return true;
+}
 
 export async function listKits() {
   const db = await dbConn;

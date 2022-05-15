@@ -94,7 +94,7 @@ function cartHtmlElement(bricks, kits) {
     createDiv.className = 'cartDiv';
     const createImg = document.createElement('img');
     createImg.src = `${lego.legoImage}`;
-    createImg.alt = `${lego.legoName}`;
+    createImg.alt = `${lego.legoId}`;
 
     const remove = document.createElement('div');
     remove.textContent = 'Delete';
@@ -130,14 +130,14 @@ function cartHtmlElement(bricks, kits) {
   localStorage.totalQuantity = cartQuantity;
 }
 
-function addButton() {
-  const increase = document.querySelectorAll('.increase');
-  for (let i = 0; i < increase.length; i++) {
-    increase[i].addEventListener('click', () => {
-      console.log('clicked');
-    });
-  }
-}
+// function addButton() {
+//   const increase = document.querySelectorAll('.increase');
+//   for (let i = 0; i < increase.length; i++) {
+//     increase[i].addEventListener('click', () => {
+//       console.log('clicked');
+//     });
+//   }
+// }
 
 function totalAmount(lego) {
   let totalAmount = localStorage.getItem('totalAmount');
@@ -152,8 +152,26 @@ function totalAmount(lego) {
   }
 }
 
+export function listener() {
+  document.querySelector('.continueToCheckout').addEventListener('click', update);
+}
+
+async function update() {
+  console.log('updated');
+  const cart = JSON.stringify(Array.from(basket));
+  console.log(cart);
+  const fetchOptions = {
+    credentials: 'same-origin',
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+    },
+  };
+  const response = await fetch(`/brick/${cart}`, fetchOptions);
+  console.log(response);
+}
 
 export function initializeBasket() {
   createBasket();
-  addButton();
+  // addButton();
 }
