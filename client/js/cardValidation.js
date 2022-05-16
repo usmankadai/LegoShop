@@ -9,7 +9,9 @@ function checkValidity(e) {
 }
 
 function clearStorage() {
-  localStorage.clear();
+  localStorage.removeItem('basket');
+  localStorage.removeItem('totalAmount');
+  localStorage.removeItem('totalQuantity');
 }
 
 async function init() {
@@ -23,6 +25,7 @@ async function init() {
   for (const input of document.querySelectorAll('input')) {
     input.addEventListener('blur', checkValidity);
   }
+  createBasket.listener();
 }
 
 window.addEventListener('load', init);

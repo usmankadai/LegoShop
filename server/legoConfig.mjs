@@ -43,6 +43,7 @@ export async function stock(req) {
     const currentStock = lego.stock;
     const updatedStock = currentStock - quantity;
     if (updatedStock < 0) {
+      console.log('Order not placed. Item in the cart is more than what we have in stock');
       continue;
     }
     const update = await db.run('UPDATE legos SET stock = ? WHERE legoId = ?', [updatedStock, legoId]);

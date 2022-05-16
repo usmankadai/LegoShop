@@ -398,10 +398,10 @@ header .loginDiv {
     margin: 5rem 1rem 5rem 0;
     font-weight: bold;
 }
-.emptyCart, .empty{
+.emptyCart{
     display: none;
 }
-.continueToCheckout, .clearBasket{
+.continueToCheckout, .clearBasket, .clearWishlist{
     text-align: center;
     display: flex;
     justify-content: end;

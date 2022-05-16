@@ -13,6 +13,7 @@ let auth0 = null;
 
 async function initializeAuth0Client() {
   const config = await fetchAuthConfig();
+  // eslint-disable-next-line no-undef
   auth0 = await createAuth0Client({
     domain: config.domain,
     client_id: config.clientId,
@@ -36,13 +37,6 @@ async function updateAuthUI() {
       const deleteBrick = document.querySelectorAll('.deleteBrick');
       deleteBrick.className = 'deleteBrick';
     }
-
-
-    const design = document.querySelector('#design');
-    design.className = 'userIsAuthenticated';
-
-    const wishlist = document.querySelector('#wishlist');
-    wishlist.className = 'fas fa-heart userIsAuthenticated';
 
     const user = await auth0.getUser();
     console.log(user);

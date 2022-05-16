@@ -27,16 +27,22 @@ After installing all the dependencies to start the server, it can be done by run
 
 need to explain how a user can't see wishlist, design and checkout button
 
+* filter by colour, type, size (there was no time that is why it wasn't implemented in the kits page). It only works in the bricks page
+* Each brick and kit has its own web page with a unique URL
+* Shopping cart
+* Simulated checkout and updating stock levels after you enter payment information
+* Maintaining an inventory of items for sale, and stock levels.
+* Top picks for the customer
+* Kits and bricks coming soon with a small advert
+* Admin can upload a new brick only if logged in via auth0 (there was no time that is why it wasn't implemented in the kits page)
+* customers can add items to their wishlist
+
 ### API
 
 * list all bricks, sorted bricks, kits and videos from the database.
 * specify a brick or kit from the database.
 * Updates stocklevels
 * see below
-
-### Management
-
-* This is managed in git(private repo).
 
 ## API and Documentation
 
@@ -62,6 +68,9 @@ need to explain how a user can't see wishlist, design and checkout button
   
 ## Testing
 
+### Management
+
+* This is managed in git(private repo).
 
 ## Reasons for a specific paradigm
 
@@ -89,13 +98,13 @@ also, for the customer i assume they should have all the features required to ch
 
 * Auth0 redirecting back to homepage. This is bad for usability, if there is time in the future i will check the auth0 library properly so that if a user logs in, it should redirect to the page they were in.
 
-* Due to the lack of time, some features i desired to achieve were not implemented. If there was time i would have implemented search for inventories using array.filter to create a new array of inventories that matches the input.value of being entered.
+* Due to the lack of time, some features i desired to achieve were not implemented. If there was time i would have implemented search for inventories using array.filter to create a new array of inventories that matches the input.value being entered.
 
 * couldn't figure out how to implement administrator authentication. At the moment any person who could login has administrator rights.
 
 * If there was time similar to how i updload brick i would have allow the admin to delete bricks. Refrence to how it was done in wp_api.
 
-* Wishlist: A new database file using HTTP request of POST. If i had created a database file for wish list, it will get a handler on the wish list button then, forEach lego being added to wish list it POST to the database. And also will display the OBJECT.value of that database file.
+* Wishlist: A new database file using HTTP request of POST. If i had created a database file for wish list, it will get a handler on the wish list button then, forEach lego being added to wish list it POST to the database. And also will display the OBJECT.value of that database file. At the moment the wishlist is being stored in the localStorage.
 
 * Orders:
 

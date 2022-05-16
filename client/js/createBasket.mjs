@@ -46,7 +46,6 @@ export function saveBrick(lego) {
     localStorage.totalQuantity = totalQuantity;
   } else {
     basket.set(lego.legoId, 1);
-    // localStorage.totalQuantity += 1;
     totalQuantity += 1;
     localStorage.totalQuantity = totalQuantity;
   }
@@ -117,11 +116,9 @@ function cartHtmlElement(bricks, kits) {
     const legoPrice = document.createElement('div');
     legoPrice.textContent = `£${lego.price}`;
 
-    const subTotal = document.createElement('div');
-    subTotal.textContent = `£${lego.price * parseInt(quantity)}`;
 
     cart.append(decrease, quantityDOM, increase, remove);
-    createDiv.append(createImg, cart, legoPrice, subTotal);
+    createDiv.append(createImg, cart, legoPrice);
     legoBasket.append(createDiv);
     cartQuantity += parseInt(quantity);
   }
@@ -130,14 +127,6 @@ function cartHtmlElement(bricks, kits) {
   localStorage.totalQuantity = cartQuantity;
 }
 
-// function addButton() {
-//   const increase = document.querySelectorAll('.increase');
-//   for (let i = 0; i < increase.length; i++) {
-//     increase[i].addEventListener('click', () => {
-//       console.log('clicked');
-//     });
-//   }
-// }
 
 function totalAmount(lego) {
   let totalAmount = localStorage.getItem('totalAmount');
@@ -153,7 +142,7 @@ function totalAmount(lego) {
 }
 
 export function listener() {
-  document.querySelector('.continueToCheckout').addEventListener('click', update);
+  document.querySelector('#successfulPayment').addEventListener('click', update);
 }
 
 async function update() {
@@ -173,5 +162,4 @@ async function update() {
 
 export function initializeBasket() {
   createBasket();
-  // addButton();
 }

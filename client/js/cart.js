@@ -1,75 +1,187 @@
 import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
 import * as createBasket from './createBasket.mjs';
-// import * as updatedb from './updatedb.mjs';
 
 async function init() {
   home.execute();
   await auth0.executeAuth0();
   isemptyCart();
   await createBasket.initializeCart();
-  createBasket.listener();
-  // checkOut();
   removefromCart();
   increaseItem();
   decreaseItem();
-  // updatedb.listener();
-  // emptyCart();
+  fetchBricks();
+  emptyCart();
+  checkOut();
 }
 
 window.addEventListener('load', init);
 
-
 function isemptyCart() {
   const totalAmount = localStorage.getItem('totalAmount');
-
   const total = document.querySelector('.total');
-
   total.textContent = `Total: £${totalAmount}`;
-
   const clear = document.querySelector('.clearBasket');
-
   clear.addEventListener('click', () => {
-    const cart = document.querySelector('.cartStyle');
-    const total = document.querySelector('.total');
-    const clear = document.querySelector('.clearBasket');
-    const checkout = document.querySelector('.continueToCheckout');
-
-    checkout.className = 'emptyCart';
-    clear.className = 'emptyCart';
-    total.className = 'emptyCart';
-    cart.className = 'emptyCart';
     const items = document.querySelectorAll('.cartDiv');
+    const checkout = document.querySelector('.continueToCheckout');
+    const cartQuantityDOM = document.querySelector('#cart');
     localStorage.removeItem('basket');
     localStorage.removeItem('totalAmount');
     localStorage.removeItem('totalQuantity');
     for (const item of items) {
       item.remove();
+      checkout.remove();
+      clear.remove();
+      total.className = 'emptyCart total';
+      emptyCart();
     }
+    cartQuantityDOM.textContent = 0;
   });
+}
 
+async function removefromCart() {
+  const legos = await fetchBricks();
+  const basket = createBasket.basket;
+  let remove = document.querySelectorAll('.remove');
+  for (let i = 0; i < remove.length; i++) {
+    remove[i].addEventListener('click', (e) => {
+      const total = parseInt(localStorage.getItem('totalAmount'));
+      const totalDOM = document.querySelector('.total');
+      const item = e.target.parentElement.parentElement;
+      const itemID = item.querySelector('img').alt;
+      const quantity = basket.get(itemID);
+      const lego = legos.find(({ legoId }) => legoId === itemID);
+      const legoPrice = parseInt(lego.price);
+      const newTotal = total - (legoPrice * quantity);
+      const totalQuantity = parseInt(localStorage.getItem('totalQuantity'));
+      const cartQuantityDOM = document.querySelector('#cart');
+      totalDOM.textContent = `Total : £${newTotal}`;
+      e.target.parentElement.parentElement.remove();
+      remove = document.querySelectorAll('.remove');
+      if (remove.length < 1) {
+        const form = document.querySelector('.cartStyle');
+        while (form.firstChild) {
+          form.removeChild(form.lastChild);
+        }
+        const total = document.querySelector('.total');
+        const checkout = document.querySelector('.continueToCheckout');
+        const clearBasket = document.querySelector('.clearBasket');
+        checkout.style.visibility = 'hidden';
+        clearBasket.style.visibility = 'hidden';
+        total.style.visibility = 'hidden';
+        localStorage.removeItem('basket');
+        localStorage.removeItem('totalAmount');
+        localStorage.removeItem('totalQuantity');
+        emptyCart();
+      }
+      basket.delete(itemID);
+      localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
+      localStorage.setItem('totalAmount', newTotal);
+      localStorage.setItem('totalQuantity', totalQuantity - quantity);
+      cartQuantityDOM.textContent = totalQuantity - quantity;
+    });
+  }
+}
+
+async function fetchBricks() {
+  const response = await fetch('/bricks', {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const legos = await response.json();
+  return legos;
+}
+
+async function increaseItem() {
+  console.log(createBasket.basket);
+  const legos = await fetchBricks();
+  const increase = document.querySelectorAll('.increase');
+  for (let i = 0; i < increase.length; i++) {
+    increase[i].addEventListener('click', (e) => {
+      let total = parseInt(localStorage.getItem('totalAmount'));
+      const totalDOM = document.querySelector('.total');
+      const cartDiv = document.querySelectorAll('.cartDiv');
+      const basket = createBasket.basket;
+      const item = e.target.parentElement.parentElement;
+      const itemID = item.querySelector('img').alt;
+      const lego = legos.find(({ legoId }) => legoId === itemID);
+      const legoPrice = parseInt(lego.price);
+      let totalQuantity = parseInt(localStorage.getItem('totalQuantity'));
+      const cartQuantityDOM = document.querySelector('#cart');
+      let quantity = basket.get(itemID);
+      const newTotal = total + legoPrice;
+      const qty = increase[i].parentElement.querySelector('span');
+      let id = increase[i].parentElement.previousElementSibling;
+      id = cartDiv[i].firstChild.alt;
+      console.log(id);
+      quantity += 1;
+      totalQuantity += 1;
+      total += lego.price;
+      basket.set(id, quantity);
+      totalDOM.textContent = `Total : £${total}`;
+      qty.textContent = quantity;
+      localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
+      localStorage.setItem('totalAmount', newTotal);
+      localStorage.setItem('totalQuantity', totalQuantity);
+      cartQuantityDOM.textContent = totalQuantity;
+    });
+  }
+}
+
+async function decreaseItem() {
+  console.log(createBasket.basket);
+  const legos = await fetchBricks();
+  const decrease = document.querySelectorAll('.decrease');
+  console.log(createBasket.basket);
+  for (let i = 0; i < decrease.length; i++) {
+    decrease[i].addEventListener('click', (e) => {
+      const total = parseInt(localStorage.getItem('totalAmount'));
+      let newTotal;
+      const totalDOM = document.querySelector('.total');
+      const cartDiv = document.querySelectorAll('.cartDiv');
+      const basket = createBasket.basket;
+      const item = e.target.parentElement.parentElement;
+      const itemID = item.querySelector('img').alt;
+      const lego = legos.find(({ legoId }) => legoId === itemID);
+      const legoPrice = parseInt(lego.price);
+      let totalQuantity = parseInt(localStorage.getItem('totalQuantity'));
+      let quantity = basket.get(itemID);
+      const qty = decrease[i].parentElement.querySelector('span');
+      let id = decrease[i].parentElement.previousElementSibling;
+      id = cartDiv[i].firstChild.alt;
+      console.log(id);
+      if (quantity > 1) {
+        const cartQuantityDOM = document.querySelector('#cart');
+        quantity -= 1;
+        totalQuantity -= 1;
+        newTotal = total - legoPrice;
+        basket.set(id, quantity);
+        totalDOM.textContent = `Total : £${newTotal}`;
+        qty.textContent = quantity;
+        localStorage.setItem('totalAmount', newTotal);
+        localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
+        localStorage.setItem('totalQuantity', totalQuantity);
+        cartQuantityDOM.textContent = totalQuantity;
+      }
+    });
+  }
+}
+
+function emptyCart() {
+  const total = document.querySelector('.total');
+  const checkout = document.querySelector('.continueToCheckout');
+  const clearBasket = document.querySelector('.clearBasket');
   const nullPrice = total.textContent === 'Total: £null';
   const zeroPounds = total.textContent === 'Total: £0';
-  const cart = document.querySelector('.cartStyle');
-  const checkout = document.querySelector('.continueToCheckout');
-
   if (zeroPounds || nullPrice) {
     total.className = 'emptyCart';
-    cart.className = 'emptyCart';
     checkout.className = 'emptyCart';
-    clear.className = 'emptyCart';
-    // checkout.className = 'emptyCart';
-  }
-
-  const basket = document.querySelector('.legoBasket');
-
-  if (basket.textContent === null) {
-    const continueToCheckout = document.querySelector('.continueToCheckout');
-    const clearBasket = document.querySelector('.clearBasket');
     clearBasket.className = 'emptyCart';
-    continueToCheckout.className = 'emptyCart';
-    total.className = 'emptyCart';
-
+  }
+  const emptyDiv = document.querySelector('.legoBasket');
+  if (emptyDiv.textContent === '') {
     const cartStyle = document.querySelector('.cartStyle');
     cartStyle.className = 'empty';
     cartStyle.textContent = 'Your Cart is empty, visit the link below to add items to your cart';
@@ -94,101 +206,9 @@ function isemptyCart() {
   }
 }
 
-function removefromCart() {
-  const remove = document.querySelectorAll('.remove');
-  for (let i = 0; i < remove.length; i++) {
-    remove[i].addEventListener('click', (e) => {
-      if (remove.length < 1) {
-        const form = document.querySelector('.form');
-        while (form.firstChild) {
-          form.removeChild(form.lastChild);
-        }
-      } else {
-        e.target.parentElement.parentElement.remove();
-      }
-    });
-  }
+function checkOut() {
+  const checkout = document.querySelector('.continueToCheckout, .emptyCart');
+  checkout.addEventListener('click', () => {
+    window.location = '/checkout.html';
+  });
 }
-
-
-function increaseItem() {
-  // const total = parseInt(localStorage.getItem('totalAmount'));
-  const cartDiv = document.querySelectorAll('.cartDiv');
-  const basket = createBasket.basket;
-  const increase = document.querySelectorAll('.increase');
-  // const totalDOM = document.querySelector('.total');
-  console.log(createBasket.basket);
-
-  for (let i = 0; i < increase.length; i++) {
-    increase[i].addEventListener('click', () => {
-      console.log('increase');
-      const qty = increase[i].parentElement.querySelector('span');
-      let id = increase[i].parentElement.previousElementSibling;
-      id = cartDiv[i].firstChild.alt;
-      console.log(id);
-      let quantity = basket.get(id);
-      quantity += 1;
-      // total += lego.price
-      basket.set(id, quantity);
-      localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
-      // localStorage.setItem('totalAmount', total);
-      qty.textContent = quantity;
-      // totalDOM.textContent = total;
-    });
-  }
-}
-
-function decreaseItem() {
-  const cartDiv = document.querySelectorAll('.cartDiv');
-  const basket = createBasket.basket;
-  const increase = document.querySelectorAll('.decrease');
-  console.log(createBasket.basket);
-
-
-  for (let i = 0; i < increase.length; i++) {
-    increase[i].addEventListener('click', () => {
-      console.log('increase');
-      const qty = increase[i].parentElement.querySelector('span');
-      let id = increase[i].parentElement.previousElementSibling;
-      id = cartDiv[i].firstChild.alt;
-      console.log(id);
-      let quantity = basket.get(id);
-      if (quantity > 1) {
-        quantity -= 1;
-      }
-      basket.set(id, quantity);
-      localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
-      qty.textContent = quantity;
-    });
-  }
-}
-
-// function emptyCart() {
-//   const clear = document.querySelector('.clearBasket');
-
-//   clear.addEventListener('click', () => {
-//     const cart = document.querySelector('.cartStyle');
-//     const total = document.querySelector('.total');
-//     const clear = document.querySelector('.clearBasket');
-//     const checkout = document.querySelector('.continueToCheckout');
-
-//     checkout.className = 'emptyCart';
-//     clear.className = 'emptyCart';
-//     total.className = 'emptyCart';
-//     cart.className = 'emptyCart';
-//     const items = document.querySelectorAll('.cartDiv');
-//     localStorage.removeItem('basket');
-//     localStorage.removeItem('totalAmount');
-//     localStorage.removeItem('totalQuantity');
-//     for (const item of items) {
-//       item.remove();
-//     }
-//   });
-// }
-
-// function checkOut() {
-//   const checkout = document.querySelector('.continueToCheckout');
-//   checkout.addEventListener('click', () => {
-//     window.location = '/checkout.html';
-//   });
-// }
