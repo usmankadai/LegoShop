@@ -14,8 +14,6 @@ export async function sendBrick() {
   payload.append('price', uploadPrice.value);
   payload.append('legoImage', avatar.files[0]);
 
-  console.log(payload);
-
   const response = await fetch('/bricks', {
     method: 'POST',
     body: payload,

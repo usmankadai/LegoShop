@@ -14,7 +14,13 @@ export function detail(details, image) {
     price.textContent = `${details.price}p`.slice(2);
   }
   const stock = document.querySelector('.stock');
+  const addToCart = document.querySelector('.addToCart');
   stock.textContent = `Stock: ${details.stock}`;
+  if (details.stock < 1) {
+    stock.textContent = 'Out of stock';
+    addToCart.textContent = 'Out of Stock';
+    addToCart.className = 'addToCart outOfStock';
+  }
 
   const category = document.querySelector('.category');
   category.textContent = `Category: ${details.category}`;

@@ -1,4 +1,3 @@
-// import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
 import * as similarity from './individualBrick&Kit.js';
 import * as createBasket from './createBasket.mjs';
@@ -7,7 +6,6 @@ import * as wishlist from './wishList.js';
 
 async function init() {
   await brick();
-  // await home.execute();
   await auth0.executeAuth0();
   await bricklocalStorage();
   createBasket.initializeBasket();

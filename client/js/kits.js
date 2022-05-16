@@ -23,7 +23,6 @@ function kitsContainer() {
 }
 
 async function createInventoryKits() {
-  console.log('kits loaded');
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('/kits', {
     headers: {
@@ -65,6 +64,10 @@ function htmlGridLayout(lego) {
   const addToCart = document.createElement('button');
   addToCart.className = 'addToCart';
   addToCart.textContent = 'Add to Cart';
+  if (lego.stock < 1) {
+    addToCart.textContent = 'Out of Stock';
+    addToCart.className = 'addToCart outOfStock';
+  }
 
   const legoNameLink = document.createElement('a');
   legoNameLink.className = 'legoNameLink';

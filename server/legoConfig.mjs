@@ -41,14 +41,20 @@ export async function stock(req) {
     const quantity = item[1];
     const lego = await findBrick(legoId);
     const currentStock = lego.stock;
+    if (currentStock === undefined) {
+      continue;
+    }
     const updatedStock = currentStock - quantity;
     if (updatedStock < 0) {
-      console.log('Order not placed. Item in the cart is more than what we have in stock');
+      console.log('Order not placed. Item in the cart is more than what we have in stock or item out of stock');
       continue;
     }
     const update = await db.run('UPDATE legos SET stock = ? WHERE legoId = ?', [updatedStock, legoId]);
+    if (update === undefined) {
+      continue;
+    }
     if (update.changes === 0) throw new Error('message not found');
-    console.log(`Old: ${currentStock}, new: ${updatedStock}`);
+    console.log(`Old Brick Stock: ${currentStock}, new Brick Stock: ${updatedStock}`);
   }
   // if nothing was updated, the ID doesn't exist
   return true;
@@ -63,6 +69,33 @@ export async function findKit(legoId) {
   const db = await dbConn;
   return db.get('SELECT * FROM kits WHERE legoId = ?', legoId);
 }
+
+// export async function kitStock(req) {
+//   const db = await dbConn;
+//   const basket = new Map(JSON.parse(req.params.basket));
+//   for (const item of basket) {
+//     const legoId = item[0];
+//     const quantity = item[1];
+//     const lego = await findKit(legoId);
+//     const currentStock = lego.stock;
+//     if (currentStock === undefined) {
+//       continue;
+//     }
+//     const updatedStock = currentStock - quantity;
+//     if (updatedStock < 0) {
+//       console.log('Order not placed. Item in the cart is more than what we have in stock or item out of stock');
+//       continue;
+//     }
+//     const update = await db.run('UPDATE kits SET stock = ? WHERE legoId = ?', [updatedStock, legoId]);
+//     if (update === undefined) {
+//       continue;
+//     }
+//     if (update.changes === 0) throw new Error('message not found');
+//     console.log(`Old kit Stock: ${currentStock}, new kit Stock: ${updatedStock}`);
+//   }
+//   // if nothing was updated, the ID doesn't exist
+//   return true;
+// }
 
 export async function video() {
   const db = await dbConn;

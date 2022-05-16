@@ -347,7 +347,7 @@ header .loginDiv {
 #checkout input.invalid {
     box-shadow: 0 0 1rem red;
 }
-#checkout:invalid input[type="button"]{
+#checkout:invalid input[type="button"], .outOfStock{
     pointer-events: none;
     opacity: 0.5;
 }

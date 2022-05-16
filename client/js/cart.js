@@ -7,9 +7,7 @@ async function init() {
   await auth0.executeAuth0();
   isemptyCart();
   await createBasket.initializeCart();
-  removefromCart();
-  increaseItem();
-  decreaseItem();
+  maintainQuantities();
   fetchBricks();
   emptyCart();
   checkOut();
@@ -40,8 +38,36 @@ function isemptyCart() {
   });
 }
 
-async function removefromCart() {
-  const legos = await fetchBricks();
+async function fetchBricks() {
+  const response = await fetch('/bricks', {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const legos = await response.json();
+  return legos;
+}
+
+async function fetchKits() {
+  const response = await fetch('/kits', {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const legos = await response.json();
+  return legos;
+}
+
+async function maintainQuantities() {
+  const bricks = await fetchBricks();
+  const kits = await fetchKits();
+
+  increaseItem(bricks, kits);
+  decreaseItem(bricks, kits);
+  removefromCart(bricks, kits);
+}
+
+function removefromCart(bricks, kits) {
   const basket = createBasket.basket;
   let remove = document.querySelectorAll('.remove');
   for (let i = 0; i < remove.length; i++) {
@@ -51,7 +77,10 @@ async function removefromCart() {
       const item = e.target.parentElement.parentElement;
       const itemID = item.querySelector('img').alt;
       const quantity = basket.get(itemID);
-      const lego = legos.find(({ legoId }) => legoId === itemID);
+      let lego = bricks.find(({ legoId }) => legoId === itemID);
+      if (lego === undefined) {
+        lego = kits.find(({ legoId }) => legoId === itemID);
+      }
       const legoPrice = parseInt(lego.price);
       const newTotal = total - (legoPrice * quantity);
       const totalQuantity = parseInt(localStorage.getItem('totalQuantity'));
@@ -84,19 +113,7 @@ async function removefromCart() {
   }
 }
 
-async function fetchBricks() {
-  const response = await fetch('/bricks', {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  });
-  const legos = await response.json();
-  return legos;
-}
-
-async function increaseItem() {
-  console.log(createBasket.basket);
-  const legos = await fetchBricks();
+function increaseItem(bricks, kits) {
   const increase = document.querySelectorAll('.increase');
   for (let i = 0; i < increase.length; i++) {
     increase[i].addEventListener('click', (e) => {
@@ -106,7 +123,10 @@ async function increaseItem() {
       const basket = createBasket.basket;
       const item = e.target.parentElement.parentElement;
       const itemID = item.querySelector('img').alt;
-      const lego = legos.find(({ legoId }) => legoId === itemID);
+      let lego = bricks.find(({ legoId }) => legoId === itemID);
+      if (lego === undefined) {
+        lego = kits.find(({ legoId }) => legoId === itemID);
+      }
       const legoPrice = parseInt(lego.price);
       let totalQuantity = parseInt(localStorage.getItem('totalQuantity'));
       const cartQuantityDOM = document.querySelector('#cart');
@@ -115,7 +135,6 @@ async function increaseItem() {
       const qty = increase[i].parentElement.querySelector('span');
       let id = increase[i].parentElement.previousElementSibling;
       id = cartDiv[i].firstChild.alt;
-      console.log(id);
       quantity += 1;
       totalQuantity += 1;
       total += lego.price;
@@ -130,11 +149,8 @@ async function increaseItem() {
   }
 }
 
-async function decreaseItem() {
-  console.log(createBasket.basket);
-  const legos = await fetchBricks();
+function decreaseItem(bricks, kits) {
   const decrease = document.querySelectorAll('.decrease');
-  console.log(createBasket.basket);
   for (let i = 0; i < decrease.length; i++) {
     decrease[i].addEventListener('click', (e) => {
       const total = parseInt(localStorage.getItem('totalAmount'));
@@ -144,14 +160,16 @@ async function decreaseItem() {
       const basket = createBasket.basket;
       const item = e.target.parentElement.parentElement;
       const itemID = item.querySelector('img').alt;
-      const lego = legos.find(({ legoId }) => legoId === itemID);
+      let lego = bricks.find(({ legoId }) => legoId === itemID);
+      if (lego === undefined) {
+        lego = kits.find(({ legoId }) => legoId === itemID);
+      }
       const legoPrice = parseInt(lego.price);
       let totalQuantity = parseInt(localStorage.getItem('totalQuantity'));
       let quantity = basket.get(itemID);
       const qty = decrease[i].parentElement.querySelector('span');
       let id = decrease[i].parentElement.previousElementSibling;
       id = cartDiv[i].firstChild.alt;
-      console.log(id);
       if (quantity > 1) {
         const cartQuantityDOM = document.querySelector('#cart');
         quantity -= 1;

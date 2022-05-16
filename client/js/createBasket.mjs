@@ -130,7 +130,6 @@ function cartHtmlElement(bricks, kits) {
 
 function totalAmount(lego) {
   let totalAmount = localStorage.getItem('totalAmount');
-  console.log('The amount is', totalAmount);
 
   // checks whatever that was in totalAmount add it to the new amount that is being clicked.
   if (totalAmount != null) {
@@ -143,12 +142,11 @@ function totalAmount(lego) {
 
 export function listener() {
   document.querySelector('#successfulPayment').addEventListener('click', update);
+  // document.querySelector('#successfulPayment').addEventListener('click', updateKit);
 }
 
 async function update() {
-  console.log('updated');
   const cart = JSON.stringify(Array.from(basket));
-  console.log(cart);
   const fetchOptions = {
     credentials: 'same-origin',
     method: 'PUT',
@@ -159,6 +157,21 @@ async function update() {
   const response = await fetch(`/brick/${cart}`, fetchOptions);
   console.log(response);
 }
+
+// async function updateKit() {
+//   console.log('updated');
+//   const cart = JSON.stringify(Array.from(basket));
+//   console.log(cart);
+//   const fetchOptions = {
+//     credentials: 'same-origin',
+//     method: 'PUT',
+//     headers: {
+//       'content-type': 'application/json',
+//     },
+//   };
+//   const response = await fetch(`/kit/${cart}`, fetchOptions);
+//   console.log(response);
+// }
 
 export function initializeBasket() {
   createBasket();

@@ -28,7 +28,6 @@ function bricksContainer() {
 }
 
 async function createInventoryBricks() {
-  console.log('bricks loaded');
   // Uploading JSON data Referenced from MDN. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   const response = await fetch('/bricks', {
     headers: {
@@ -70,6 +69,10 @@ export function htmlGridLayout(lego) {
   const addToCart = document.createElement('a');
   addToCart.className = 'addToCart';
   addToCart.textContent = 'Add to Cart';
+  if (lego.stock < 1) {
+    addToCart.textContent = 'Out of Stock';
+    addToCart.className = 'addToCart outOfStock';
+  }
 
   const removeBrick = document.createElement('div');
   removeBrick.textContent = 'Delete';
@@ -101,13 +104,11 @@ async function brickslocalStorage() {
 async function sorting(e) {
   const color = e.target.options[e.target.selectedIndex].text;
   const legos = await fetchSortedItems(color);
-  console.log(legos);
   const legosDOM = document.querySelectorAll('.lis');
   legosDOM.forEach(lego => {
     lego.remove();
   });
 
-  console.log('sorting', color);
   legos.forEach(lego => {
     htmlGridLayout(lego);
   });
