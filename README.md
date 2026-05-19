@@ -4,7 +4,7 @@
 
 A full-stack LEGO e-commerce web application built with Node.js/Express, SQLite (Turso), Auth0 authentication, and Cloudinary image hosting. Deployed on Vercel.
 
-**Live site:** https://lego-shop-nine.vercel.app
+**Live site:** https://lego-shop.usmankadai.dev
 
 ---
 
