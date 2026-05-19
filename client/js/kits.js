@@ -2,6 +2,7 @@ import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
 import * as createBasket from './createBasket.mjs';
 import * as upload from './uploadKit.mjs';
+import * as edit from './edit.mjs';
 
 async function deleteKit(legoId) {
   const email = auth0.getAdminEmail();
@@ -95,6 +96,8 @@ export function htmlGridLayout(lego) {
   removKit.className = 'deleteBrick emptyCart';
   removKit.innerHTML = '<i class="fas fa-trash"></i> Delete';
   removKit.addEventListener('click', () => deleteKit(lego.legoId));
+
+  edit.createEditButton(lego, createLis, 'kits');
 
   legoName.append(legoNameLink);
   createA.append(createImg);

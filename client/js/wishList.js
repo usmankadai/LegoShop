@@ -6,9 +6,8 @@ async function init() {
   home.execute();
   await auth0.executeAuth0();
   createBasket.initializeBasket();
-  initializeWish();
+  await initializeWish();
   emptyWishlist();
-  // removefromList();
 }
 
 window.addEventListener('load', init);
@@ -34,8 +33,40 @@ function wishList() {
   }
 }
 
+function pushWishlistToServer() {
+  const uid = auth0.getUserId();
+  if (!uid) return;
+  const items = Array.from(wishlist.entries()).map(([legoId, quantity]) => ({ legoId, quantity }));
+  fetch('/user/wishlist', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'x-user-id': uid },
+    body: JSON.stringify({ items }),
+  }).catch(e => console.warn('Wishlist push failed:', e));
+}
+
+async function syncWishlistFromServer() {
+  const uid = auth0.getUserId();
+  if (!uid) return;
+  try {
+    const res = await fetch('/user/wishlist', { headers: { 'x-user-id': uid } });
+    const serverItems = await res.json();
+    // Merge: union of local + server
+    const merged = new Map(Array.from(wishlist.entries()));
+    for (const r of serverItems) {
+      if (!merged.has(r.legoId)) merged.set(r.legoId, Number(r.quantity));
+    }
+    wishlist = merged;
+    localStorage.setItem('wishlist', JSON.stringify(Array.from(merged)));
+    localStorage.setItem('wishQuantity', merged.size);
+    pushWishlistToServer();
+  } catch (e) {
+    console.warn('Wishlist sync failed:', e);
+  }
+}
+
 async function initializeWish() {
   wishList();
+  await syncWishlistFromServer();
   const bricks = await fetchBricks();
   const kits = await fetchKits();
   cartHtmlElement(bricks, kits);
@@ -62,14 +93,22 @@ async function fetchKits() {
 }
 
 function cartHtmlElement(bricks, kits) {
+  if (wishlist.size === 0) {
+    showEmptyState();
+    return;
+  }
+
   for (const [id] of wishlist.entries()) {
     let lego = bricks.find(({ legoId }) => legoId === id);
     if (lego === undefined) {
       lego = kits.find(({ legoId }) => legoId === id);
     }
+    if (!lego) continue;
+
     const legoBasket = document.querySelector('.legoBasket, #cartTemplate');
     const createDiv = document.createElement('div');
     createDiv.className = 'cartDiv';
+
     const createImg = document.createElement('img');
     createImg.src = `${lego.legoImage}`;
     createImg.alt = `${lego.legoId}`;
@@ -78,22 +117,33 @@ function cartHtmlElement(bricks, kits) {
     remove.textContent = 'Delete';
     remove.className = 'remove';
 
-
     const cart = document.createElement('div');
     cart.className = 'qtyContainer';
 
     const quantityDOM = document.createElement('span');
     quantityDOM.textContent = `${lego.stock}`;
 
-
     const legoPrice = document.createElement('div');
     legoPrice.textContent = `£${lego.price}`;
-
 
     cart.append(quantityDOM, remove);
     createDiv.append(createImg, cart, legoPrice);
     legoBasket.append(createDiv);
   }
+}
+
+function showEmptyState() {
+  const msg = document.querySelector('.emptyMessage');
+  msg.className = 'emptyState';
+  msg.innerHTML = `
+    <p>Your wishlist is empty.</p>
+    <div class="usefulLinks">
+      <a href="/bricks.html">Browse Bricks</a>
+      <a href="/kits.html">Browse Kits</a>
+    </div>
+  `;
+  document.querySelector('.cartStyle').style.display = 'none';
+  document.querySelector('.clearWishlist').style.display = 'none';
 }
 
 
@@ -113,22 +163,8 @@ function saveBrick(lego) {
     localStorage.wishQuantity = wishQuantity;
   }
   localStorage.setItem('wishlist', JSON.stringify(Array.from(wishlist)));
+  pushWishlistToServer();
 }
-
-// this function should be the similar to how i deleted from cart. But in this case
-// i couldn't figure out why it's not even console.logging when i click Delete in the wishlist page...
-// hence that's why i didn't do delete each item from the wishlist
-
-// function removefromList() {
-//   const remove = document.querySelectorAll('.cartDiv');
-//   // debugger
-//   console.log(remove);
-//   for (let i = 0; i < remove.length; i++) {
-//     remove[i].addEventListener('click', () => {
-//       console.log('removed');
-//     });
-//   }
-// }
 
 function emptyWishlist() {
   const clear = document.querySelector('.clearWishlist, .emptyCart');
@@ -137,9 +173,12 @@ function emptyWishlist() {
     const items = document.querySelectorAll('.cartDiv');
     localStorage.removeItem('wishQuantity');
     localStorage.removeItem('wishlist');
+    wishlist.clear();
+    pushWishlistToServer();
     for (const item of items) {
       item.remove();
-      clear.remove();
     }
+    clear.remove();
+    showEmptyState();
   });
 }

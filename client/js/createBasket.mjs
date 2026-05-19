@@ -1,5 +1,7 @@
 // this file creates basket and localStorage
 
+import { getUserId } from './auth0.mjs';
+
 export let basket;
 
 export function setupListeners(legos) {
@@ -53,6 +55,42 @@ export function saveBrick(lego) {
   }
   localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
   cartQuantityDOM.textContent = localStorage.getItem('totalQuantity');
+  pushCartToServer();
+}
+
+export function pushCartToServer() {
+  const uid = getUserId();
+  if (!uid) return;
+  const items = Array.from(basket.entries()).map(([legoId, quantity]) => ({ legoId, quantity }));
+  fetch('/user/cart', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'x-user-id': uid },
+    body: JSON.stringify({ items }),
+  }).catch(e => console.warn('Cart push failed:', e));
+}
+
+async function syncCartFromServer() {
+  const uid = getUserId();
+  if (!uid) return;
+  try {
+    const res = await fetch('/user/cart', { headers: { 'x-user-id': uid } });
+    const serverItems = await res.json();
+    // Merge: start with server items, take max qty for items in both
+    const merged = new Map(serverItems.map(r => [r.legoId, Number(r.quantity)]));
+    for (const [legoId, qty] of basket.entries()) {
+      merged.set(legoId, Math.max(merged.get(legoId) || 0, qty));
+    }
+    basket = merged;
+    const total = Array.from(merged.values()).reduce((s, q) => s + q, 0);
+    localStorage.setItem('basket', JSON.stringify(Array.from(merged)));
+    localStorage.setItem('totalQuantity', total);
+    const cartEl = document.querySelector('#cart');
+    if (cartEl) cartEl.textContent = total;
+    // Push merged result back so server is up to date
+    pushCartToServer();
+  } catch (e) {
+    console.warn('Cart sync failed:', e);
+  }
 }
 
 export async function fetchBricks() {
@@ -67,6 +105,7 @@ export async function fetchBricks() {
 
 export async function initializeCart() {
   createBasket();
+  await syncCartFromServer();
   const bricks = await fetchBricks();
   const kits = await fetchKits();
   cartHtmlElement(bricks, kits);
@@ -175,6 +214,7 @@ async function update() {
 //   console.log(response);
 // }
 
-export function initializeBasket() {
+export async function initializeBasket() {
   createBasket();
+  await syncCartFromServer();
 }

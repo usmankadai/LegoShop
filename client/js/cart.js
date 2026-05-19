@@ -27,6 +27,8 @@ function isemptyCart() {
     localStorage.removeItem('basket');
     localStorage.removeItem('totalAmount');
     localStorage.removeItem('totalQuantity');
+    createBasket.basket.clear();
+    createBasket.pushCartToServer();
     for (const item of items) {
       item.remove();
       checkout.remove();
@@ -109,6 +111,7 @@ function removefromCart(bricks, kits) {
       localStorage.setItem('totalAmount', newTotal);
       localStorage.setItem('totalQuantity', totalQuantity - quantity);
       cartQuantityDOM.textContent = totalQuantity - quantity;
+      createBasket.pushCartToServer();
     });
   }
 }
@@ -145,6 +148,7 @@ function increaseItem(bricks, kits) {
       localStorage.setItem('totalAmount', newTotal);
       localStorage.setItem('totalQuantity', totalQuantity);
       cartQuantityDOM.textContent = totalQuantity;
+      createBasket.pushCartToServer();
     });
   }
 }
@@ -182,6 +186,7 @@ function decreaseItem(bricks, kits) {
         localStorage.setItem('basket', JSON.stringify(Array.from(basket)));
         localStorage.setItem('totalQuantity', totalQuantity);
         cartQuantityDOM.textContent = totalQuantity;
+        createBasket.pushCartToServer();
       }
     });
   }
@@ -201,26 +206,15 @@ function emptyCart() {
   const emptyDiv = document.querySelector('.legoBasket');
   if (emptyDiv.textContent === '') {
     const cartStyle = document.querySelector('.cartStyle');
-    cartStyle.className = 'empty';
-    cartStyle.textContent = 'Your Cart is empty, visit the link below to add items to your cart';
-
-    const usefulLinks = document.createElement('div');
-    usefulLinks.className = 'usefulLinks';
-
-    const homeLink = document.createElement('a');
-    homeLink.textContent = 'Home';
-    homeLink.href = '/';
-
-    const brickLink = document.createElement('a');
-    brickLink.textContent = 'Bricks';
-    brickLink.href = '/bricks.html';
-
-    const kitLink = document.createElement('a');
-    kitLink.textContent = 'Kits';
-    kitLink.href = '/kits.html';
-
-    usefulLinks.append(homeLink, brickLink, kitLink);
-    cartStyle.append(usefulLinks);
+    cartStyle.className = 'emptyState';
+    cartStyle.innerHTML = `
+      <p>Your cart is empty.</p>
+      <div class="usefulLinks">
+        <a href="/">Home</a>
+        <a href="/bricks.html">Browse Bricks</a>
+        <a href="/kits.html">Browse Kits</a>
+      </div>
+    `;
   }
 }
 

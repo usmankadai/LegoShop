@@ -3,6 +3,7 @@ import * as auth0 from './auth0.mjs';
 import * as sort from './sort.mjs';
 import * as upload from './uploadBrick.mjs';
 import * as createBasket from './createBasket.mjs';
+import * as edit from './edit.mjs';
 
 async function deleteBrick(legoId) {
   const email = auth0.getAdminEmail();
@@ -31,9 +32,23 @@ window.addEventListener('load', init);
 
 function bricksContainer() {
   const brickTemplate = document.querySelector('.bricksPage');
+
+  const filterBar = document.createElement('div');
+  filterBar.className = 'filterBar';
+
+  const filterLabel = document.createElement('span');
+  filterLabel.className = 'filterLabel';
+  filterLabel.textContent = 'Filter:';
+
+  const select = document.createElement('select');
+  select.id = 'sort';
+
+  filterBar.append(filterLabel, select);
+
   const createDiv = document.createElement('div');
   createDiv.className = 'mainLinks';
-  brickTemplate.append(createDiv);
+
+  brickTemplate.append(filterBar, createDiv);
 }
 
 async function createInventoryBricks() {
@@ -98,6 +113,8 @@ export function htmlGridLayout(lego) {
   createImg.id = `image${lego.legoId}`;
   createImg.src = `${lego.legoImage}`;
   createImg.alt = `#${lego.legoName}`;
+
+  edit.createEditButton(lego, createLis, 'bricks');
 
   legoName.append(legoNameLink);
   createA.append(createImg);

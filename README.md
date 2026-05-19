@@ -78,10 +78,11 @@ turso db shell legoshop "$(cat scripts/seed.sql)"
 - **Bricks catalogue** — filter by colour, type, and size
 - **Kits catalogue** — browse full LEGO kits
 - **Individual product pages** — unique URL per brick/kit
-- **Shopping cart** — add/remove items, persisted in localStorage
-- **Wishlist** — save items for later, persisted in localStorage
+- **Site-wide search** — searches across both bricks and kits by name; results page at `/search.html?q=`
+- **Shopping cart** — add/remove/adjust items; persisted in localStorage for guests, synced to the database when logged in (cross-device)
+- **Wishlist** — save items for later; persisted in localStorage for guests, synced to the database when logged in (cross-device)
 - **Simulated checkout** — payment form updates stock levels in the database
-- **Admin panel** — upload and delete bricks/kits (admin only, gated by Auth0 login)
+- **Admin panel** — upload, delete, and inline-edit name/price of bricks and kits (admin only, gated by Auth0 login)
 - **Out-of-stock protection** — out of stock items cannot be added to cart via UI or devtools
 - **Homepage** — featured picks and coming soon section with random video adverts
 - **404 page** — invalid URLs redirect to a custom error page
@@ -95,7 +96,8 @@ Admins are determined by email address, configured in the server via the `ADMIN_
 
 - Upload form is shown on the bricks and kits pages
 - Delete button appears on each product card
-- All write operations (`POST /bricks`, `POST /kits`, `DELETE /bricks/:id`, `DELETE /kits/:id`) are protected server-side via the `x-admin-email` header check
+- Inline edit button appears on each card — click to edit name and price in place without leaving the page
+- All write operations are protected server-side via the `x-admin-email` header check
 
 ---
 
@@ -106,13 +108,20 @@ Admins are determined by email address, configured in the server via the `ADMIN_
 | GET | `/bricks` | List all bricks |
 | POST | `/bricks` | Upload a new brick (admin only) |
 | GET | `/bricks/:sort` | List bricks filtered by sort category |
+| PUT | `/bricks/:legoId` | Edit brick name/price (admin only) |
 | GET | `/brick?legoId=` | Get a single brick |
 | PUT | `/brick/:basket` | Update stock levels after purchase |
 | GET | `/kits` | List all kits |
 | POST | `/kits` | Upload a new kit (admin only) |
 | GET | `/kit?legoId=` | Get a single kit |
+| PUT | `/kits/:legoId` | Edit kit name/price (admin only) |
 | DELETE | `/bricks/:legoId` | Delete a brick (admin only) |
 | DELETE | `/kits/:legoId` | Delete a kit (admin only) |
+| GET | `/search?q=` | Search bricks and kits by name |
+| GET | `/user/cart` | Get logged-in user's cart |
+| PUT | `/user/cart` | Save logged-in user's cart |
+| GET | `/user/wishlist` | Get logged-in user's wishlist |
+| PUT | `/user/wishlist` | Save logged-in user's wishlist |
 | GET | `/videos` | List videos (used for homepage coming soon section) |
 | GET | `/auth-config` | Serve Auth0 + admin config to the client |
 
@@ -139,14 +148,11 @@ Browser
 - Kit stock levels are not decremented on checkout (only brick stock is updated)
 - Quantity input in cart requires repeated clicks — no direct number input
 - Auth0 always redirects back to homepage after login rather than the page the user was on
-- Wishlist is localStorage only — not persisted to the database
 
 ## Future Improvements
 
-- Search across inventory using client-side filtering
 - Redirect to the originating page after Auth0 login
 - Link kits to their component bricks
-- Persist wishlist to the database
 - Orders page showing purchase history
 - Moving items directly from wishlist to cart
 - Loyalty program and pre-order for out-of-stock items

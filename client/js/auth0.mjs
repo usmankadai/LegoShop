@@ -1,5 +1,6 @@
 let auth0Client = null;
 let adminEmail = null;
+let userId = null;
 
 async function fetchAuthConfig() {
   const response = await fetch('/auth-config');
@@ -23,6 +24,10 @@ export function getAdminEmail() {
   return adminEmail;
 }
 
+export function getUserId() {
+  return userId;
+}
+
 async function updateAuthUI(config) {
   let isAuthenticated = false;
   try {
@@ -37,6 +42,7 @@ async function updateAuthUI(config) {
   if (isAuthenticated) {
     try {
       const user = await auth0Client.getUser();
+      userId = user.sub;
       const isAdmin = config.adminEmails.includes(user.email);
 
       if (isAdmin) {
@@ -57,9 +63,8 @@ function showAdminUI() {
   if (uploadForm) uploadForm.classList.remove('emptyCart');
 
   // show all delete buttons
-  document.querySelectorAll('.deleteBrick').forEach(btn => {
-    btn.classList.remove('emptyCart');
-  });
+  document.querySelectorAll('.deleteBrick').forEach(btn => btn.classList.remove('emptyCart'));
+  document.querySelectorAll('.editBrick').forEach(btn => btn.classList.remove('emptyCart'));
 }
 
 async function login() {

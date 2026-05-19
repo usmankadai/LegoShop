@@ -51,6 +51,21 @@ async function saveImage(file, folder) {
 
 app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), '../client')));
 
+app.get('/search', asyncWrap(searchHandler));
+app.get('/user/cart', requireUser, asyncWrap(async (req, res) => {
+  res.json(await legoConfig.getUserCart(req.userId));
+}));
+app.put('/user/cart', requireUser, express.json(), asyncWrap(async (req, res) => {
+  await legoConfig.setUserCart(req.userId, req.body.items || []);
+  res.json({ ok: true });
+}));
+app.get('/user/wishlist', requireUser, asyncWrap(async (req, res) => {
+  res.json(await legoConfig.getUserWishlist(req.userId));
+}));
+app.put('/user/wishlist', requireUser, express.json(), asyncWrap(async (req, res) => {
+  await legoConfig.setUserWishlist(req.userId, req.body.items || []);
+  res.json({ ok: true });
+}));
 app.get('/bricks', asyncWrap(bricks));
 app.get('/bricks/:sort', asyncWrap(sort));
 app.get('/brick', asyncWrap(brick));
@@ -61,6 +76,8 @@ app.get('/auth-config', authConf);
 app.put('/brick/:basket', asyncWrap(stock));
 app.post('/bricks', requireAdmin, uploader.single('legoImage'), express.json(), asyncWrap(upload));
 app.post('/kits', requireAdmin, uploader.single('legoImage'), express.json(), asyncWrap(uploadKit));
+app.put('/bricks/:legoId', requireAdmin, express.json(), asyncWrap(updateBrickHandler));
+app.put('/kits/:legoId', requireAdmin, express.json(), asyncWrap(updateKitHandler));
 app.delete('/bricks/:legoId', requireAdmin, asyncWrap(deleteBrickHandler));
 app.delete('/kits/:legoId', requireAdmin, asyncWrap(deleteKitHandler));
 app.use(redirect);
@@ -69,6 +86,13 @@ function asyncWrap(f) {
   return (req, res, next) => {
     Promise.resolve(f(req, res, next)).catch((e) => next(e || new Error()));
   };
+}
+
+function requireUser(req, res, next) {
+  const userId = req.headers['x-user-id'];
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+  req.userId = userId;
+  next();
 }
 
 function requireAdmin(req, res, next) {
@@ -102,6 +126,11 @@ async function brick(req, res) {
   } catch (e) {
     error(res, e);
   }
+}
+
+async function searchHandler(req, res) {
+  const term = req.query.q || '';
+  res.json(await legoConfig.search(term));
 }
 
 async function sort(req, res) {
@@ -161,6 +190,24 @@ async function deleteBrickHandler(req, res) {
   try {
     await legoConfig.deleteBrick(req.params.legoId);
     res.json({ ok: true });
+  } catch (e) {
+    error(res, e);
+  }
+}
+
+async function updateBrickHandler(req, res) {
+  try {
+    const updated = await legoConfig.updateBrick(req.params.legoId, req.body);
+    res.json(updated);
+  } catch (e) {
+    error(res, e);
+  }
+}
+
+async function updateKitHandler(req, res) {
+  try {
+    const updated = await legoConfig.updateKit(req.params.legoId, req.body);
+    res.json(updated);
   } catch (e) {
     error(res, e);
   }

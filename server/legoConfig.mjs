@@ -6,6 +6,25 @@ const client = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
+(async () => {
+  try {
+    await client.execute(`CREATE TABLE IF NOT EXISTS user_carts (
+      userId TEXT NOT NULL,
+      legoId TEXT NOT NULL,
+      quantity INTEGER NOT NULL DEFAULT 1,
+      PRIMARY KEY (userId, legoId)
+    )`);
+    await client.execute(`CREATE TABLE IF NOT EXISTS user_wishlists (
+      userId TEXT NOT NULL,
+      legoId TEXT NOT NULL,
+      quantity INTEGER NOT NULL DEFAULT 1,
+      PRIMARY KEY (userId, legoId)
+    )`);
+  } catch (e) {
+    console.error('Failed to init user tables:', e);
+  }
+})();
+
 async function query(sql, args = []) {
   const result = await client.execute({ sql, args });
   return result.rows;
@@ -71,6 +90,24 @@ export async function deleteKit(legoId) {
   if (result.rowsAffected === 0) throw new Error('Kit not found');
 }
 
+export async function updateBrick(legoId, data) {
+  const result = await run(
+    'UPDATE legos SET legoName = ?, price = ? WHERE legoId = ?',
+    [data.legoName, Number(data.price), legoId]
+  );
+  if (result.rowsAffected === 0) throw new Error('Brick not found');
+  return findBrick(legoId);
+}
+
+export async function updateKit(legoId, data) {
+  const result = await run(
+    'UPDATE kits SET legoName = ?, price = ? WHERE legoId = ?',
+    [data.legoName, Number(data.price), legoId]
+  );
+  if (result.rowsAffected === 0) throw new Error('Kit not found');
+  return findKit(legoId);
+}
+
 export async function addBrick(brick, imageUrl) {
   if (!brick.legoName || !brick.price || !imageUrl) throw new Error('Missing required fields');
   const legoId = uuid();
@@ -79,6 +116,39 @@ export async function addBrick(brick, imageUrl) {
     null, null, Number(brick.price), 10, 0,
   ]);
   return listBricks();
+}
+
+export async function getUserCart(userId) {
+  return query('SELECT legoId, quantity FROM user_carts WHERE userId = ?', [userId]);
+}
+
+export async function setUserCart(userId, items) {
+  await run('DELETE FROM user_carts WHERE userId = ?', [userId]);
+  for (const { legoId, quantity } of items) {
+    if (quantity > 0) {
+      await run('INSERT INTO user_carts (userId, legoId, quantity) VALUES (?, ?, ?)', [userId, legoId, quantity]);
+    }
+  }
+}
+
+export async function getUserWishlist(userId) {
+  return query('SELECT legoId, quantity FROM user_wishlists WHERE userId = ?', [userId]);
+}
+
+export async function setUserWishlist(userId, items) {
+  await run('DELETE FROM user_wishlists WHERE userId = ?', [userId]);
+  for (const { legoId, quantity } of items) {
+    if (quantity > 0) {
+      await run('INSERT INTO user_wishlists (userId, legoId, quantity) VALUES (?, ?, ?)', [userId, legoId, quantity]);
+    }
+  }
+}
+
+export async function search(term) {
+  const like = `%${term}%`;
+  const brickRows = await query('SELECT * FROM legos WHERE legoName LIKE ?', [like]);
+  const kitRows = await query('SELECT * FROM kits WHERE legoName LIKE ?', [like]);
+  return { bricks: brickRows, kits: kitRows };
 }
 
 export async function addKit(kit, imageUrl) {

@@ -53,12 +53,6 @@ function templateHeader() {
   const searchDiv = document.createElement('div');
   searchDiv.className = 'search';
 
-  const sort = document.createElement('div');
-  sort.className = 'sort';
-
-  const select = document.createElement('select');
-  select.id = 'sort';
-
   const searchForm = document.createElement('form');
   searchForm.id = 'searchForm';
   const searchInput = document.createElement('input');
@@ -66,15 +60,14 @@ function templateHeader() {
   searchInput.type = 'search';
   searchInput.placeholder = 'Search items...';
 
-  const searchButton = document.createElement('a');
+  const searchButton = document.createElement('button');
   searchButton.id = 'search';
-  searchButton.value = 'searchSite';
+  searchButton.type = 'submit';
   searchButton.className = 'fas fa-search';
 
   searchForm.append(searchInput, searchButton);
   searchDiv.append(searchForm);
-  sort.append(select);
-  selectH1.append(searchDiv, sort);
+  selectH1.append(searchDiv);
 
   const iconsDiv = document.createElement('div');
   iconsDiv.className = 'icons';
@@ -141,6 +134,14 @@ function templateMain() {
   grid.append(createCartTemp);
 }
 
+function setupSearch() {
+  document.getElementById('searchForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = document.getElementById('searchSite').value.trim();
+    if (q) window.location.href = `/search.html?q=${encodeURIComponent(q)}`;
+  });
+}
+
 function toggleLogin() {
   document.querySelector('.loginDiv').classList.toggle('display');
 }
@@ -160,4 +161,5 @@ export function execute() {
   templateFooter();
   icons();
   dropOptions();
+  setupSearch();
 }
