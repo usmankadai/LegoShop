@@ -4,6 +4,15 @@ import * as sort from './sort.mjs';
 import * as upload from './uploadBrick.mjs';
 import * as createBasket from './createBasket.mjs';
 
+async function deleteBrick(legoId) {
+  const email = auth0.getAdminEmail();
+  const res = await fetch(`/bricks/${legoId}`, {
+    method: 'DELETE',
+    headers: { 'x-admin-email': email },
+  });
+  if (res.ok) document.getElementById(`lego${legoId}`)?.closest('li').remove();
+}
+
 
 async function init() {
   bricksContainer();
@@ -74,9 +83,10 @@ export function htmlGridLayout(lego) {
     addToCart.className = 'addToCart outOfStock';
   }
 
-  const removeBrick = document.createElement('div');
-  removeBrick.textContent = 'Delete';
+  const removeBrick = document.createElement('button');
   removeBrick.className = 'deleteBrick emptyCart';
+  removeBrick.innerHTML = '<i class="fas fa-trash"></i> Delete';
+  removeBrick.addEventListener('click', () => deleteBrick(lego.legoId));
 
   const legoNameLink = document.createElement('a');
   legoNameLink.className = 'legoNameLink';

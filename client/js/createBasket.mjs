@@ -6,6 +6,7 @@ export function setupListeners(legos) {
   const cart = document.querySelector('.addToCart');
 
   cart.addEventListener('click', () => {
+    if (legos.stock < 1) return;
     saveBrick(legos);
     totalAmount(legos);
   });
@@ -16,6 +17,7 @@ export function listeners(legos) {
   const cart = document.querySelectorAll('.addToCart');
   for (let i = 0; i < cart.length; i++) {
     cart[i].addEventListener('click', () => {
+      if (legos[i].stock < 1) return;
       saveBrick(legos[i]);
       totalAmount(legos[i]);
     });

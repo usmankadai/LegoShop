@@ -1,881 +1,1031 @@
 
-*{
-    transition: all 0.2s linear;
-    text-decoration: none;
-    font-family: sans-serif;
+/* ============================================================
+   CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  --clr-bg: #000;
+  --clr-accent: rgb(255, 251, 0);
+  --clr-danger: rgb(220, 30, 30);
+  --clr-card-bg: rgb(248, 248, 237);
+  --clr-card-border: rgb(220, 210, 210);
+  --shadow-md: 0 0.5rem 1.2rem rgba(30, 19, 54, 0.45);
+  --shadow-lg: 0 0.8rem 2.4rem rgba(30, 19, 54, 0.55);
+  --radius-card: 1rem;
+  --radius-btn: 10rem;
+  --header-h: 7rem;
+  --max-content: 130rem;
+  /* Centers content within --max-content; stays 2.4rem on smaller screens */
+  --side-pad: max(2.4rem, calc((100% - var(--max-content)) / 2));
 }
 
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+*::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Only animate properties that should animate */
+a, button, input[type="button"], input[type="submit"],
+.addToCart, .addToWishList, .continueButton,
+.continueToCheckout, .clearBasket, .clearWishlist,
+.legoDiv img, .slides, .mainLinks li, .kitLinks li {
+  transition: color 0.18s ease, background 0.18s ease,
+              transform 0.18s ease, box-shadow 0.18s ease,
+              filter 0.18s ease, opacity 0.18s ease;
+}
+
+html {
+  font-size: 0.625rem; /* 1rem = 10px */
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-size: 1.6rem;
+  background: #f4f4f2;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.grid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.grid > main {
+  flex: 1;
+  background: #f4f4f2;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
 header {
-    background: black;
-    position: relative;
-    top: 0;
-    right: 0;
-    left: 0;
-    align-items: center;
-    display: flex;
-    padding: 0.5rem;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    justify-content: space-between;
-    height: 8rem;
+  background: var(--clr-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--side-pad);
+  height: var(--header-h);
+  box-shadow: var(--shadow-md);
+  gap: 1.2rem;
 }
 
-header .Lego{
-    color: rgb(255, 251, 0);
-    margin: 0 1rem;
-    font-size: 4rem;
-    font-weight: bold;
+header .Lego {
+  color: var(--clr-accent);
+  font-size: 3.6rem;
+  font-weight: 900;
+  letter-spacing: 0.15rem;
+  flex-shrink: 0;
+  margin: 0;
 }
 
-header .tabs a{
-    color: rgb(255, 251, 0); 
-    margin: 0 1rem;
-    font-size: 1.7rem;
+header .tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
 }
 
-header .icons a{
-    color: rgb(255, 251, 0);
-    margin: 0 1rem;
-    font-size: 1.7rem;
-    display: inline;
+header .tabs a {
+  color: var(--clr-accent);
+  font-size: 1.5rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
 }
 
-header a{
-    color: rgb(255, 251, 0);
-    margin: 0 1rem;
+header .tabs a:hover,
+header a:hover {
+  color: var(--clr-danger);
 }
 
-header a:hover{
-    color: rgb(255, 0, 0);
-}
-.tab:hover, .userIsAuthenticated:hover{
-    background-color: rgb(255, 255, 255);
+.tab:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
+.search {
+  display: flex;
+  align-items: center;
+}
+
+#searchSite {
+  width: 18rem;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--clr-accent);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--clr-accent);
+  font-size: 1.4rem;
+}
+
+#searchSite::placeholder {
+  color: rgba(255, 251, 0, 0.45);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+}
+
+#sort {
+  border: 1px solid var(--clr-accent);
+  background: var(--clr-bg);
+  color: var(--clr-accent);
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+}
+
+header .icons {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+header .icons a {
+  color: var(--clr-accent);
+  font-size: 1.8rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+header .icons a:hover {
+  color: var(--clr-danger);
+}
+
+/* hamburger icon */
+#options {
+  display: none;
+  color: var(--clr-accent);
+  font-size: 2.2rem;
+  cursor: pointer;
+  padding: 0.6rem 0.8rem;
+  flex-shrink: 0;
+  border-radius: 0.4rem;
+  line-height: 1;
+  user-select: none;
+}
+
+#options:hover {
+  color: var(--clr-danger);
+}
+
+/* ensure Font Awesome icons render at correct size in header */
+header .fas,
+header .far,
+header .fab {
+  font-size: inherit;
+  line-height: 1;
+}
+
+/* login dropdown */
+.loginDiv {
+  display: none;
+  color: var(--clr-accent);
+  font-size: 1.5rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.loginDiv button {
+  color: red;
+  background: white;
+  box-shadow: 0 0.3rem 0.8rem rgba(255, 0, 0, 0.4);
+  display: block;
+  width: 100%;
+  margin: 0.6rem 0 0;
+  padding: 0.7rem 1rem;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.loginDiv button:hover {
+  background: var(--clr-accent);
+}
+
+.loginDiv button[disabled] {
+  background: #c5c2c2;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+header .loginDiv {
+  display: none;
+  background: var(--clr-bg);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 18rem;
+  padding: 1.4rem;
+  border-top: 0.1rem solid var(--clr-accent);
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  border-radius: 0 0 0.8rem 0.8rem;
+}
+
+.loginDiv.display {
+  display: block;
+}
+
+.display {
+  display: block;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--clr-bg);
+  color: var(--clr-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem var(--side-pad);
+  font-size: 1.4rem;
+  margin-top: auto;
+}
+
+/* ============================================================
+   PAGE SHOW / HIDE
+   ============================================================ */
 .pages .page {
-    display: none;
+  display: none;
 }
 
 .pages .page.active {
-    display: block;
+  display: block;
 }
 
-html{
-    font-size: 0.625rem;
-    scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+/* ============================================================
+   PRODUCT GRID  (bricks / kits listing pages)
+   ============================================================ */
+.mainLinks,
+.kitLinks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+  gap: 2rem;
+  padding: 3rem var(--side-pad);
+  list-style: none;
+  margin: 0;
+  width: 100%;
 }
 
-body{
-    margin: 0;
-    height: 100vh;
-    font-size: 1.5rem;
-    font-family: sans-serif;
+.mainLinks li,
+.kitLinks li {
+  background: var(--clr-card-bg);
+  border: 0.1rem solid var(--clr-card-border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-card);
+  color: black;
+  text-align: center;
+  font-size: 1.6rem;
+  overflow: hidden;
 }
 
-.grid{
-    display: grid;
-    grid-template-areas: 
-        'header'
-        'main'
-        'footer';
-    grid-template-rows: 5rem 1fr 5rem;
-    grid-template-columns: 1fr;
-    height: 100%;
+.mainLinks li:hover,
+.kitLinks li:hover {
+  transform: translateY(-0.4rem);
+  box-shadow: var(--shadow-lg);
 }
 
-footer{
-    background: black;
-    color: rgb(255, 251, 0);
-    align-items: center;
-    display: flex;
-    justify-content: center;
+.legoDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  gap: 1rem;
+  height: 100%;
 }
 
-.mainLinks{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 5rem;
-    margin-bottom: 3rem;
-    padding: 0;
-    list-style-type: none;
+.legoDiv img {
+  width: 17rem;
+  height: 17rem;
+  object-fit: contain;
 }
 
-.kitLinks{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 5rem;
-    margin-bottom: 3rem;
-    padding: 0;
-    list-style-type: none;
+.legoDiv:hover img {
+  filter: drop-shadow(0.2rem 0.2rem 0.3rem rgba(0,0,0,0.5));
+  transform: scale(1.06);
 }
 
-.mainLinks li{
-    background: rgb(248, 248, 237);
-    flex: 0 1 30rem;
-    border: 0.2rem rgb(230, 214, 214) solid;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    margin: 1rem;
-    height: 45rem;
-    color: black;
-    text-align: center;
-    font-size: 2rem;
+.legoNameLink {
+  color: black;
+  font-weight: 600;
+  font-size: 1.6rem;
 }
 
-
-.kitLinks li{
-    background: rgb(248, 248, 237);
-    flex: 0 1 30rem;
-    border: 0.2rem rgb(230, 214, 214) solid;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    margin: 1rem;
-    height: 45rem;
-    color: black;
-    text-align: center;
-    font-size: 2rem;
+.legoNameLink:hover {
+  color: red;
 }
 
-.legoDiv{
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    justify-content: space-around;
+.legoPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
 }
 
-.legoDiv img, .legoBasket img, .slide-image{
-    max-width: 22rem;
-    max-height: 22rem;
-    min-width: 22rem;
-    min-height: 22rem;
-    margin: 5rem;
+.addToCart,
+.addToWishList {
+  font-size: 1.5rem;
+  color: var(--clr-accent);
+  background: var(--clr-bg);
+  border-radius: var(--radius-btn);
+  padding: 0.8rem 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  margin: 0.4rem auto;
 }
 
-.legoDiv:hover img{
-    filter: drop-shadow(0.2rem 0.2rem black);
-    transform: scale(1.2);
+.addToCart:hover,
+.addToWishList:hover {
+  color: red;
+  background: white;
+  filter: drop-shadow(0.1rem 0.2rem 0.3rem rgba(0,0,0,0.4));
 }
 
-.legoNameLink{
-    color: black;
+/* ============================================================
+   INDIVIDUAL PRODUCT PAGE  (brick.html / kit.html)
+   ============================================================ */
+#brickPage,
+#kitPage {
+  max-width: var(--max-content);
+  margin: 4rem auto;
+  padding: 0 var(--side-pad);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: flex-start;
 }
 
-.legoNameLink:hover{
-    color: red;
+.kitIn,
+.brickIn {
+  width: 100%;
+  max-width: 40rem;
+  height: auto;
+  border-radius: var(--radius-card);
+  object-fit: contain;
 }
 
-.legoPrice{
-    font-size: 3rem;
+#kitPage .description,
+#kitPage .legoPrice,
+#kitPage .stock,
+#kitPage .category,
+#brickPage .legoPrice,
+#brickPage .stock,
+#brickPage .category,
+#brickPage .description {
+  margin: 0.8rem 0;
 }
 
-.addToCart, .addToWishList{
-    font-size: 2rem;
-    color: rgb(255, 251, 0);
-    background: black;
-    border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-    width: 18rem;
-    display: flex;
-    justify-content: center;
-    margin-left: 6rem; 
-}
-.addToCart:hover, .addToWishList:hover{
-    color: red;
-    background: white;
-    filter: drop-shadow(0.2rem 0.2rem black);
+#kitPage .addToCart,
+#kitPage .addToWishList,
+#brickPage .addToCart,
+#brickPage .addToWishList {
+  margin: 1.5rem 0;
 }
 
-.continueButton{
-    font-size: 2rem;
-    color: rgb(255, 251, 0);
-    background: black;
-    border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-    width: 22rem;
-}
-.continueButton:hover{
-    color: red;
-    background: white;
+/* ============================================================
+   CART PAGE
+   ============================================================ */
+#cartPage {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 3rem var(--side-pad);
+  color: #111;
 }
 
-.loginDiv {
-    display: none;
-    border:  1rem, solid rgb(255, 251, 0);
-    font-size: 2.5rem;
-    padding: 0.5rem 1.5rem;
-    color: rgb(255, 251, 0);
-    cursor: pointer;
-    right: -10rem;
-    height: 10rem;
-    justify-content: center;
+#cartPage h1 {
+  margin: 0 0 2.4rem;
+  font-size: 3rem;
+  color: #111;
 }
 
-.loginDiv Button {
-    color: red;
-    background: white;
-    box-shadow: 0 .5rem 1rem red;
-    display: block;
-    margin: 1.5rem 0 0 0;
-    font-size: 1.7rem;
-    justify-content: space-between;
+#cartPage .empty {
+  text-align: center;
+  margin-top: 12rem;
+  font-size: 2rem;
 }
 
-.loginDiv Button:hover {
-    color: red;
-    background: rgb(255, 251, 0);
+#cartPage .empty .usefulLinks a {
+  margin: 0.5rem;
+  font-weight: bold;
 }
 
-.loginDiv Button[disabled]{
-    background: rgb(197, 194, 194);
-    box-shadow: none;
-}
-header .loginDiv {
-    display: none;
-    background: black;
-    position: absolute;
-    top: 100%; 
-    width: 100%;
-    border-top: 0.1rem solid rgb(255, 251, 0);
-}
-.loginDiv.display{
-    display: block;
-    width: 20rem;
-}
-.display {
-    display: block;
+.cartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-card);
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
-#searchSite{
-    width: 20rem;
-    border: 1px solid rgb(255, 251, 0);
+.cartStyle {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  font-weight: 700;
+  border-bottom: 0.1rem solid #ddd;
+  font-size: 1.5rem;
 }
 
-#options {
-    display: none;
-    border:  1rem, solid rgb(255, 251, 0);
-    border-radius: 3rem;
-    font-size: 2.5rem;
-    padding: 0.5rem 1.5rem;
-    color: rgb(255, 251, 0);
-    cursor: pointer;
+.legoInCart {
+  width: 20rem;
 }
 
-#options:hover{
-    color: rgb(255, 0, 0);
+.cartDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.6rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
 
-.cartHeader{
-    margin-top: 5rem;
-    margin-left: 40rem;
-    margin-right: 40rem;
-    text-align: center;
-    position: relative;
-    align-items: center;
-    display: flex;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    justify-content: space-between;
+.legoBasket div img {
+  width: 9rem;
+  height: 9rem;
+  object-fit: contain;
+  box-shadow: var(--shadow-md);
+  border-radius: 0.4rem;
 }
 
-.address{
-    height: 80rem;
-    margin-top: 0rem;
-    margin-left: 40rem;
-    margin-right: 40rem;
-    position: relative;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    justify-content: space-between;
+.cartSignIn {
+  max-width: 60rem;
+  margin: 8rem auto;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-card);
 }
 
-.cartSignIn{
-    height: 40rem;
-    margin-top: 10rem;
-    margin-left: 40rem;
-    margin-right: 40rem;
-    text-align: center;
-    position: relative;
-    align-items: center;
-    display: flex;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    justify-content: space-between;
-}
-.kitIn, .brickIn{
-    display: flex;
-    max-width: 70rem;
-    max-height: 70rem;
-    margin: 5rem 0 0 2rem;
-}
-#kitPage .description, #kitPage .legoPrice, #kitPage .stock, #kitPage .category, #brickPage .legoPrice, #brickPage .stock, #brickPage .category, #brickPage .description{
-    margin: 1rem 0 0 2rem;
-}
-#kitPage .addToCart, #kitPage .addToWishList, #brickPage .addToCart, #brickPage .addToWishList{
-    margin: 1rem 0 0 28rem;
+.address {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-card);
 }
 
-#checkout{
-    margin: 5rem 0 0 3rem;
-    display: grid;
-    grid-gap: 1rem;
-    margin: auto;
-    max-width: 30rem;
-}
-.checkoutHeader{
-    font-weight: bold;
-    font-size: 3rem;
-    margin: 5rem 0 0 0;
-}
-.payHeader{
-    font-weight: bold;
-    font-size: 3rem;
-    margin: 10rem 0 0 0;
-}
-#checkout input{
-    border: 1px solid black;
-    border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-    height: 3rem;
-}
-#checkout input:invalid + label:after{
-    content: '*';
-    color: red;
-}
-#checkout input:valid + label:after{
-    content: '✓';
-    color: green;
-}
-#checkout select{
-    width: 10rem;
-    border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-    height: 3rem;
-}
-#checkout input.invalid {
-    box-shadow: 0 0 1rem red;
-}
-#checkout:invalid input[type="button"], .outOfStock{
-    pointer-events: none;
-    opacity: 0.5;
-}
-#checkout span{
-    margin-top: 3rem;
-}
-#checkout:valid .if-invalid{
-    display: none;
-}
-#pay {
-    margin-bottom: 3rem;
-}
-#cartPage h1{
-    margin: 5rem 0 0 2rem;
-}
-#cartPage .empty{
-    text-align: center;
-    margin: 15rem 0 0 0;
-    font-size: 2rem;
-}
-#cartPage .empty .usefulLinks a{
-    margin: 1rem;
-    font-weight: bold;
-}
-.cartStyle{
-    justify-content: space-between;
-    display: flex;
-    margin: 2rem;
-}
-.legoInCart{
-    width: 22rem;
+.total {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 3rem 0;
 }
 
-.cartDiv{
-    justify-content: space-between;
-    display: flex;
-    margin: 2rem;
-    border: 0.1rem solid black;
-}
-.legoBasket div img{
-    margin: 0;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-}
-.total{
-    display: flex;
-    justify-content: end;
-    font-size: 2rem;
-    margin: 5rem 1rem 5rem 0;
-    font-weight: bold;
-}
-.emptyCart{
-    display: none;
-}
-.continueToCheckout, .clearBasket, .clearWishlist{
-    text-align: center;
-    display: flex;
-    justify-content: end;
-    margin: 5rem;
-    font-size: 2rem;
-    color: rgb(255, 251, 0);
-    background: black;
-    border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
+.emptyCart,
+.uploadBrick.emptyCart,
+.deleteBrick.emptyCart {
+  display: none !important;
 }
 
-#error{
-    background: black;
-    color: rgb(255, 251, 0);
-    text-align: center;
+.continueToCheckout,
+.clearBasket,
+.clearWishlist {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2.8rem;
+  font-size: 1.6rem;
+  color: var(--clr-accent);
+  background: var(--clr-bg);
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  margin: 0.5rem;
 }
 
-#errorLink{
-    color: white;
+.continueToCheckout:hover,
+.clearBasket:hover,
+.clearWishlist:hover {
+  color: red;
+  background: white;
+}
+
+.continueButton {
+  font-size: 1.8rem;
+  color: var(--clr-accent);
+  background: var(--clr-bg);
+  border-radius: var(--radius-btn);
+  padding: 0.8rem 2.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.continueButton:hover {
+  color: red;
+  background: white;
+}
+
+.qtyContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.increase,
+.decrease {
+  margin: 0;
 }
 
 .remove {
-    color: red;
-    margin: 5rem 0 0 0;
-    text-decoration: underline;
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: inline-block;
 }
 
 .deleteBrick {
-    color: red;
-    text-decoration: underline;
+  font-size: 1.4rem;
+  color: white;
+  background: var(--clr-danger);
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.4rem auto;
 }
 
-/* .tab#design, .tab#wishlist{
-    display: none;
-} */
-
-/* .emptyMessage{
-    display: none;
-} */
-
-.userIsAuthenticated, .deleteBrick{
-    display: relative;
+.deleteBrick:hover {
+  background: #a00;
 }
 
-.notAuthenticated{
-    color: red;
-    margin: 5rem;
+/* ============================================================
+   CHECKOUT / PAY FORMS
+   ============================================================ */
+#checkout {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 3rem 2.4rem 6rem;
+  display: grid;
+  gap: 1.2rem;
 }
 
-.featured, .wishlistHeader{
-    margin-top: 5rem;
+.checkoutHeader {
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  color: #111;
 }
 
-.slides{
-    width: 25rem;
-    box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-    height: 25rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.payHeader {
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  color: #111;
 }
 
-.container{
-    display: flex;
+#checkout h1,
+#checkout h2 {
+  color: #111;
+  margin: 1.5rem 0 0.5rem;
+}
+
+#checkout input,
+#checkout select {
+  width: 100%;
+  padding: 1rem 1.4rem;
+  border: 1px solid #bbb;
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  height: auto;
+  background: #fff;
+}
+
+#checkout input:focus,
+#checkout select:focus {
+  outline: none;
+  border-color: #333;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.12);
+}
+
+#checkout input:invalid + label::after {
+  content: ' *';
+  color: red;
+}
+
+#checkout input:valid + label::after {
+  content: ' ✓';
+  color: green;
+}
+
+#checkout input.invalid {
+  box-shadow: 0 0 0.8rem rgba(255, 0, 0, 0.5);
+}
+
+#checkout:invalid input[type="button"],
+.outOfStock {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+#checkout span {
+  margin-top: 0.5rem;
+  color: red;
+  font-size: 1.4rem;
+}
+
+#checkout:valid .if-invalid {
+  display: none;
+}
+
+#pay {
+  margin-bottom: 2rem;
+}
+
+/* ============================================================
+   HOME PAGE — featured slides + video
+   ============================================================ */
+.featured,
+.wishlistHeader {
+  margin: 4rem 0 1.5rem;
+  padding: 0 var(--side-pad);
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+/* "Coming Soon" and other dynamically injected h1s in main */
+#tempMain h1 {
+  margin: 3rem 0 1rem;
+  padding: 0 var(--side-pad);
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  padding: 1rem var(--side-pad);
+}
+
+.slides {
+  width: 28rem;
+  height: 28rem;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: white;
+}
+
+.slides:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: var(--shadow-lg);
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: 0;
+  padding: 1rem;
 }
 
 video {
+  display: block;
+  max-width: min(90rem, calc(100% - var(--side-pad) * 2));
+  height: auto;
+  margin: 2rem 0;
+  padding: 0 var(--side-pad);
+  border-radius: var(--radius-card);
+}
+
+/* ============================================================
+   INDIVIDUAL PRODUCT PAGE text colours
+   ============================================================ */
+#brickPage,
+#kitPage {
+  color: #111;
+}
+
+/* ============================================================
+   UPLOAD BRICK
+   ============================================================ */
+.uploadBrick {
+  margin: 3rem auto 2rem;
+  padding: 2rem var(--side-pad);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  background: white;
+  box-shadow: var(--shadow-md);
+}
+
+.uploadBrick input[type="text"] {
+  padding: 0.8rem 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.6rem;
+  font-size: 1.5rem;
+  background: #fff;
+}
+
+.uploadBrick input[type="submit"] {
+  padding: 0.8rem 2rem;
+  background: #111;
+  color: var(--clr-accent);
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.uploadBrick input[type="submit"]:hover {
+  background: #333;
+}
+
+#tempMain .userIsAuthenticated {
+  margin-top: 8rem;
+}
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.userIsAuthenticated,
+.deleteBrick {
+  position: relative;
+}
+
+.notAuthenticated {
+  color: red;
+  margin: 4rem 2.4rem;
+}
+
+/* ============================================================
+   ERROR PAGE
+   ============================================================ */
+#error {
+  background: var(--clr-bg);
+  color: var(--clr-accent);
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+}
+
+#errorLink {
+  color: white;
+}
+
+/* ============================================================
+   SUCCESS PAGE
+   ============================================================ */
+#successPage {
+  background: var(--clr-bg);
+  color: var(--clr-accent);
+}
+
+#tick {
+  color: #8bEA6C;
+}
+
+#successful {
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+#successPage a {
+  color: white;
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet  (≤ 768px / 76.8rem)
+   ============================================================ */
+@media (max-width: 76.8rem) {
+  #options {
+    display: block;
+  }
+
+  header .tabs {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--clr-bg);
+    border-top: 0.1rem solid var(--clr-accent);
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-md);
+    z-index: 99;
+  }
+
+  header .tabs.display {
     display: flex;
-    /* margin: 5rem; */
-    margin: 3rem 0 0 5rem;
-} 
+  }
 
-.slide-image{
-    margin: 0;
-}
-.container div{
-    flex: 0 1 30rem;
-}
-.container{
-    display: flex;
-    flex-wrap: wrap;
-}
-.slides{
-    margin: 1rem;
-}
-.qtyContainer{
-    display: flex;
-}
-.increase{
-    margin-left: 1rem;
-}
-.decrease{
-    margin-right: 1rem;
-}
-
-.uploadBrick{
-    margin-top: 10rem;
-}
-
-#tempMain .userIsAuthenticated{
-    margin-top: 10rem;
-}
-
-#successPage{
-    background: black;
-    color: rgb(255, 251, 0);;
-}
-#tick{
-    color: #8bEA6C;
-}
-
-#successful{
+  header .tabs a {
     text-align: center;
+    padding: 1.2rem;
+    border: 0.1rem solid rgba(255, 251, 0, 0.25);
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    width: 100%;
+    display: block;
+  }
+
+  #searchSite {
+    width: 13rem;
+  }
+
+  .mainLinks,
+  .kitLinks {
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  }
+
+  #brickPage,
+  #kitPage {
+    flex-direction: column;
+    margin: 2.5rem auto;
+  }
+
+  .kitIn,
+  .brickIn {
+    max-width: 100%;
+  }
+
+  #kitPage .addToCart,
+  #kitPage .addToWishList,
+  #brickPage .addToCart,
+  #brickPage .addToWishList {
+    margin: 1rem 0;
+  }
 }
 
-#successPage a{
-    color: white;
+/* ============================================================
+   RESPONSIVE — Mobile  (≤ 480px / 48rem)
+   ============================================================ */
+@media (max-width: 48rem) {
+  :root {
+    --header-h: 6rem;
+  }
+
+  header {
+    padding: 0 1.4rem;
+    gap: 0.8rem;
+  }
+
+  header .Lego {
+    font-size: 2.8rem;
+  }
+
+  #searchSite {
+    width: 9rem;
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  header .icons a {
+    font-size: 1.5rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .mainLinks,
+  .kitLinks {
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1.2rem;
+    padding: 2rem 1.2rem;
+  }
+
+  .legoDiv {
+    padding: 1.5rem 1rem;
+  }
+
+  .legoDiv img {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .legoPrice {
+    font-size: 1.7rem;
+  }
+
+  .cartDiv {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .legoInCart {
+    width: auto;
+  }
+
+  .cartStyle {
+    font-size: 1.3rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .total {
+    font-size: 1.9rem;
+    margin: 2rem 0;
+  }
+
+  .slides {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .container {
+    justify-content: center;
+    padding: 1rem 1.2rem;
+    gap: 1.2rem;
+  }
+
+  #checkout {
+    padding: 2rem 1.5rem 4rem;
+    gap: 1rem;
+  }
+
+  .checkoutHeader,
+  .payHeader {
+    font-size: 2.2rem;
+  }
+
+  #checkout input,
+  #checkout select {
+    font-size: 1.4rem;
+    padding: 0.9rem 1.1rem;
+  }
 }
 
-@media(max-width:75rem){
-    .cartHeader{
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
-    .cartSignIn{
-        margin-left: 2rem;
-        margin-right: 2rem;
-    }
-    video{
-        height: 90rem;
-        width: 90rem;
-    }
-    .slides{
-    margin: 0 0 0 3rem;
-    }
-}
+/* ============================================================
+   RESPONSIVE — Small mobile  (≤ 360px / 36rem)
+   ============================================================ */
+@media (max-width: 36rem) {
+  header .Lego {
+    font-size: 2.2rem;
+  }
 
-@media(max-width:65rem){
-    video{
-        height: 75rem;
-        width: 75rem;
-    }
-}
+  #searchSite {
+    width: 6.5rem;
+  }
 
-@media(max-width:55rem){
-    video{
-        height: 65rem;
-        width: 65rem;
-    }
-}
+  .mainLinks,
+  .kitLinks {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+  }
 
-@media(max-width:50rem){
-    .tabs.display{
-        display: block;
-        width: 20rem;
-    }
-    #options{
-        display: block;
-    }
+  .legoDiv img {
+    width: 10rem;
+    height: 10rem;
+  }
 
-    header .tabs {
-        display: none;
-        background: black;
-        position: absolute;
-        top: 100%; 
-        width: 100%;
-        border-top: 0.1rem solid rgb(255, 251, 0);
-    }
+  .addToCart,
+  .addToWishList {
+    font-size: 1.3rem;
+    padding: 0.7rem 1.4rem;
+  }
 
-    header .tabs a{
-        text-align: center;
-        margin: 1.5rem;
-        border-radius: 0.5rem;
-        border: 0.1rem solid rgb(255, 251, 0);
-        font-size: 2rem;
-        background: black;
-        padding: 1.5rem;
-        display: block;
-    }
-    .cartHeader{
-        height: 3rem;
-        font-size: 1.5rem;
-        margin-top: 5rem;
-        margin-left: 15rem;
-        margin-right: 15rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    .cartHeader h1{
-        font-size: 1.5rem;
-    }
-    .cartSignIn{
-        height: 40rem;
-        margin-top: 10rem;
-        margin-left: 15rem;
-        margin-right: 15rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    #searchSite{
-        width: 11rem;
-        border: 1px solid rgb(255, 251, 0);
-    }
-    .addToCart, .addToWishList{
-        font-size: 2rem;
-        color: rgb(255, 251, 0);
-        background: black;
-        border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-        width: 18rem;
-        display: flex;
-        justify-content: center;
-    }
-    .kitIn, .brickIn{
-        display: flex;
-        max-width: 45rem;
-        max-height: 50rem;
-        margin: 5rem 0 0 2rem;
-    }
-    #kitPage .description, #kitPage .legoPrice, #kitPage .stock, #kitPage .category, #brickPage .legoPrice, #brickPage .stock, #brickPage .category, #brickPage .description{
-        margin: 1rem 0 0 2rem;
-    }
-    #kitPage .addToCart, #kitPage .addToWishList{
-        margin: 1rem 0 0 15rem;
-    }
-
-    #brickPage .addToCart, #brickPage .addToWishList{
-        margin: 1rem 0 0 10rem;
-    }
-    video{
-        height: 70rem;
-        width:70rem;
-    }
-} 
-
-@media(max-width:47rem){
-    video{
-        height: 60rem;
-        width: 60rem;
-        margin-top: 0;
-    }
-    .slides{
-        margin-left: 15rem;
-    }
-}
-
-@media(max-width:42rem){
-    video{
-        height: 55rem;
-        width: 55rem;
-        margin-top: 0;
-        margin-left: 3rem;
-    }
-    .slides{
-        margin-left: 12rem;
-    }
-}
-
-@media(max-width:35rem){
-    .cartHeader{
-        height: 3rem;
-        font-size: 1.5rem;
-        margin-top: 5rem;
-        margin-left: 7rem;
-        margin-right: 7rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    .cartHeader h1{
-        font-size: 1.5rem;
-    }
-    .cartSignIn{
-        height: 40rem;
-        margin-top: 10rem;
-        margin-left: 7rem;
-        margin-right: 7rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    #searchSite{
-        width: 6.5rem;
-        border: 1px solid rgb(255, 251, 0);
-    }
-
-    #logo{
-        font-size: 3rem;
-    }
-    header .icons a{
-        font-size: 1.2rem;
-    }
-    video{
-        height: 46rem;
-        width: 46rem;
-    }
-}
-
-@media(max-width:30rem){
-    .cartHeader{
-        height: 3rem;
-        font-size: 1.5rem;
-        margin-top: 5rem;
-        margin-left: 3rem;
-        margin-right: 3rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    .cartHeader h1{
-        font-size: 1.5rem;
-    }
-    .cartSignIn{
-        height: 40rem;
-        margin-top: 10rem;
-        margin-left: 3rem;
-        margin-right: 3rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    #searchSite{
-        width: 5rem;
-        border: 1px solid rgb(255, 251, 0);
-    }
-
-    #options{
-        font-size: 2rem;
-    }
-    #sort{
-        width: 5rem;
-    }
-    video{
-        height: 40rem;
-        width: 40rem;
-        margin-left: 3rem;
-        margin-top: 0;
-    }
-    .slides{
-        margin-left: 8rem;
-    }
-}
-
-@media(max-width:28rem){
-    .cartHeader{
-        height: 3rem;
-        margin-top: 5rem;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    .cartHeader h1{
-        font-size: 1.5rem;
-    }
-    .cartSignIn{
-        height: 40rem;
-        margin-top: 10rem;
-        margin-left: 2rem;
-        margin-right: 2rem;
-        text-align: center;
-        position: relative;
-        align-items: center;
-        display: flex;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        justify-content: space-between;
-    }
-    #searchSite{
-        width: 4rem;
-        border: 1px solid rgb(255, 251, 0);
-    }
-
-    #options{
-        font-size: 2rem;
-    }
-
-    #logo{
-        font-size: 2rem;
-    }
-    .legoDiv img, .legoBasket img, .slide-image{
-        max-width: 12rem;
-        max-height: 12rem;
-        min-width: 12rem;
-        min-height: 12rem;
-        margin: 5rem;
-    }
-    .addToCart, .addToWishList{
-        font-size: 2rem;
-        color: rgb(255, 251, 0);
-        background: black;
-        border-radius: 1.563rem 1.563rem 1.563rem 1.563rem;
-        width: 18rem;
-        display: flex;
-        justify-content: center;
-    }
-
-    #kitPage .addToCart, #kitPage .addToWishList, #brickPage .addToCart, #brickPage .addToWishList{
-        margin: 1rem 0 0 10rem;
-    }
-    .mainLinks li{
-        background: rgb(248, 248, 237);
-        flex: 0 1 30rem;
-        border: 0.2rem rgb(230, 214, 214) solid;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        margin: 1rem;
-        height: 30rem;
-        color: black;
-        text-align: center;
-        font-size: 2rem;
-    }
-    .kitLinks li{
-        background: rgb(248, 248, 237);
-        flex: 0 1 30rem;
-        border: 0.2rem rgb(230, 214, 214) solid;
-        box-shadow: 0 .5rem 1rem rgb(30, 19, 54);
-        margin: 1rem;
-        height: 30rem;
-        color: black;
-        text-align: center;
-        font-size: 2rem;
-    }
-    .legoPrice{
-        font-size: 2rem;
-    }
-    #sort{
-        width: 2rem;
-    }
-
-    .kitIn, .brickIn{
-        display: flex;
-        max-width: 33rem;
-        max-height: 33rem;
-        margin: 5rem 0 0 2rem;
-    }
-    #kitPage .description, #kitPage .legoPrice, #kitPage .stock, #kitPage .category, #brickPage .legoPrice, #brickPage .stock, #brickPage .category, #brickPage .description{
-        margin: 1rem 0 0 2rem;
-    }
-    .legoInCart{
-        width: 10rem;
-    }
-    video{
-        height: 30rem;
-        width: 30rem;
-        margin-top: 0;
-        margin-left: 3rem;
-    }
-    .slides{
-        height: 15rem;
-        width: 10rem;
-        margin-left: 4rem;
-    }
-    .slide-image{
-        margin-left: 10rem;
-    }
+  .slides {
+    width: 13rem;
+    height: 13rem;
+  }
 }

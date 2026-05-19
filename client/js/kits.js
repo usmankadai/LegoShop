@@ -1,14 +1,25 @@
 import * as home from './home.mjs';
 import * as auth0 from './auth0.mjs';
 import * as createBasket from './createBasket.mjs';
+import * as upload from './uploadKit.mjs';
+
+async function deleteKit(legoId) {
+  const email = auth0.getAdminEmail();
+  const res = await fetch(`/kits/${legoId}`, {
+    method: 'DELETE',
+    headers: { 'x-admin-email': email },
+  });
+  if (res.ok) document.getElementById(`lego${legoId}`)?.closest('li').remove();
+}
 
 
 async function init() {
   kitsContainer();
-  createInventoryKits();
+  await createInventoryKits();
   await home.execute();
   await auth0.executeAuth0();
   await kitslocalStorage();
+  upload.addEventListeners();
   createBasket.initializeBasket();
 }
 
@@ -36,7 +47,7 @@ async function createInventoryKits() {
   });
 }
 
-function htmlGridLayout(lego) {
+export function htmlGridLayout(lego) {
   const mainLinks = document.querySelector('.mainLinks');
   const createLi = document.createElement('li');
   createLi.className = 'lis';
@@ -80,9 +91,14 @@ function htmlGridLayout(lego) {
   createImg.src = `${lego.legoImage}`;
   createImg.alt = `#${lego.legoName}`;
 
+  const removKit = document.createElement('button');
+  removKit.className = 'deleteBrick emptyCart';
+  removKit.innerHTML = '<i class="fas fa-trash"></i> Delete';
+  removKit.addEventListener('click', () => deleteKit(lego.legoId));
+
   legoName.append(legoNameLink);
   createA.append(createImg);
-  createLis.append(createA, legoName, legoPrice, addToCart);
+  createLis.append(createA, legoName, legoPrice, addToCart, removKit);
   createLi.append(createLis);
   mainLinks.append(createLi);
 }

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "legoshop",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/svr.js"],
+      "port": 8080
+    }
+  ]
+}
